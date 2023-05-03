@@ -2,9 +2,9 @@
 
 namespace Masmaleki\LaravelProductFinder;
 
+use Masmaleki\LaravelProductFinder\Commands\LaravelProductFinderCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Masmaleki\LaravelProductFinder\Commands\LaravelProductFinderCommand;
 
 class LaravelProductFinderServiceProvider extends PackageServiceProvider
 {
@@ -27,8 +27,8 @@ class LaravelProductFinderServiceProvider extends PackageServiceProvider
                 'create_product_finders_forms_table',
                 'create_product_finders_answers_table',
 
-                )
-            
+            )
+
             ->hasCommand(LaravelProductFinderCommand::class);
     }
 }
