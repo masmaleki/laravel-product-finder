@@ -13,7 +13,7 @@ return new class extends Migration
             $table->unsignedBigInteger('product_finders_question_id')->index();
             $table->foreign('product_finders_question_id')->references('id')
                     ->on('product_finders_questions')->onDelete('cascade'); 
-            $table->unsignedBigInteger('product_finders_question_id')->index();
+            $table->unsignedBigInteger('product_finders_form_id')->index();
             $table->foreign('product_finders_form_id')->references('id')
                     ->on('product_finders_forms')->onDelete('cascade');                      
             $table->unsignedBigInteger('product_finders_option_id')->index();
