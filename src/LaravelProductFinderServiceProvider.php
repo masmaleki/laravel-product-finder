@@ -19,16 +19,12 @@ class LaravelProductFinderServiceProvider extends PackageServiceProvider
             ->name('laravel-product-finder')
             ->hasConfigFile()
             ->hasViews()
-            ->hasMigration(
-                'create_product_finders_wizards_table',
-                'create_product_finders_steps_table',
-                'create_product_finders_questions_table',
-                'create_product_finders_options_table',
-                'create_product_finders_forms_table',
-                'create_product_finders_answers_table',
-
-                )
-            
+            ->hasMigration('create_product_finders_wizards_table')
+            ->hasMigration('create_product_finders_steps_table')
+            ->hasMigration('create_product_finders_questions_table')
+            ->hasMigration('create_product_finders_options_table')
+            ->hasMigration('create_product_finders_forms_table')
+            ->hasMigration('create_product_finders_answers_table')
             ->hasCommand(LaravelProductFinderCommand::class);
     }
 }

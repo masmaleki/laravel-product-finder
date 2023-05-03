@@ -8,11 +8,20 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('laravel_product_finder_table', function (Blueprint $table) {
+        Schema::create('product_finders_options', function (Blueprint $table) {
             $table->id();
-
-            // add fields
-
+            $table->unsignedBigInteger('product_finders_question_id')->index();
+            $table->foreign('product_finders_question_id')
+            ->references('id')
+            ->on('product_finders_questions')
+            ->onDelete('cascade');
+            $table->text('value')->nullable();
+            $table->integer('point')->default(0);
+            $table->integer('max')->nullable();
+            $table->integer('min')->nullable();
+            $table->string('tag')->nullable();
+            $table->text('info')->nullable();
+            $table->string('status',100)->default('active');
             $table->timestamps();
         });
     }

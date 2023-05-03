@@ -8,11 +8,15 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('laravel_product_finder_table', function (Blueprint $table) {
+        Schema::create('product_finders_forms', function (Blueprint $table) {
             $table->id();
-
-            // add fields
-
+            $table->unsignedBigInteger('product_finders_wizard_id')->index();
+            $table->foreign('product_finders_wizard_id')->references('id')
+                    ->on('product_finders_wizards')->onDelete('cascade');           
+            $table->unsignedBigInteger('user_id')->default(0);
+            $table->string('email');
+            $table->string('name');
+            $table->unsignedBigInteger('product_id')->nullable();
             $table->timestamps();
         });
     }

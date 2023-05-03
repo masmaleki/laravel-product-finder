@@ -8,10 +8,25 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('laravel_product_finder_table', function (Blueprint $table) {
+        Schema::create('product_finders_answers', function (Blueprint $table) {
             $table->id();
-
-            // add fields
+            $table->unsignedBigInteger('product_finders_question_id')->index();
+            $table->foreign('product_finders_question_id')->references('id')
+                    ->on('product_finders_questions')->onDelete('cascade'); 
+            $table->unsignedBigInteger('product_finders_question_id')->index();
+            $table->foreign('product_finders_form_id')->references('id')
+                    ->on('product_finders_forms')->onDelete('cascade');                      
+            $table->unsignedBigInteger('product_finders_option_id')->index();
+            $table->foreign('product_finders_option_id')->references('id')
+                    ->on('product_finders_options')->onDelete('cascade');                               
+            $table->unsignedBigInteger('user_id')->default(0);
+            $table->string('tag')->nullable();
+            $table->string('file')->nullable();
+            $table->string('type')->default('checkbox');
+            $table->string('range_value')->nullable();
+            $table->text('info')->nullable();
+            $table->string('name');
+            $table->unsignedBigInteger('product_id')->nullable();
 
             $table->timestamps();
         });
