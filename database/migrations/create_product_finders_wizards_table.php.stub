@@ -8,11 +8,11 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('migration_table_name_table', function (Blueprint $table) {
+        Schema::create('product_finders_wizards', function (Blueprint $table) {
             $table->id();
-
-            // add fields
-
+            $table->string('title',255);
+            $table->longtext('desc')->nullable();
+            $table->string('status',100)->default('active');
             $table->timestamps();
         });
     }
