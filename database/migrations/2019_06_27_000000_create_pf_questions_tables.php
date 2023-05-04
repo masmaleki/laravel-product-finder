@@ -15,7 +15,7 @@ return new class extends Migration
                 ->onDelete('cascade');
             $table->unsignedBigInteger('pf_type_option_id')->index();
             $table->foreign('pf_type_option_id')->references('id')
-                    ->on('pf_type_options')->onDelete('cascade');
+                ->on('pf_type_options')->onDelete('cascade');
             $table->text('title');
             $table->jsonb('conditions')->nullable()->index();
 
@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('image')->nullable;
             $table->integer('point')->default(0);
             $table->boolean('is_required')->default(1);
-            $table->string('status',100)->default('active');
+            $table->string('status', 100)->default('active');
             $table->timestamps();
         });
     }

@@ -10,9 +10,9 @@ return new class extends Migration
     {
         Schema::create('pf_wizards', function (Blueprint $table) {
             $table->id();
-            $table->string('title',255);
+            $table->string('title', 255);
             $table->longtext('desc')->nullable();
-            $table->string('status',100)->default('active');
+            $table->string('status', 100)->default('active');
             $table->timestamps();
         });
     }

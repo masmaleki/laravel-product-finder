@@ -12,11 +12,11 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('pf_type_id')->index();
             $table->foreign('pf_type_id')->references('id')
-                    ->on('pf_types')->onDelete('cascade');
+                ->on('pf_types')->onDelete('cascade');
             $table->string('name');
             $table->jsonb('option');
             $table->string('status')->default('active');
-            
+
             $table->timestamps();
         });
     }

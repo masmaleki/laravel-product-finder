@@ -12,11 +12,11 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('pf_wizard_id')->index();
             $table->foreign('pf_wizard_id')->references('id')
-                    ->on('pf_wizards')->onDelete('cascade');
-            $table->string('title',255)->nullable();
+                ->on('pf_wizards')->onDelete('cascade');
+            $table->string('title', 255)->nullable();
             $table->integer('order')->default(0);
             $table->longtext('desc')->nullable();
-            $table->string('status',100)->default('active');
+            $table->string('status', 100)->default('active');
             $table->timestamps();
         });
     }

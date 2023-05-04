@@ -3,10 +3,9 @@
 namespace Masmaleki\LaravelProductFinder;
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\ServiceProvider;
 use Masmaleki\LaravelProductFinder\Commands\LaravelProductFinderCommand;
 use Spatie\LaravelPackageTools\Package;
-use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Illuminate\Support\ServiceProvider;
 
 class LaravelProductFinderServiceProvider extends ServiceProvider
 {
@@ -34,22 +33,24 @@ class LaravelProductFinderServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'productFinder');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'productFinder');
 
-        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
         $this->registerRoutes();
         $this->publishes([
-            __DIR__ . '/../resources/views/assets' => public_path('vendor/masmaleki/productfinder'),
+            __DIR__.'/../resources/views/assets' => public_path('vendor/masmaleki/productfinder'),
 
         ], 'public');
     }
+
     protected function registerRoutes()
     {
         Route::group($this->routeConfiguration(), function () {
-            $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
+            $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
         });
     }
+
     protected function routeConfiguration(): array
     {
         return [
