@@ -15,12 +15,12 @@ return new class extends Migration
                 ->onDelete('cascade');
             $table->unsignedBigInteger('pf_type_option_id')->index();
             $table->foreign('pf_type_option_id')->references('id')
-                    ->on('pf_type_options')->onDelete('cascade');
+                ->on('pf_type_options')->onDelete('cascade');
             $table->jsonb('value')->nullable();
             $table->integer('point')->default(0);
             $table->string('tag')->nullable();
             $table->text('info')->nullable();
-            $table->string('status',100)->default('active');
+            $table->string('status', 100)->default('active');
             $table->timestamps();
         });
     }
