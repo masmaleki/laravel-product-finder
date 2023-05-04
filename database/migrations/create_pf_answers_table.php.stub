@@ -16,9 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('pf_form_id')->index();
             $table->foreign('pf_form_id')->references('id')
                     ->on('pf_forms')->onDelete('cascade');                      
-            $table->unsignedBigInteger('pf_option_id')->index();
-            $table->foreign('pf_option_id')->references('id')
-                    ->on('pf_options')->onDelete('cascade');                               
+                                        
             $table->string('tag')->nullable();
             $table->jsonb('value')->nullable();
             $table->text('info')->nullable();
