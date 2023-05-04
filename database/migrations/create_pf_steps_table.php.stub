@@ -8,11 +8,11 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('product_finders_steps', function (Blueprint $table) {
+        Schema::create('pf_steps', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('product_finders_wizard_id')->index();
-            $table->foreign('product_finders_wizard_id')->references('id')
-                    ->on('product_finders_wizards')->onDelete('cascade');
+            $table->unsignedBigInteger('pf_wizard_id')->index();
+            $table->foreign('pf_wizard_id')->references('id')
+                    ->on('pf_wizards')->onDelete('cascade');
             $table->string('title',255)->nullable();
             $table->integer('order')->default(0);
             $table->longtext('desc')->nullable();
