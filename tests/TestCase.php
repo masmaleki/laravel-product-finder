@@ -3,8 +3,8 @@
 namespace Masmaleki\LaravelProductFinder\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Orchestra\Testbench\TestCase as Orchestra;
 use Masmaleki\LaravelProductFinder\LaravelProductFinderServiceProvider;
+use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
 {

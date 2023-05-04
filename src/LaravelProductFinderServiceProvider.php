@@ -2,9 +2,9 @@
 
 namespace Masmaleki\LaravelProductFinder;
 
+use Masmaleki\LaravelProductFinder\Commands\LaravelProductFinderCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Masmaleki\LaravelProductFinder\Commands\LaravelProductFinderCommand;
 
 class LaravelProductFinderServiceProvider extends PackageServiceProvider
 {
