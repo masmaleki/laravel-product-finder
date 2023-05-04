@@ -3,9 +3,9 @@
 namespace Masmaleki\LaravelProductFinder;
 
 use Illuminate\Support\Facades\Route;
-use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Masmaleki\LaravelProductFinder\Commands\LaravelProductFinderCommand;
 use Spatie\LaravelPackageTools\Package;
+use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class LaravelProductFinderServiceProvider extends PackageServiceProvider
 {
@@ -28,7 +28,7 @@ class LaravelProductFinderServiceProvider extends PackageServiceProvider
                 'create_pf_questions_table',
                 'create_pf_options_table',
                 'create_pf_forms_table',
-                'create_pf_answers_table'
+                'create_pf_answers_table',
             ])
             ->hasAssets()
             ->hasRoute('web')
