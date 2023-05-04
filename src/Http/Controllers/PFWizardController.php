@@ -8,6 +8,6 @@ class PFWizardController extends Controller
 {
     public function index(Request $request)
     {
-        return view('productFinder::index');
+        return view('productfinder::index');
     }
 }
