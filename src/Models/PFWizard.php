@@ -9,13 +9,11 @@ class PFWizard extends Model
 {
     use HasFactory;
 
-   
     protected $table = 'pf_wizards';
 
     protected $guarded = [];
 
     protected $casts = [
-        
-    ];
 
+    ];
 }
