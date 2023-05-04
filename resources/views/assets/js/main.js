@@ -86,17 +86,17 @@
     var marginSlider = document.getElementById('slider-margin');
     if (marginSlider != undefined) {
         noUiSlider.create(marginSlider, {
-              start: [1100],
+              start: [5000],
               step: 100,
               connect: [true, false],
               tooltips: [true],
               range: {
                   'min': 100,
-                  'max': 2000
+                  'max': 15000
               },
               pips: {
                     mode: 'values',
-                    values: [100, 2000],
+                    values: [100, 15000],
                     density: 4
                     },
                 format: wNumb({
