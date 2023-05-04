@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('pf_type_option', function (Blueprint $table) {
+        Schema::create('pf_type_options', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('pf_type_id')->index();
             $table->foreign('pf_type_id')->references('id')
