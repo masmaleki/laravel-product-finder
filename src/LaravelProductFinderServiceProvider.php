@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Masmaleki\LaravelProductFinder\Commands\LaravelProductFinderCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Spatie\LaravelPackageTools\Commands\InstallCommand;
 
 class LaravelProductFinderServiceProvider extends PackageServiceProvider
 {
@@ -17,10 +18,13 @@ class LaravelProductFinderServiceProvider extends PackageServiceProvider
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package
-            ->name('laravel-product-finder')
+            ->name('productfinder')
             ->hasConfigFile()
             ->hasViews('productfinder')
             ->hasMigrations([
+                'create_pf_tags_table',
+                'create_pf_products_table',
+                'create_pf_product_tags_table',
                 'create_pf_wizards_table',
                 'create_pf_types_table',
                 'create_pf_type_options_table',
@@ -35,21 +39,25 @@ class LaravelProductFinderServiceProvider extends PackageServiceProvider
             // ->hasViewComposer()
             // ->hasViewComponents()
             ->runsMigrations()
-            ->hasCommand(LaravelProductFinderCommand::class);
+            ->hasCommand(LaravelProductFinderCommand::class)
+            ->hasInstallCommand(function(InstallCommand $command) {
+                $command
+                    ->startWith(function(InstallCommand $command) {
+                        $command->info('Hello, and welcome to my great new package!');
+                    })
+                    ->publishConfigFile()
+                    ->publishAssets()
+                    ->publishMigrations()
+                    // ->copyAndRegisterServiceProviderInApp()
+                    // ->askToStarRepoOnGitHub()
+                    ->endWith(function(InstallCommand $command) {
+                        $command->info('Have a great day!');
+                    })
+                    ;
+            });
     }
 
-    // public function boot()
-    // {
-    //     $this->loadViewsFrom(__DIR__.'/../resources/views', 'productFinder');
-
-    //     $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-
-    //     $this->registerRoutes();
-    //     $this->publishes([
-    //         __DIR__.'/../resources/views/assets' => public_path('vendor/masmaleki/productfinder'),
-
-    //     ], 'public');
-    // }
+    
 
     protected function registerRoutes()
     {
