@@ -1,17 +1,17 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "masmaleki/laravel-product-finder",
+    "description": "This is my package laravel-product-finder",
     "keywords": [
-        ":vendor_name",
+        "masmaleki",
         "laravel",
-        ":package_slug"
+        "laravel-product-finder"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/masmaleki/laravel-product-finder",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "davood.thinker",
+            "email": "davood.thinker@gmail.com",
             "role": "Developer"
         }
     ],
@@ -35,13 +35,13 @@
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src/",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories/"
+            "Masmaleki\\LaravelProductFinder\\": "src/",
+            "Masmaleki\\LaravelProductFinder\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests/"
+            "Masmaleki\\LaravelProductFinder\\Tests\\": "tests/"
         }
     },
     "scripts": {
@@ -49,7 +49,10 @@
         "analyse": "vendor/bin/phpstan analyse",
         "test": "vendor/bin/pest",
         "test-coverage": "vendor/bin/pest --coverage",
-        "format": "vendor/bin/pint"
+        "format": "vendor/bin/pint",
+        "post-install-cmd": [
+            "php artisan vendor:publish --provider=\"Masmaleki\\LaravelProductFinder\\LaravelProductFinderServiceProvider\""
+          ]
     },
     "config": {
         "sort-packages": true,
@@ -61,10 +64,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
+                "Masmaleki\\LaravelProductFinder\\LaravelProductFinderServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\Facades\\Skeleton"
+                "LaravelProductFinder": "Masmaleki\\LaravelProductFinder\\Facades\\LaravelProductFinder"
             }
         }
     },
