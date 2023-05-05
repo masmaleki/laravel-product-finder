@@ -4,9 +4,9 @@ namespace Masmaleki\LaravelProductFinder;
 
 use Illuminate\Support\Facades\Route;
 use Masmaleki\LaravelProductFinder\Commands\LaravelProductFinderCommand;
+use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Spatie\LaravelPackageTools\Commands\InstallCommand;
 
 class LaravelProductFinderServiceProvider extends PackageServiceProvider
 {
@@ -40,9 +40,9 @@ class LaravelProductFinderServiceProvider extends PackageServiceProvider
             // ->hasViewComponents()
             ->runsMigrations()
             ->hasCommand(LaravelProductFinderCommand::class)
-            ->hasInstallCommand(function(InstallCommand $command) {
+            ->hasInstallCommand(function (InstallCommand $command) {
                 $command
-                    ->startWith(function(InstallCommand $command) {
+                    ->startWith(function (InstallCommand $command) {
                         $command->info('Hello, and welcome to my great new package!');
                     })
                     ->publishConfigFile()
@@ -50,14 +50,11 @@ class LaravelProductFinderServiceProvider extends PackageServiceProvider
                     ->publishMigrations()
                     // ->copyAndRegisterServiceProviderInApp()
                     // ->askToStarRepoOnGitHub()
-                    ->endWith(function(InstallCommand $command) {
+                    ->endWith(function (InstallCommand $command) {
                         $command->info('Have a great day!');
-                    })
-                    ;
+                    });
             });
     }
-
-    
 
     protected function registerRoutes()
     {
