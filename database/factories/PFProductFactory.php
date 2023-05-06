@@ -5,7 +5,7 @@ namespace Masmaleki\LaravelProductFinder\Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Masmaleki\LaravelProductFinder\Models\PFProduct;
 
-class ModelFactory extends Factory
+class PFProductFactory extends Factory
 {
     protected $model = PFProduct::class;
 

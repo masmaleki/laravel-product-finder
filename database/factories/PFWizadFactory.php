@@ -5,7 +5,7 @@ namespace Masmaleki\LaravelProductFinder\Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Masmaleki\LaravelProductFinder\Models\PFWizard;
 
-class ModelFactory extends Factory
+class PFWizadFactory extends Factory
 {
     protected $model = PFWizard::class;
 

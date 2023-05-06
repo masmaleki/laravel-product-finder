@@ -3,18 +3,22 @@
 namespace Masmaleki\LaravelProductFinder\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Masmaleki\LaravelProductFinder\Models\PFProduct;
 use Masmaleki\LaravelProductFinder\Models\PFTag;
 
-class ModelFactory extends Factory
+class PFTagFactory extends Factory
 {
     protected $model = PFTag::class;
 
     public function definition()
     {
         return [
-            'name' => $this->faker->word,
-            'value' => $this->faker->word,
-            'info' => $this->faker->sentence
+            'name' => $this->faker->word(),
+            'value' => $this->faker->word(),
+            'info' => $this->faker->text(),
         ];
     }
+
+   
+    
 }
