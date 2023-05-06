@@ -17,8 +17,7 @@ class PFWizard extends Model
 
     ];
 
-
-     /**
+    /**
      * Get the steps associated with the wizard.
      */
     public function steps()
@@ -27,7 +26,7 @@ class PFWizard extends Model
 
     }
 
-     /**
+    /**
      * Get the forms associated with the wizard.
      */
     public function forms()

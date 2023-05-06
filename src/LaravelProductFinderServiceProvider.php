@@ -2,7 +2,6 @@
 
 namespace Masmaleki\LaravelProductFinder;
 
-use Illuminate\Support\Facades\Route;
 use Masmaleki\LaravelProductFinder\Commands\LaravelProductFinderCommand;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
@@ -55,6 +54,4 @@ class LaravelProductFinderServiceProvider extends PackageServiceProvider
                     });
             });
     }
-
-  
 }

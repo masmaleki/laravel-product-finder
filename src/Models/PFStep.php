@@ -17,7 +17,7 @@ class PFStep extends Model
 
     ];
 
-     /**
+    /**
      * Get the wizard that owns the step.
      */
     public function wizard()
@@ -26,7 +26,7 @@ class PFStep extends Model
 
     }
 
-     /**
+    /**
      * Get the questions associated with the step.
      */
     public function questions()

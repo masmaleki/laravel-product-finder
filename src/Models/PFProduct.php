@@ -17,7 +17,7 @@ class PFProduct extends Model
 
     ];
 
-       /**
+    /**
      * The tags that belong to the product.
      */
     public function tags()
