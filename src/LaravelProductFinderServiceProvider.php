@@ -56,5 +56,21 @@ class LaravelProductFinderServiceProvider extends PackageServiceProvider
             });
     }
 
-  
+    public function packageBooted()
+    {
+        
+
+        if ($this->app->runningInConsole()) {
+            $this->publishSeeders();
+        }
+    }
+
+   
+
+    protected function publishSeeders()
+    {
+        $this->publishes([
+            __DIR__ . '/../database/seeders/PFWizardSeeder.php' => database_path('seeders/PFWizardSeeder.php'),
+        ], 'productfinder-seeders');
+    }
 }

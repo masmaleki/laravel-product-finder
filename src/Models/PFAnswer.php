@@ -22,7 +22,7 @@ class PFAnswer extends Model
      */
     public function question()
     {
-        return $this->belongsTo(PfQuestion::class, 'pf_question_id');
+        return $this->belongsTo(PFQuestion::class, 'pf_question_id');
     }
 
     /**
@@ -30,6 +30,6 @@ class PFAnswer extends Model
      */
     public function form()
     {
-        return $this->belongsTo(PfForm::class, 'pf_form_id');
+        return $this->belongsTo(PFForm::class, 'pf_form_id');
     }
 }
