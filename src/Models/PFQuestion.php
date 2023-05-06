@@ -17,7 +17,6 @@ class PFQuestion extends Model
 
     ];
 
-
     /**
      * Get the step that owns the question.
      */

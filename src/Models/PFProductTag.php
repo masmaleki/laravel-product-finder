@@ -17,7 +17,7 @@ class PFProductTag extends Model
 
     ];
 
-       /**
+    /**
      * Get the tag that owns the product tag.
      */
     public function tag()

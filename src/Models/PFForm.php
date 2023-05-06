@@ -16,7 +16,7 @@ class PFForm extends Model
     protected $casts = [
 
     ];
-    
+
     /**
      * Get the wizard that owns the form.
      */
