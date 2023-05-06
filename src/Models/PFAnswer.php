@@ -16,4 +16,20 @@ class PFAnswer extends Model
     protected $casts = [
 
     ];
+
+    /**
+     * Get the question that owns the answer.
+     */
+    public function question()
+    {
+        return $this->belongsTo(PfQuestion::class, 'pf_question_id');
+    }
+
+    /**
+     * Get the form that owns the answer.
+     */
+    public function form()
+    {
+        return $this->belongsTo(PfForm::class, 'pf_form_id');
+    }
 }

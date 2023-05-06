@@ -16,4 +16,21 @@ class PFStep extends Model
     protected $casts = [
 
     ];
+
+     /**
+     * Get the wizard that owns the step.
+     */
+    public function wizard()
+    {
+        return $this->belongsTo(PFWizard::class, 'pf_wizard_id');
+
+    }
+
+     /**
+     * Get the questions associated with the step.
+     */
+    public function questions()
+    {
+        return $this->hasMany(PFQuestion::class);
+    }
 }

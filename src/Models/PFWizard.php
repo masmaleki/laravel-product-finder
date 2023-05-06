@@ -16,4 +16,22 @@ class PFWizard extends Model
     protected $casts = [
 
     ];
+
+
+     /**
+     * Get the steps associated with the wizard.
+     */
+    public function steps()
+    {
+        return $this->hasMany(PFStep::class);
+
+    }
+
+     /**
+     * Get the forms associated with the wizard.
+     */
+    public function forms()
+    {
+        return $this->hasMany(PFForm::class);
+    }
 }

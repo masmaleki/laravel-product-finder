@@ -16,4 +16,20 @@ class PFProduct extends Model
     protected $casts = [
 
     ];
+
+       /**
+     * The tags that belong to the product.
+     */
+    public function tags()
+    {
+        return $this->belongsToMany(PfTag::class, 'pf_product_tags', 'pf_product_id', 'pf_tag_id');
+    }
+
+    /**
+     * Get the form that owns the product.
+     */
+    public function form()
+    {
+        return $this->belongsTo(PfForm::class, 'product_id');
+    }
 }

@@ -56,18 +56,5 @@ class LaravelProductFinderServiceProvider extends PackageServiceProvider
             });
     }
 
-    protected function registerRoutes()
-    {
-        Route::group($this->routeConfiguration(), function () {
-            $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
-        });
-    }
-
-    protected function routeConfiguration(): array
-    {
-        return [
-            'prefix' => 'pf',
-            // 'middleware' => config('medialibrary.middleware'),
-        ];
-    }
+  
 }

@@ -16,4 +16,20 @@ class PFOption extends Model
     protected $casts = [
 
     ];
+
+    /**
+     * Get the question that owns the option.
+     */
+    public function question()
+    {
+        return $this->belongsTo(PfQuestion::class, 'pf_question_id');
+    }
+
+    /**
+     * Get the type option that owns the option.
+     */
+    public function typeOption()
+    {
+        return $this->belongsTo(PFTypeOption::class, 'pf_type_option_id');
+    }
 }

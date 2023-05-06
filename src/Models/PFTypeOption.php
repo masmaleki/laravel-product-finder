@@ -16,4 +16,12 @@ class PFTypeOption extends Model
     protected $casts = [
 
     ];
+
+    /**
+     * Get the type that owns the option.
+     */
+    public function type()
+    {
+        return $this->belongsTo(PFType::class, 'pf_type_id');
+    }
 }
