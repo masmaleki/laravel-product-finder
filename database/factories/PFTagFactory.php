@@ -3,7 +3,6 @@
 namespace Masmaleki\LaravelProductFinder\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Masmaleki\LaravelProductFinder\Models\PFProduct;
 use Masmaleki\LaravelProductFinder\Models\PFTag;
 
 class PFTagFactory extends Factory
@@ -18,7 +17,4 @@ class PFTagFactory extends Factory
             'info' => $this->faker->text(),
         ];
     }
-
-   
-    
 }

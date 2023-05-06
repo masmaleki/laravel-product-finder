@@ -26,10 +26,10 @@ class PFQuestionsFactory extends Factory
         //         8 => 19
         //     ]
         // ]
-        
+
         $conditions = [
-            "and_conditions" => [],
-            "or_conditions" => []
+            'and_conditions' => [],
+            'or_conditions' => [],
         ];
 
         // Generate a random number of required options for this question.
@@ -39,15 +39,14 @@ class PFQuestionsFactory extends Factory
         for ($i = 1; $i <= $requiredCount; $i++) {
             $optionId = $this->faker->numberBetween(1, 25);
             $questionId = $this->faker->numberBetween(1, 15);
-            $conditions["and_conditions"][$questionId] = $optionId;
+            $conditions['and_conditions'][$questionId] = $optionId;
         }
-       // Generate the required options randomly and store them in the conditions array.
+        // Generate the required options randomly and store them in the conditions array.
         for ($i = 1; $i <= $requiredCount; $i++) {
             $optionId = $this->faker->numberBetween(1, 25);
             $questionId = $this->faker->numberBetween(1, 15);
-            $conditions["or_conditions"][$questionId] = $optionId;
+            $conditions['or_conditions'][$questionId] = $optionId;
         }
-        
 
         // Encode the conditions array as a JSON string and return it.
         $conditions = json_encode($conditions);

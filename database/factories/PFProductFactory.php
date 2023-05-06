@@ -19,4 +19,3 @@ class PFProductFactory extends Factory
         ];
     }
 }
-

@@ -13,7 +13,7 @@ class PFTypeOptionFactory extends Factory
     {
         // Create an empty array to hold the options
         $option = [];
-  
+
         // Randomly select an input type
         $type = $this->faker->randomElement(['check_box', 'radio', 'range']);
 

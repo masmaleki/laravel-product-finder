@@ -3,16 +3,13 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Masmaleki\LaravelProductFinder\Models\PFWizard;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Hash;
 use Masmaleki\LaravelProductFinder\Models\PFProduct;
 use Masmaleki\LaravelProductFinder\Models\PFQuestion;
 use Masmaleki\LaravelProductFinder\Models\PFStep;
 use Masmaleki\LaravelProductFinder\Models\PFTag;
 use Masmaleki\LaravelProductFinder\Models\PFType;
 use Masmaleki\LaravelProductFinder\Models\PFTypeOption;
+use Masmaleki\LaravelProductFinder\Models\PFWizard;
 
 class PFWizardSeeder extends Seeder
 {
@@ -20,17 +17,17 @@ class PFWizardSeeder extends Seeder
     {
         // Seed PFType and its related models
         $pfTypes = PFType::factory()->count(10)->create();
-        
+
         // For each PFType instance, create related PFTypeOption instances
         foreach ($pfTypes as $pfType) {
             PFTypeOption::factory()->count(5)->create([
                 'pf_type_id' => $pfType->id,
             ]);
         }
-        
+
         // Seed PFWizard and its related models
         $pfWizards = PFWizard::factory()->count(10)->create();
-        
+
         // For each PFWizard instance, create related PFStep instances
         foreach ($pfWizards as $pfWizard) {
             $pfSteps = PFStep::factory()->count(5)->create([
@@ -66,7 +63,7 @@ class PFWizardSeeder extends Seeder
         // For each PFProduct instance, create related PFTag instances
         foreach ($pfProducts as $pfProduct) {
             $pfTags = PFTag::factory()->count(3)->create();
-            
+
             // Attach the created tags to the product
             $pfProduct->tags()->attach($pfTags);
         }

@@ -18,4 +18,3 @@ class PFWizadFactory extends Factory
         ];
     }
 }
-
