@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
-use Faker\Factory as Faker;
+use Faker\Generator as Faker;
 use Illuminate\Database\Seeder;
 use Masmaleki\LaravelProductFinder\Models\PFProduct;
+use Masmaleki\LaravelProductFinder\Models\PFProductTag;
 use Masmaleki\LaravelProductFinder\Models\PFQuestion;
 use Masmaleki\LaravelProductFinder\Models\PFStep;
 use Masmaleki\LaravelProductFinder\Models\PFTag;
@@ -14,153 +15,196 @@ use Masmaleki\LaravelProductFinder\Models\PFWizard;
 
 class PFWizardSeeder extends Seeder
 {
+    const STATUS_ACTIVE = 'active';
+    const TAG_LIMIT = 5;
+    const TYPE_NAMES = ['checkbox', 'radio', 'range'];
+
+    protected $faker;
+
+    public function __construct(Faker $faker)
+    {
+        $this->faker = $faker;
+    }
+
+    /**
+     * Seed the database with PFType and PFTypeOption records.
+     *
+     * @return void
+     */
     public function run()
     {
+        $this->seedTypes();
+        $this->seedWizards();
+        $this->createProducts();
+        $this->createTags();
+        $this->associateTagsWithProducts();
+    }
 
-        $faker = Faker::create();
-
-        // Seed PFType and its related models
-        $names = ['checkbox', 'radio', 'range'];
-        for ($i = 0; $i <= 2; $i++) {
-            $name = $names[$i];
-            // Create new PFType instance
-            $pfType = new PFType([
+    /**
+     * Seed the database with PFType and PFTypeOption records.
+     *
+     * @return void
+     */
+    protected function seedTypes()
+    {
+        foreach (self::TYPE_NAMES as $name) {
+            $type = PFType::create([
                 'name' => $name,
-                'status' => 'active',
-                'created_at' => now(),
-                'updated_at' => now(),
+                'status' => self::STATUS_ACTIVE,
             ]);
-            $pfType->save();
+
             $option = $this->getTypeOption($name);
-            // Create new PFTypeOption instance
-            $pfTypeOption = new PFTypeOption([
-                'name' => $faker->word,
+
+            PFTypeOption::create([
+                'name' => $this->faker->word,
                 'option' => json_encode($option),
-                'status' => 'active',
-                'pf_type_id' => $pfType->id,
-            ]);
-
-            // Save the PFTypeOption instance
-            $pfTypeOption->save();
-        }
-
-        // Seed PFWizard and its related models
-        for ($i = 1; $i <= 8; $i++) {
-            $pfWizards[$i] = PFWizard::create([
-                'title' => 'Wizard '.$i,
-                'desc' => 'Description for Wizard '.$i,
-                'status' => rand(0, 1) ? 'active' : 'inactive',
+                'status' => self::STATUS_ACTIVE,
+                'pf_type_id' => $type->id,
             ]);
         }
-
     }
 
     /**
-     * Get a random type name from the available options.
+     * Seed the database with PFWizard, PFStep, and PFQuestion records.
      *
-     * @return string
+     * @return void
      */
-    private function getRandomTypeName()
+    protected function seedWizards()
     {
-        // $names = ['checkbox', 'radio', 'bar', 'uploads', 'textinput'];
-        $names = ['checkbox', 'radio', 'range'];
+        for ($i = 1; $i <= 3; $i++) {
+            $wizard = PFWizard::create([
+                'title' => "Wizard $i",
+                'desc' => "This is the description for Wizard $i",
+                'status' => self::STATUS_ACTIVE,
+            ]);
 
-        $index = array_rand($names);
+            for ($j = 1; $j <= 4; $j++) {
+                $step = PFStep::create([
+                    'pf_wizard_id' => $wizard->id,
+                    'title' => "Step $j for Wizard $i",
+                    'order' => $j,
+                    'desc' => "This is the description for Step $j of Wizard $i",
+                    'status' => self::STATUS_ACTIVE,
+                ]);
 
-        return $names[$index];
+                for ($k = 1; $k <= 5; $k++) {
+                    PFQuestion::create([
+                        'pf_step_id' => $step->id,
+                        'pf_type_option_id' => $this->faker->randomElement([1, 2, 3]),
+                        'title' => "Question $k for Step $j of Wizard $i",
+                        'conditions' => json_encode([
+                            'and_conditions' => $this->faker->boolean() ? [
+                                rand(1, 8) => rand(1, 3),
+                                rand(1, 8) => rand(1, 3),
+                            ] : [],
+                            'or_conditions' => $this->faker->boolean() ? [
+                                rand(1, 8) => rand(1, 3),
+                                rand(1, 8) => rand(1, 3),
+                            ] : [],
+                        ]),
+                        'desc' => "This is the description for Question $k of Step $j for Wizard $i",
+                        'image' => 'https://example.com/image.jpg',
+                        'point' => rand(0, 10),
+                        'is_required' => $this->faker->boolean(),
+                        'status' => self::STATUS_ACTIVE,
+                    ]);
+                }
+            }
+        }
     }
 
     /**
-     * Get a random type option based on the selected input type.
+     * Create sample PFProduct records.
      *
-     * @return array
+     * @return void
      */
-    private function getTypeOption($type)
+    protected function createProducts()
     {
-        $faker = Faker::create();
+        // Create 50 products
+        for ($i = 1; $i <= 50; $i++) {
+            PFProduct::create([
+                'name' => "Product $i",
+                'picture' => "product-$i.jpg",
+                'price' => rand(10, 100),
+                'info' => "Info about product $i",
+            ]);
+        }
+    }
 
-        // Populate the options array based on the selected input type
+    /**
+     * Create sample PFTag records.
+     *
+     * @return void
+     */
+    protected function createTags()
+    {
+        // Create 80 tags
+        for ($i = 1; $i <= 80; $i++) {
+            PFTag::create([
+                'name' => "Tag $i",
+                'value' => "tag-$i",
+                'info' => "Info about tag $i",
+            ]);
+        }
+    }
+
+    /**
+     * Associate PFTag records with PFProduct records.
+     *
+     * @return void
+     */
+    protected function associateTagsWithProducts()
+    {
+        $products = PFProduct::all();
+        $tags = PFTag::all();
+
+        foreach ($products as $product) {
+            // Get a random selection of tags to associate with the product
+            $randomTags = $tags->random(self::TAG_LIMIT);
+
+            foreach ($randomTags as $tag) {
+                PFProductTag::create([
+                    'pf_product_id' => $product->id,
+                    'pf_tag_id' => $tag->id,
+                ]);
+            }
+        }
+    }
+
+    /**
+     * Get a type option array based on the given type name.
+     *
+     * @param string $type The type name
+     * @return array The corresponding type option array
+     */
+    protected function getTypeOption(string $type): array
+    {
         switch ($type) {
             case 'checkbox':
                 return [
                     'checkbox' => [
-                        'max_user_select' => $faker->numberBetween(1, 5),
-                        'total_item' => $faker->numberBetween(1, 10),
+                        'max_user_select' => $this->faker->numberBetween(1, 5),
+                        'total_item' => $this->faker->numberBetween(1, 10),
                     ],
                 ];
             case 'radio':
                 return [
                     'radio' => [
-                        'total_item' => $faker->numberBetween(1, 10),
+                        'total_item' => $this->faker->numberBetween(1, 10),
                     ],
                 ];
             case 'range':
                 return [
                     'range' => [
-                        'max' => $faker->numberBetween(1, 100),
-                        'min' => $faker->numberBetween(0, 50),
-                        'step' => $faker->numberBetween(1, 10),
-                        'unit' => $faker->word,
-                        'def_value' => $faker->numberBetween(0, 50),
+                        'max' => $this->faker->numberBetween(1, 100),
+                        'min' => $this->faker->numberBetween(0, 50),
+                        'step' => $this->faker->numberBetween(1, 10),
+                        'unit' => $this->faker->word,
+                        'def_value' => $this->faker->numberBetween(0, 50),
                     ],
                 ];
             default:
                 return [];
         }
     }
-    //     public function run()
-    //     {
-    //         // Seed PFType and its related models
-    //         $pfTypes = PFType::factory()->count(10)->create();
-
-    //         // For each PFType instance, create related PFTypeOption instances
-    //         foreach ($pfTypes as $pfType) {
-    //             PFTypeOption::factory()->count(5)->create([
-    //                 'pf_type_id' => $pfType->id,
-    //             ]);
-    //         }
-
-    //         // Seed PFWizard and its related models
-    //         $pfWizards = PFWizard::factory()->count(10)->create();
-
-    //         // For each PFWizard instance, create related PFStep instances
-    //         foreach ($pfWizards as $pfWizard) {
-    //             $pfSteps = PFStep::factory()->count(5)->create([
-    //                 'pf_wizard_id' => $pfWizard->id,
-    //             ]);
-
-    //             // For each PFStep instance, create related PFQuestion instances
-    //             foreach ($pfSteps as $pfStep) {
-    //                 $pfQuestions = PFQuestion::factory()->count(3)->create([
-    //                     'pf_step_id' => $pfStep->id,
-    //                 ]);
-
-    //                 // For each PFQuestion instance, create related PFTag instances
-    //                 foreach ($pfQuestions as $pfQuestion) {
-    //                     PFTag::factory()->count(3)->create([
-    //                         'pf_question_id' => $pfQuestion->id,
-    //                     ]);
-
-    //                     // For each PFQuestion instance, create related PFTypeOption instances
-    //                     $pfTypeOptions = $pfQuestion->pfType->pfTypeOptions;
-    //                     foreach ($pfTypeOptions as $pfTypeOption) {
-    //                         PFQuestion::factory()->count(3)->create([
-    //                             'pf_question_id' => $pfQuestion->id,
-    //                             'pf_type_option_id' => $pfTypeOption->id,
-    //                         ]);
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //         // Create 50 PFProduct instances using the factory method
-    //         $pfProducts = PFProduct::factory()->count(50)->create();
-
-    //         // For each PFProduct instance, create related PFTag instances
-    //         foreach ($pfProducts as $pfProduct) {
-    //             $pfTags = PFTag::factory()->count(3)->create();
-
-    //             // Attach the created tags to the product
-    //             $pfProduct->tags()->attach($pfTags);
-    //         }
-    //     }
 }

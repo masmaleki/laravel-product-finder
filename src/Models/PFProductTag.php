@@ -30,6 +30,6 @@ class PFProductTag extends Model
      */
     public function product()
     {
-        return $this->belongsTo('App\Models\PfProduct', 'pf_product_id');
+        return $this->belongsTo(PFProduct::class, 'pf_product_id');
     }
 }
