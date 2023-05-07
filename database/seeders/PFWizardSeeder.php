@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Faker\Generator as Faker;
 use Illuminate\Database\Seeder;
+use Masmaleki\LaravelProductFinder\Models\PFOption;
 use Masmaleki\LaravelProductFinder\Models\PFProduct;
 use Masmaleki\LaravelProductFinder\Models\PFProductTag;
 use Masmaleki\LaravelProductFinder\Models\PFQuestion;
@@ -71,6 +72,12 @@ class PFWizardSeeder extends Seeder
      *
      * @return void
      */
+
+    /**
+     * Seed the database with PFWizard, PFStep, and PFQuestion records.
+     *
+     * @return void
+     */
     protected function seedWizards()
     {
         for ($i = 1; $i <= 3; $i++) {
@@ -89,8 +96,10 @@ class PFWizardSeeder extends Seeder
                     'status' => self::STATUS_ACTIVE,
                 ]);
 
+                $questions = [];
+
                 for ($k = 1; $k <= 5; $k++) {
-                    PFQuestion::create([
+                    $question = PFQuestion::create([
                         'pf_step_id' => $step->id,
                         'pf_type_option_id' => $this->faker->randomElement([1, 2, 3]),
                         'title' => "Question $k for Step $j of Wizard $i",
@@ -110,10 +119,133 @@ class PFWizardSeeder extends Seeder
                         'is_required' => $this->faker->boolean(),
                         'status' => self::STATUS_ACTIVE,
                     ]);
+
+                    $questions[] = $question;
+                }
+
+                // Add random pf_option records for each question
+                foreach ($questions as $question) {
+                    // Get a random selection of type options to associate with the question
+                    $typeOption = $question->typeOption;
+
+                    $value = [];
+
+                    switch ($typeOption->type->name) {
+                        case 'checkbox':
+                            $totalItems = rand(1, 10);
+                            $maxUserSelect = rand(1, $totalItems);
+                            //TODO::fix the signle option
+                            for ($i = 1; $i <= $totalItems; $i++) {
+                                $value[] = [
+                                    'label' => $this->faker->word,
+                                    'value' => $i,
+                                ];
+                            }
+
+                            shuffle($value);
+
+                            $value = [
+                                'max_user_select' => $maxUserSelect,
+                                'total_item' => $totalItems,
+                                'items' => $value,
+                            ];
+                            break;
+                        case 'radio':
+                            $totalItems = rand(1, 10);
+
+                            for ($i = 1; $i <= $totalItems; $i++) {
+                                $value[] = [
+                                    'label' => $this->faker->word,
+                                    'value' => $i,
+                                ];
+                            }
+
+                            shuffle($value);
+
+                            $value = [
+                                'total_item' => $totalItems,
+                                'items' => $value,
+                            ];
+                            break;
+                        case 'range':
+                            $max = rand(1, 100);
+                            $min = rand(0, 50);
+                            $step = rand(1, 10);
+                            $unit = $this->faker->word;
+                            $defValue = rand($min, $max);
+
+                            $value = [
+                                'max' => $max,
+                                'min' => $min,
+                                'step' => $step,
+                                'unit' => $unit,
+                                'def_value' => $defValue,
+                            ];
+
+                            break;
+                    }
+
+                    // Get a random selection of tags to associate with the option
+                    $tag = PFTag::inRandomOrder()->first();
+
+                    $pfOption = new PFOption([
+                        'pf_question_id' => $question->id,
+                        'pf_type_option_id' => $typeOption->id,
+                        'pf_tag_id' => $tag ? $tag->id : null,
+                        'value' => json_encode($value),
+                        'status' => self::STATUS_ACTIVE,
+                    ]);
+
+                    $pfOption->save();
                 }
             }
         }
     }
+
+
+    // protected function seedWizards()
+    // {
+    //     for ($i = 1; $i <= 3; $i++) {
+    //         $wizard = PFWizard::create([
+    //             'title' => "Wizard $i",
+    //             'desc' => "This is the description for Wizard $i",
+    //             'status' => self::STATUS_ACTIVE,
+    //         ]);
+
+    //         for ($j = 1; $j <= 4; $j++) {
+    //             $step = PFStep::create([
+    //                 'pf_wizard_id' => $wizard->id,
+    //                 'title' => "Step $j for Wizard $i",
+    //                 'order' => $j,
+    //                 'desc' => "This is the description for Step $j of Wizard $i",
+    //                 'status' => self::STATUS_ACTIVE,
+    //             ]);
+
+    //             for ($k = 1; $k <= 5; $k++) {
+    //                 PFQuestion::create([
+    //                     'pf_step_id' => $step->id,
+    //                     'pf_type_option_id' => $this->faker->randomElement([1, 2, 3]),
+    //                     'title' => "Question $k for Step $j of Wizard $i",
+    //                     'conditions' => json_encode([
+    //                         'and_conditions' => $this->faker->boolean() ? [
+    //                             rand(1, 8) => rand(1, 3),
+    //                             rand(1, 8) => rand(1, 3),
+    //                         ] : [],
+    //                         'or_conditions' => $this->faker->boolean() ? [
+    //                             rand(1, 8) => rand(1, 3),
+    //                             rand(1, 8) => rand(1, 3),
+    //                         ] : [],
+    //                     ]),
+    //                     'desc' => "This is the description for Question $k of Step $j for Wizard $i",
+    //                     'image' => 'https://example.com/image.jpg',
+    //                     'point' => rand(0, 10),
+    //                     'is_required' => $this->faker->boolean(),
+    //                     'status' => self::STATUS_ACTIVE,
+    //                 ]);
+    //             }
+    //         }
+    //     }
+    // }
 
     /**
      * Create sample PFProduct records.
