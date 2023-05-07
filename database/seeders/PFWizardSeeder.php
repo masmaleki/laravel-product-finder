@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 use Masmaleki\LaravelProductFinder\Models\PFProduct;
 use Masmaleki\LaravelProductFinder\Models\PFQuestion;
@@ -10,8 +11,6 @@ use Masmaleki\LaravelProductFinder\Models\PFTag;
 use Masmaleki\LaravelProductFinder\Models\PFType;
 use Masmaleki\LaravelProductFinder\Models\PFTypeOption;
 use Masmaleki\LaravelProductFinder\Models\PFWizard;
-use Faker\Factory as Faker;
-use Illuminate\Support\Facades\DB;
 
 class PFWizardSeeder extends Seeder
 {
@@ -20,7 +19,7 @@ class PFWizardSeeder extends Seeder
 
         $faker = Faker::create();
 
-       // Seed PFType and its related models
+        // Seed PFType and its related models
         $names = ['checkbox', 'radio', 'range'];
         for ($i = 0; $i <= 2; $i++) {
             $name = $names[$i];
@@ -29,7 +28,7 @@ class PFWizardSeeder extends Seeder
                 'name' => $name,
                 'status' => 'active',
                 'created_at' => now(),
-                'updated_at' => now()
+                'updated_at' => now(),
             ]);
             $pfType->save();
             $option = $this->getTypeOption($name);
@@ -38,11 +37,11 @@ class PFWizardSeeder extends Seeder
                 'name' => $faker->word,
                 'option' => json_encode($option),
                 'status' => 'active',
-                'pf_type_id' => $pfType->id
-             ]);
+                'pf_type_id' => $pfType->id,
+            ]);
 
             // Save the PFTypeOption instance
-            $pfTypeOption->save();             
+            $pfTypeOption->save();
         }
 
         // Seed PFWizard and its related models
@@ -55,6 +54,7 @@ class PFWizardSeeder extends Seeder
         }
 
     }
+
     /**
      * Get a random type name from the available options.
      *
@@ -66,9 +66,11 @@ class PFWizardSeeder extends Seeder
         $names = ['checkbox', 'radio', 'range'];
 
         $index = array_rand($names);
+
         return $names[$index];
     }
-        /**
+
+    /**
      * Get a random type option based on the selected input type.
      *
      * @return array
@@ -84,13 +86,13 @@ class PFWizardSeeder extends Seeder
                     'checkbox' => [
                         'max_user_select' => $faker->numberBetween(1, 5),
                         'total_item' => $faker->numberBetween(1, 10),
-                    ]
+                    ],
                 ];
             case 'radio':
                 return [
                     'radio' => [
                         'total_item' => $faker->numberBetween(1, 10),
-                    ]
+                    ],
                 ];
             case 'range':
                 return [
@@ -100,7 +102,7 @@ class PFWizardSeeder extends Seeder
                         'step' => $faker->numberBetween(1, 10),
                         'unit' => $faker->word,
                         'def_value' => $faker->numberBetween(0, 50),
-                    ]
+                    ],
                 ];
             default:
                 return [];
