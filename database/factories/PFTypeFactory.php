@@ -11,7 +11,7 @@ class PFTypeFactory extends Factory
 
     public function definition()
     {
-        $name = $this->faker->randomElement(['checkbox', 'radio', 'bar', 'uploads', 'textinput']);
+        $name = $this->faker->randomElement(['checkbox', 'radio', 'range', 'uploads', 'textinput']);
 
         return [
             'name' => $name,
