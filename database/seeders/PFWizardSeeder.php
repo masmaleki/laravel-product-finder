@@ -16,7 +16,9 @@ use Masmaleki\LaravelProductFinder\Models\PFWizard;
 class PFWizardSeeder extends Seeder
 {
     const STATUS_ACTIVE = 'active';
+
     const TAG_LIMIT = 5;
+
     const TYPE_NAMES = ['checkbox', 'radio', 'range'];
 
     protected $faker;
@@ -174,7 +176,7 @@ class PFWizardSeeder extends Seeder
     /**
      * Get a type option array based on the given type name.
      *
-     * @param string $type The type name
+     * @param  string  $type The type name
      * @return array The corresponding type option array
      */
     protected function getTypeOption(string $type): array
