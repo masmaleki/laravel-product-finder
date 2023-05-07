@@ -5,11 +5,11 @@ namespace Masmaleki\LaravelProductFinder\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PFOption extends Model
+class PFQuestionOption extends Model
 {
     use HasFactory;
 
-    protected $table = 'pf_options';
+    protected $table = 'pf_question_options';
 
     protected $guarded = [];
 

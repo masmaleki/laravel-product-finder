@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Faker\Generator as Faker;
 use Illuminate\Database\Seeder;
-use Masmaleki\LaravelProductFinder\Models\PFOption;
+use Masmaleki\LaravelProductFinder\Models\PFQuestionOption;
 use Masmaleki\LaravelProductFinder\Models\PFProduct;
 use Masmaleki\LaravelProductFinder\Models\PFProductTag;
 use Masmaleki\LaravelProductFinder\Models\PFQuestion;
@@ -188,7 +188,7 @@ class PFWizardSeeder extends Seeder
                     // Get a random selection of tags to associate with the option
                     $tag = PFTag::inRandomOrder()->first();
 
-                    $pfOption = new PFOption([
+                    $PFQuestionOption = new PFQuestionOption([
                         'pf_question_id' => $question->id,
                         'pf_type_option_id' => $typeOption->id,
                         'pf_tag_id' => $tag ? $tag->id : null,
@@ -196,7 +196,7 @@ class PFWizardSeeder extends Seeder
                         'status' => self::STATUS_ACTIVE,
                     ]);
 
-                    $pfOption->save();
+                    $PFQuestionOption->save();
                 }
             }
         }

@@ -38,6 +38,6 @@ class PFQuestion extends Model
      */
     public function options()
     {
-        return $this->hasMany(PfOption::class);
+        return $this->hasMany(PFQuestionOption::class);
     }
 }
