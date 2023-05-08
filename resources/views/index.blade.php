@@ -19,7 +19,7 @@
         <div class="main">
         
             <div class="container">
-                <form method="POST" id="signup-form" class="signup-form" action="#">
+                <form method="POST" id="pfwizrd" class="signup-form" action="#">
                     <div>
                       @foreach ($pf_steps as $pf_step )
                         <h3>{{$pf_step->title}}</h3>
@@ -30,24 +30,18 @@
 
                             @foreach ($pf_step->questions as $pf_question)
                             <div class="form-row">
-                                <h4>{{$pf_question->title}}</h4>
+                                <h4>{{$pf_question->title}}<span class="{{ $pf_question->is_required ? 'required' : '' }}"> * </span></h4>
                                 @if ($pf_question->typeOption?->type?->name === 'checkbox')
                                 @foreach($pf_question->options as $value => $label)
-                                <label>
-                                    <input type="radio" name="age_gender" value="under_30_male">
-                                    <span class="radio-text">Under 30 and male</span>
-                                </label>
+                               {{-- checkbox code --}}
                                 @endforeach
                                 @endif
 
                                 @if ($pf_question->typeOption?->type?->name === 'radio')
                                 @foreach ($pf_question->options as $option)
-                                @php
-                                    $option_value=json_decode($option->value);
-                                @endphp
                                     <label>
                                         <input type="radio" name="{{ $pf_question->id }}" value="{{ $option->id }}">
-                                        <span class="radio-text">{{ $option_value->title }}</span>
+                                        <span class="radio-text">{{ json_decode($option->value)->title }}</span>
                                     </label>
                                 @endforeach
                                 @endif
@@ -81,6 +75,46 @@
     <script src="{{ asset('vendor/productfinder/lib/nouislider/nouislider.min.js')}}"></script>
     <script src="{{ asset('vendor/productfinder/lib/wnumb/wNumb.js')}}"></script>
     <script src="{{ asset('vendor/productfinder/js/main.js')}}"></script>
+
+    <script>
+// Array of required questions for each step
+const requiredQuestions = {
+  step1: ['1', '2'],
+  step2: ['6', ]
+};
+
+// Function to check if all required questions have been answered
+function areRequiredQuestionsAnswered(step) {
+  const requiredQuestionsForStep = requiredQuestions[step];
+  let allAnswered = true;
+  requiredQuestionsForStep.forEach((questionId) => {
+    const radioButton = document.querySelector(`input[name=${questionId}]:checked`);
+    if (!radioButton) {
+      allAnswered = false;
+      // Display error message for unanswered question
+      const errorMessage = `Please answer question ${questionId}`;
+      const errorElement = document.getElementById(`${questionId}-error`);
+      errorElement.innerText = errorMessage;
+    }
+  });
+  return allAnswered;
+}
+
+// Function to handle "next" button click
+function onNextButtonClick() {
+  const currentStep = getCurrentStep();
+  const allRequiredQuestionsAnswered = areRequiredQuestionsAnswered(currentStep);
+  if (allRequiredQuestionsAnswered) {
+    // Proceed to next step
+    goToNextStep();
+  } else {
+    // Don't proceed to next step
+    return;
+  }
+}
+
+
+    </script>
 </body>
 
 </html>
