@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="author" content="colorlib.com">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ai - product finder!</title>
+    <title>{{$pf_wizard?->title}}</title>
 
     <!-- Font Icon -->
     <link rel="stylesheet" href="{{ asset('vendor/productfinder/fonts/material-icon/css/material-design-iconic-font.min.css')}}">
@@ -31,30 +31,27 @@
                             @foreach ($pf_step->questions as $pf_question)
                             <div class="form-row">
                                 <h4>{{$pf_question->title}}</h4>
-                                @if ($pf_question === 'checkbox' || $type === 'radio')
-                                @foreach($options as $value => $label)
-
+                                @if ($pf_question->typeOption?->type?->name === 'checkbox')
+                                @foreach($pf_question->options as $value => $label)
                                 <label>
                                     <input type="radio" name="age_gender" value="under_30_male">
                                     <span class="radio-text">Under 30 and male</span>
                                 </label>
-
-                                <label>
-                                    <input type="radio" name="age_gender" value="under_30_female">
-                                    <span class="radio-text">Under 30 and female</span>
-                                </label>
-
-                                <label>
-                                    <input type="radio" name="age_gender" value="over_30_male">
-                                    <span class="radio-text">Over 30 and male</span>
-                                </label>
-
-                                <label>
-                                    <input type="radio" name="age_gender" value="over_30_female">
-                                    <span class="radio-text">Over 30 and female</span>
-                                </label>
                                 @endforeach
-                                @elseif ($type === 'range')
+                                @endif
+
+                                @if ($pf_question->typeOption?->type?->name === 'radio')
+                                @foreach ($pf_question->options as $option)
+                                @php
+                                    $option_value=json_decode($option->value);
+                                @endphp
+                                    <label>
+                                        <input type="radio" name="{{ $pf_question->id }}" value="{{ $option->id }}">
+                                        <span class="radio-text">{{ $option_value->title }}</span>
+                                    </label>
+                                @endforeach
+                                @endif
+                                @if ($pf_question->typeOption?->type?->name === 'range')
                                     {{-- FOR RANGE --}}
                                 @endif
 
