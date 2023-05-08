@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('pf_options', function (Blueprint $table) {
+        Schema::create('pf_question_options', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('pf_question_id')->index();
             $table->foreign('pf_question_id')->references('id')->on('pf_questions')
@@ -16,9 +16,11 @@ return new class extends Migration
             $table->unsignedBigInteger('pf_type_option_id')->index();
             $table->foreign('pf_type_option_id')->references('id')
                 ->on('pf_type_options')->onDelete('cascade');
+            $table->unsignedBigInteger('pf_tag_id')->nullable();
+            $table->foreign('pf_tag_id')->references('id')
+            ->on('pf_tags')->onDelete('cascade');
             $table->jsonb('value')->nullable();
             $table->integer('point')->default(0);
-            $table->string('tag')->nullable();
             $table->text('info')->nullable();
             $table->string('status', 100)->default('active');
             $table->timestamps();

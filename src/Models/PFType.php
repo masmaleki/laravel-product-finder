@@ -16,4 +16,12 @@ class PFType extends Model
     protected $casts = [
 
     ];
+
+    /**
+     * Get the type options associated with the type.
+     */
+    public function typeOptions()
+    {
+        return $this->hasMany(PFTypeOption::class);
+    }
 }

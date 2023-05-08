@@ -112,7 +112,7 @@ input {
     }
 }
 .content {
-    height: 800px;
+    // height: 800px;
 }
 
 .steps {
@@ -395,4 +395,9 @@ input.error {
         font-size: 28px;
         font-weight: bold;
     }
+}
+span.required {
+    color: red;
+    font-size: 20px;
+    line-height: 10px;
 }

@@ -19,7 +19,7 @@
 @media screen and (max-width: 992px) {
 
     .content {
-        height: 900px;
+        // height: 900px;
     }
     .form-radio-flex input + label {
         width: 100px;
@@ -52,7 +52,7 @@
         @include flex-direction(column);
     }
     .content {
-        height: 1050px;
+        // height: 1050px;
     }
     #find_bank {
         margin-bottom: 20px;

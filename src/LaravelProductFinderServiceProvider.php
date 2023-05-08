@@ -2,7 +2,6 @@
 
 namespace Masmaleki\LaravelProductFinder;
 
-use Illuminate\Support\Facades\Route;
 use Masmaleki\LaravelProductFinder\Commands\LaravelProductFinderCommand;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
@@ -30,7 +29,7 @@ class LaravelProductFinderServiceProvider extends PackageServiceProvider
                 'create_pf_type_options_table',
                 'create_pf_steps_table',
                 'create_pf_questions_table',
-                'create_pf_options_table',
+                'create_pf_question_options_table',
                 'create_pf_forms_table',
                 'create_pf_answers_table',
             ])
@@ -56,18 +55,19 @@ class LaravelProductFinderServiceProvider extends PackageServiceProvider
             });
     }
 
-    protected function registerRoutes()
+    public function packageBooted()
     {
-        Route::group($this->routeConfiguration(), function () {
-            $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
-        });
+
+        if ($this->app->runningInConsole()) {
+            $this->publishSeeders();
+        }
     }
 
-    protected function routeConfiguration(): array
+    protected function publishSeeders()
     {
-        return [
-            'prefix' => 'pf',
-            // 'middleware' => config('medialibrary.middleware'),
-        ];
+        $this->publishes([
+            __DIR__.'/../database/seeders/PFWizardSeeder.php' => database_path('seeders/PFWizardSeeder.php'),
+            __DIR__.'/../database/seeders/PFStaticDataAISeeder.php' => database_path('seeders/PFStaticDataAISeeder.php'),
+        ], 'productfinder-seeders');
     }
 }

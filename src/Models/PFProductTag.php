@@ -16,4 +16,20 @@ class PFProductTag extends Model
     protected $casts = [
 
     ];
+
+    /**
+     * Get the tag that owns the product tag.
+     */
+    public function tag()
+    {
+        return $this->belongsTo(PfTag::class, 'pf_tag_id');
+    }
+
+    /**
+     * Get the product that owns the product tag.
+     */
+    public function product()
+    {
+        return $this->belongsTo(PFProduct::class, 'pf_product_id');
+    }
 }

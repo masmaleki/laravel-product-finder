@@ -16,4 +16,28 @@ class PFQuestion extends Model
     protected $casts = [
 
     ];
+
+    /**
+     * Get the step that owns the question.
+     */
+    public function step()
+    {
+        return $this->belongsTo('App\Models\PFStep', 'pf_step_id');
+    }
+
+    /**
+     * Get the type option that owns the question.
+     */
+    public function typeOption()
+    {
+        return $this->belongsTo(PFTypeOption::class, 'pf_type_option_id');
+    }
+
+    /**
+     * Get the options for the question.
+     */
+    public function options()
+    {
+        return $this->hasMany(PFQuestionOption::class, 'pf_question_id');
+    }
 }
