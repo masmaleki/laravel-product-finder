@@ -4,10 +4,10 @@ namespace Database\Seeders;
 
 use Faker\Generator as Faker;
 use Illuminate\Database\Seeder;
-use Masmaleki\LaravelProductFinder\Models\PFQuestionOption;
 use Masmaleki\LaravelProductFinder\Models\PFProduct;
 use Masmaleki\LaravelProductFinder\Models\PFProductTag;
 use Masmaleki\LaravelProductFinder\Models\PFQuestion;
+use Masmaleki\LaravelProductFinder\Models\PFQuestionOption;
 use Masmaleki\LaravelProductFinder\Models\PFStep;
 use Masmaleki\LaravelProductFinder\Models\PFTag;
 use Masmaleki\LaravelProductFinder\Models\PFType;
@@ -201,7 +201,6 @@ class PFWizardSeeder extends Seeder
             }
         }
     }
-
 
     // protected function seedWizards()
     // {

@@ -4,10 +4,10 @@ namespace Database\Seeders;
 
 use Faker\Generator as Faker;
 use Illuminate\Database\Seeder;
-use Masmaleki\LaravelProductFinder\Models\PFQuestionOption;
 use Masmaleki\LaravelProductFinder\Models\PFProduct;
 use Masmaleki\LaravelProductFinder\Models\PFProductTag;
 use Masmaleki\LaravelProductFinder\Models\PFQuestion;
+use Masmaleki\LaravelProductFinder\Models\PFQuestionOption;
 use Masmaleki\LaravelProductFinder\Models\PFStep;
 use Masmaleki\LaravelProductFinder\Models\PFTag;
 use Masmaleki\LaravelProductFinder\Models\PFType;
@@ -103,13 +103,13 @@ class PFStaticDataAISeeder extends Seeder
                 'title' => 'What is your age and gender?',
                 'conditions' => json_encode([
                     'and_conditions' => [],
-                    'or_conditions' => []
+                    'or_conditions' => [],
                 ]),
                 'desc' => 'Please provide your age and gender.',
                 'image' => '',
                 'point' => 5,
                 'is_required' => true,
-                'status' => self::STATUS_ACTIVE
+                'status' => self::STATUS_ACTIVE,
             ]);
 
             // Create question 1 options
@@ -165,13 +165,13 @@ class PFStaticDataAISeeder extends Seeder
                 'title' => 'When did you first notice your hair loss?',
                 'conditions' => json_encode([
                     'and_conditions' => [],
-                    'or_conditions' => []
+                    'or_conditions' => [],
                 ]),
                 'desc' => 'Please describe when you first noticed your hair loss.',
                 'image' => '',
                 'point' => 10,
                 'is_required' => true,
-                'status' => self::STATUS_ACTIVE
+                'status' => self::STATUS_ACTIVE,
             ]);
 
             // Create question 2 options
@@ -220,7 +220,6 @@ class PFStaticDataAISeeder extends Seeder
 
             ]);
 
-
             // Create question 3
             $question3 = PFQuestion::create([
                 'pf_step_id' => 1,
@@ -228,13 +227,13 @@ class PFStaticDataAISeeder extends Seeder
                 'title' => 'How quickly has your hair loss progressed?',
                 'conditions' => json_encode([
                     'and_conditions' => [],
-                    'or_conditions' => []
+                    'or_conditions' => [],
                 ]),
                 'desc' => 'Please describe how quickly your hair loss has progressed.',
                 'image' => '',
                 'point' => 10,
                 'is_required' => true,
-                'status' => self::STATUS_ACTIVE
+                'status' => self::STATUS_ACTIVE,
             ]);
 
             // Create question 3 options
@@ -284,8 +283,6 @@ class PFStaticDataAISeeder extends Seeder
 
             ]);
 
-
-
             // Create question 4
             $question4 = PFQuestion::create([
                 'pf_step_id' => 1,
@@ -293,13 +290,13 @@ class PFStaticDataAISeeder extends Seeder
                 'title' => 'Have you experienced any sudden hair loss or shedding?',
                 'conditions' => json_encode([
                     'and_conditions' => [],
-                    'or_conditions' => []
+                    'or_conditions' => [],
                 ]),
                 'desc' => '',
                 'image' => '',
                 'point' => 10,
                 'is_required' => true,
-                'status' => self::STATUS_ACTIVE
+                'status' => self::STATUS_ACTIVE,
             ]);
 
             // Create question 4 options
@@ -354,13 +351,13 @@ class PFStaticDataAISeeder extends Seeder
                 'title' => 'Do you have any underlying medical conditions or are you taking any medications that may be contributing to your hair loss?',
                 'conditions' => json_encode([
                     'and_conditions' => [],
-                    'or_conditions' => []
+                    'or_conditions' => [],
                 ]),
                 'desc' => '',
                 'image' => '',
                 'point' => 10,
                 'is_required' => true,
-                'status' => self::STATUS_ACTIVE
+                'status' => self::STATUS_ACTIVE,
             ]);
 
             // Create question 5 options
@@ -408,7 +405,6 @@ class PFStaticDataAISeeder extends Seeder
                 'info' => null, // insert a description if needed
             ]);
 
-
             // Create question 6
             $question6 = PFQuestion::create([
                 'pf_step_id' => 2,
@@ -416,13 +412,13 @@ class PFStaticDataAISeeder extends Seeder
                 'title' => 'How would you describe the pattern of your hair loss (e.g. receding hairline, thinning on top, etc.)?',
                 'conditions' => json_encode([
                     'and_conditions' => [],
-                    'or_conditions' => []
+                    'or_conditions' => [],
                 ]),
                 'desc' => '',
                 'image' => '',
                 'point' => 10,
                 'is_required' => true,
-                'status' => self::STATUS_ACTIVE
+                'status' => self::STATUS_ACTIVE,
             ]);
 
             // Create question 6 options
@@ -477,13 +473,13 @@ class PFStaticDataAISeeder extends Seeder
                 'title' => 'Have you experienced any significant life changes or stressful events that may be related to your hair loss?',
                 'conditions' => json_encode([
                     'and_conditions' => [],
-                    'or_conditions' => []
+                    'or_conditions' => [],
                 ]),
                 'desc' => '',
                 'image' => '',
                 'point' => 10,
                 'is_required' => true,
-                'status' => self::STATUS_ACTIVE
+                'status' => self::STATUS_ACTIVE,
             ]);
 
             // Create question 7 options
@@ -538,13 +534,13 @@ class PFStaticDataAISeeder extends Seeder
                 'title' => 'Are there any areas of your scalp where you have noticed new hair growth or increased thickness?',
                 'conditions' => json_encode([
                     'and_conditions' => [],
-                    'or_conditions' => []
+                    'or_conditions' => [],
                 ]),
                 'desc' => '',
                 'image' => '',
                 'point' => 10,
                 'is_required' => true,
-                'status' => self::STATUS_ACTIVE
+                'status' => self::STATUS_ACTIVE,
             ]);
 
             // Create question 8 options
@@ -599,13 +595,13 @@ class PFStaticDataAISeeder extends Seeder
                 'title' => 'Are you interested in non-surgical hair restoration options, such as hair loss medications or hair growth supplements?',
                 'conditions' => json_encode([
                     'and_conditions' => [],
-                    'or_conditions' => []
+                    'or_conditions' => [],
                 ]),
                 'desc' => '',
                 'image' => '',
                 'point' => 10,
                 'is_required' => true,
-                'status' => self::STATUS_ACTIVE
+                'status' => self::STATUS_ACTIVE,
             ]);
 
             // Create question 9 options
@@ -660,13 +656,13 @@ class PFStaticDataAISeeder extends Seeder
                 'title' => 'Have you considered surgical hair restoration procedures, such as hair transplants or scalp reduction?',
                 'conditions' => json_encode([
                     'and_conditions' => [],
-                    'or_conditions' => []
+                    'or_conditions' => [],
                 ]),
                 'desc' => '',
                 'image' => '',
                 'point' => 10,
                 'is_required' => true,
-                'status' => self::STATUS_ACTIVE
+                'status' => self::STATUS_ACTIVE,
             ]);
 
             // Create question 10 options
@@ -721,13 +717,13 @@ class PFStaticDataAISeeder extends Seeder
                 'title' => 'What are your expectations for the outcome of any hair restoration procedures?',
                 'conditions' => json_encode([
                     'and_conditions' => [],
-                    'or_conditions' => []
+                    'or_conditions' => [],
                 ]),
                 'desc' => '',
                 'image' => '',
                 'point' => 10,
                 'is_required' => true,
-                'status' => self::STATUS_ACTIVE
+                'status' => self::STATUS_ACTIVE,
             ]);
 
             // Create question 11 options
@@ -782,16 +778,16 @@ class PFStaticDataAISeeder extends Seeder
                 'title' => 'Have you experienced any side effects or complications with any previous hair restoration procedures?',
                 'conditions' => json_encode([
                     'and_conditions' => [],
-                    'or_conditions' => []
+                    'or_conditions' => [],
                 ]),
                 'desc' => '',
                 'image' => '',
                 'point' => 10,
                 'is_required' => true,
-                'status' => self::STATUS_ACTIVE
+                'status' => self::STATUS_ACTIVE,
             ]);
-             // Create question 12 options
-             PFQuestionOption::create([
+            // Create question 12 options
+            PFQuestionOption::create([
                 'pf_question_id' => $question12->id,
                 'pf_type_option_id' => 2,
                 'pf_tag_id' => null,
@@ -842,16 +838,16 @@ class PFStaticDataAISeeder extends Seeder
                 'title' => 'What is your budget for hair restoration procedures?',
                 'conditions' => json_encode([
                     'and_conditions' => [],
-                    'or_conditions' => []
+                    'or_conditions' => [],
                 ]),
                 'desc' => '',
                 'image' => '',
                 'point' => 10,
                 'is_required' => true,
-                'status' => self::STATUS_ACTIVE
+                'status' => self::STATUS_ACTIVE,
             ]);
-             // Create question 12 options
-             PFQuestionOption::create([
+            // Create question 12 options
+            PFQuestionOption::create([
                 'pf_question_id' => $question13->id,
                 'pf_type_option_id' => 2,
                 'pf_tag_id' => null,
@@ -894,12 +890,9 @@ class PFStaticDataAISeeder extends Seeder
                 'status' => self::STATUS_ACTIVE,
                 'info' => null, // insert a description if needed
             ]);
-            
+
         }
     }
-
-
-
 
     /**
      * Create sample PFProduct records.
