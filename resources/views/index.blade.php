@@ -30,7 +30,7 @@
 
                             @foreach ($pf_step->questions as $pf_question)
                             <div class="form-row">
-                                <h4>What is your age and gender?</h4>
+                                <h4>{{$pf_question->title}}</h4>
                                 @if ($pf_question === 'checkbox' || $type === 'radio')
                                 @foreach($options as $value => $label)
 
@@ -58,7 +58,7 @@
                                     {{-- FOR RANGE --}}
                                 @endif
 
-                                <p class="desc">Please select an option that best describes your age and gender.</p>
+                                <p class="desc">{{$pf_question->desc}}</p>
                             </div>
 
                             @endforeach
