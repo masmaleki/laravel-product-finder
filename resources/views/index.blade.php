@@ -67,62 +67,463 @@
                        <h3>Best Product for you!</h3>
                        <fieldset>
                            <h3>Find the best product for you!</h3>
-                           <p class="desc">Please enter your infomation and proceed to next step so we can build your account</p>
+                           <p class="desc">Please enter your infomation and proceed to next step so we can build your
+                               account</p>
                            <div class="fieldset-content">
                                <div class="choose-bank">
                                    <h2>Best Product for you!</h2>
+                                   <div class="card">
+                                       <div class="card__title">
+                                           <div class="icon">
+                                               <a href="#"><i class="fa fa-arrow-left"></i></a>
+                                           </div>
+                                           <h3>New products</h3>
+                                       </div>
+
+                                       <div class="card__body">
+                                           <div class="half">
+                                               <div class="featured_text">
+                                                   <h1>Nurton</h1>
+                                                   <div>
+                                                       <p class="sub">Office Chair</p>
+                                                       <p class="price">$210.00</p>
+                                                   </div>
+                                               </div>
+                                               <div class="image">
+                                                   <img src="https://images-na.ssl-images-amazon.com/images/I/613A7vcgJ4L._SL1500_.jpg"
+                                                       alt="">
+                                               </div>
+                                           </div>
+                                           <div class="half">
+                                               <div class="description">
+                                                   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero
+                                                       voluptatem nam pariatur voluptate perferendis, asperiores
+                                                       aspernatur! Porro similique consequatur, nobis soluta minima,
+                                                       quasi laboriosam hic cupiditate perferendis esse numquam magni.
+                                                   </p>
+                                               </div>
+                                               <span class="stock"><i class="fa fa-pen"></i> In stock</span>
+                                               <div class="reviews">
+                                                   <ul class="stars">
+                                                       <li><i class="fa fa-star"></i></li>
+                                                       <li><i class="fa fa-star"></i></li>
+                                                       <li><i class="fa fa-star"></i></li>
+                                                       <li><i class="fa fa-star"></i></li>
+                                                       <li><i class="fa fa-star-o"></i></li>
+                                                   </ul>
+                                                   <span>(sample text!)</span>
+                                               </div>
+                                           </div>
+                                       </div>
+
+
+
+                                       <div class="card__footer">
+                                           <div class="recommend">
+                                               <p class="rating">
+                                               <div class="product-rating">
+                                                   <span class="star">&#9733;</span>
+                                                   <span class="star">&#9733;</span>
+                                                   <span class="star">&#9733;</span>
+                                                   <span class="star">&#9733;</span>
+                                                   <span class="star-half">&#9733;</span>
+                                               </div>
+
+                                               </p>
+                                           </div>
+                                           <div class="action">
+                                               <button type="button">view product</button>
+                                           </div>
+                                       </div>
+                                   </div>
+                                   <div class="card">
+                                       <div class="card__title">
+                                           <div class="icon">
+                                               <a href="#"><i class="fa fa-arrow-left"></i></a>
+                                           </div>
+                                           <h3>New products</h3>
+                                       </div>
+
+                                       <div class="card__body">
+                                           <div class="half">
+                                               <div class="featured_text">
+                                                   <h1>Nurton</h1>
+                                                   <div>
+                                                       <p class="sub">Office Chair</p>
+                                                       <p class="price">$210.00</p>
+                                                   </div>
+                                               </div>
+                                               <div class="image">
+                                                   <img src="https://images-na.ssl-images-amazon.com/images/I/613A7vcgJ4L._SL1500_.jpg"
+                                                       alt="">
+                                               </div>
+                                           </div>
+                                           <div class="half">
+                                               <div class="description">
+                                                   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero
+                                                       voluptatem nam pariatur voluptate perferendis, asperiores
+                                                       aspernatur! Porro similique consequatur, nobis soluta minima,
+                                                       quasi laboriosam hic cupiditate perferendis esse numquam magni.
+                                                   </p>
+                                               </div>
+                                               <span class="stock"><i class="fa fa-pen"></i> In stock</span>
+                                               <div class="reviews">
+                                                   <ul class="stars">
+                                                       <li><i class="fa fa-star"></i></li>
+                                                       <li><i class="fa fa-star"></i></li>
+                                                       <li><i class="fa fa-star"></i></li>
+                                                       <li><i class="fa fa-star"></i></li>
+                                                       <li><i class="fa fa-star-o"></i></li>
+                                                   </ul>
+                                                   <span>(sample text!)</span>
+                                               </div>
+                                           </div>
+                                       </div>
+
+
+
+                                       <div class="card__footer">
+                                           <div class="recommend">
+                                               <p class="rating">
+                                               <div class="product-rating">
+                                                   <span class="star">&#9733;</span>
+                                                   <span class="star">&#9733;</span>
+                                                   <span class="star">&#9733;</span>
+                                                   <span class="star">&#9733;</span>
+                                                   <span class="star-half">&#9733;</span>
+                                               </div>
+
+                                               </p>
+                                           </div>
+                                           <div class="action">
+                                               <button type="button">view product</button>
+                                           </div>
+                                       </div>
+                                   </div>
+                                   <div class="card">
+                                       <div class="card__title">
+                                           <div class="icon">
+                                               <a href="#"><i class="fa fa-arrow-left"></i></a>
+                                           </div>
+                                           <h3>New products</h3>
+                                       </div>
+
+                                       <div class="card__body">
+                                           <div class="half">
+                                               <div class="featured_text">
+                                                   <h1>Nurton</h1>
+                                                   <div>
+                                                       <p class="sub">Office Chair</p>
+                                                       <p class="price">$210.00</p>
+                                                   </div>
+                                               </div>
+                                               <div class="image">
+                                                   <img src="https://images-na.ssl-images-amazon.com/images/I/613A7vcgJ4L._SL1500_.jpg"
+                                                       alt="">
+                                               </div>
+                                           </div>
+                                           <div class="half">
+                                               <div class="description">
+                                                   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero
+                                                       voluptatem nam pariatur voluptate perferendis, asperiores
+                                                       aspernatur! Porro similique consequatur, nobis soluta minima,
+                                                       quasi laboriosam hic cupiditate perferendis esse numquam magni.
+                                                   </p>
+                                               </div>
+                                               <span class="stock"><i class="fa fa-pen"></i> In stock</span>
+                                               <div class="reviews">
+                                                   <ul class="stars">
+                                                       <li><i class="fa fa-star"></i></li>
+                                                       <li><i class="fa fa-star"></i></li>
+                                                       <li><i class="fa fa-star"></i></li>
+                                                       <li><i class="fa fa-star"></i></li>
+                                                       <li><i class="fa fa-star-o"></i></li>
+                                                   </ul>
+                                                   <span>(sample text!)</span>
+                                               </div>
+                                           </div>
+                                       </div>
+
+
+
+                                       <div class="card__footer">
+                                           <div class="recommend">
+                                               <p class="rating">
+                                               <div class="product-rating">
+                                                   <span class="star">&#9733;</span>
+                                                   <span class="star">&#9733;</span>
+                                                   <span class="star">&#9733;</span>
+                                                   <span class="star">&#9733;</span>
+                                                   <span class="star-half">&#9733;</span>
+                                               </div>
+
+                                               </p>
+                                           </div>
+                                           <div class="action">
+                                               <button type="button">view product</button>
+                                           </div>
+                                       </div>
+                                   </div>
+                                   <div class="card">
+                                       <div class="card__title">
+                                           <div class="icon">
+                                               <a href="#"><i class="fa fa-arrow-left"></i></a>
+                                           </div>
+                                           <h3>New products</h3>
+                                       </div>
+
+                                       <div class="card__body">
+                                           <div class="half">
+                                               <div class="featured_text">
+                                                   <h1>Nurton</h1>
+                                                   <div>
+                                                       <p class="sub">Office Chair</p>
+                                                       <p class="price">$210.00</p>
+                                                   </div>
+                                               </div>
+                                               <div class="image">
+                                                   <img src="https://images-na.ssl-images-amazon.com/images/I/613A7vcgJ4L._SL1500_.jpg"
+                                                       alt="">
+                                               </div>
+                                           </div>
+                                           <div class="half">
+                                               <div class="description">
+                                                   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero
+                                                       voluptatem nam pariatur voluptate perferendis, asperiores
+                                                       aspernatur! Porro similique consequatur, nobis soluta minima,
+                                                       quasi laboriosam hic cupiditate perferendis esse numquam magni.
+                                                   </p>
+                                               </div>
+                                               <span class="stock"><i class="fa fa-pen"></i> In stock</span>
+                                               <div class="reviews">
+                                                   <ul class="stars">
+                                                       <li><i class="fa fa-star"></i></li>
+                                                       <li><i class="fa fa-star"></i></li>
+                                                       <li><i class="fa fa-star"></i></li>
+                                                       <li><i class="fa fa-star"></i></li>
+                                                       <li><i class="fa fa-star-o"></i></li>
+                                                   </ul>
+                                                   <span>(sample text!)</span>
+                                               </div>
+                                           </div>
+                                       </div>
+
+
+
+                                       <div class="card__footer">
+                                           <div class="recommend">
+                                               <p class="rating">
+                                               <div class="product-rating">
+                                                   <span class="star">&#9733;</span>
+                                                   <span class="star">&#9733;</span>
+                                                   <span class="star">&#9733;</span>
+                                                   <span class="star">&#9733;</span>
+                                                   <span class="star-half">&#9733;</span>
+                                               </div>
+
+                                               </p>
+                                           </div>
+                                           <div class="action">
+                                               <button type="button">view product</button>
+                                           </div>
+                                       </div>
+                                   </div>
+                                   <div class="card">
+                                       <div class="card__title">
+                                           <div class="icon">
+                                               <a href="#"><i class="fa fa-arrow-left"></i></a>
+                                           </div>
+                                           <h3>New products</h3>
+                                       </div>
+
+                                       <div class="card__body">
+                                           <div class="half">
+                                               <div class="featured_text">
+                                                   <h1>Nurton</h1>
+                                                   <div>
+                                                       <p class="sub">Office Chair</p>
+                                                       <p class="price">$210.00</p>
+                                                   </div>
+                                               </div>
+                                               <div class="image">
+                                                   <img src="https://images-na.ssl-images-amazon.com/images/I/613A7vcgJ4L._SL1500_.jpg"
+                                                       alt="">
+                                               </div>
+                                           </div>
+                                           <div class="half">
+                                               <div class="description">
+                                                   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero
+                                                       voluptatem nam pariatur voluptate perferendis, asperiores
+                                                       aspernatur! Porro similique consequatur, nobis soluta minima,
+                                                       quasi laboriosam hic cupiditate perferendis esse numquam magni.
+                                                   </p>
+                                               </div>
+                                               <span class="stock"><i class="fa fa-pen"></i> In stock</span>
+                                               <div class="reviews">
+                                                   <ul class="stars">
+                                                       <li><i class="fa fa-star"></i></li>
+                                                       <li><i class="fa fa-star"></i></li>
+                                                       <li><i class="fa fa-star"></i></li>
+                                                       <li><i class="fa fa-star"></i></li>
+                                                       <li><i class="fa fa-star-o"></i></li>
+                                                   </ul>
+                                                   <span>(sample text!)</span>
+                                               </div>
+                                           </div>
+                                       </div>
+
+
+
+                                       <div class="card__footer">
+                                           <div class="recommend">
+                                               <p class="rating">
+                                               <div class="product-rating">
+                                                   <span class="star">&#9733;</span>
+                                                   <span class="star">&#9733;</span>
+                                                   <span class="star">&#9733;</span>
+                                                   <span class="star">&#9733;</span>
+                                                   <span class="star-half">&#9733;</span>
+                                               </div>
+
+                                               </p>
+                                           </div>
+                                           <div class="action">
+                                               <button type="button">view product</button>
+                                           </div>
+                                       </div>
+                                   </div>
+                                   <div class="card">
+                                       <div class="card__title">
+                                           <div class="icon">
+                                               <a href="#"><i class="fa fa-arrow-left"></i></a>
+                                           </div>
+                                           <h3>New products</h3>
+                                       </div>
+
+                                       <div class="card__body">
+                                           <div class="half">
+                                               <div class="featured_text">
+                                                   <h1>Nurton</h1>
+                                                   <div>
+                                                       <p class="sub">Office Chair</p>
+                                                       <p class="price">$210.00</p>
+                                                   </div>
+                                               </div>
+                                               <div class="image">
+                                                   <img src="https://images-na.ssl-images-amazon.com/images/I/613A7vcgJ4L._SL1500_.jpg"
+                                                       alt="">
+                                               </div>
+                                           </div>
+                                           <div class="half">
+                                               <div class="description">
+                                                   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero
+                                                       voluptatem nam pariatur voluptate perferendis, asperiores
+                                                       aspernatur! Porro similique consequatur, nobis soluta minima,
+                                                       quasi laboriosam hic cupiditate perferendis esse numquam magni.
+                                                   </p>
+                                               </div>
+                                               <span class="stock"><i class="fa fa-pen"></i> In stock</span>
+                                               <div class="reviews">
+                                                   <ul class="stars">
+                                                       <li><i class="fa fa-star"></i></li>
+                                                       <li><i class="fa fa-star"></i></li>
+                                                       <li><i class="fa fa-star"></i></li>
+                                                       <li><i class="fa fa-star"></i></li>
+                                                       <li><i class="fa fa-star-o"></i></li>
+                                                   </ul>
+                                                   <span>(sample text!)</span>
+                                               </div>
+                                           </div>
+                                       </div>
+
+
+
+                                       <div class="card__footer">
+                                           <div class="recommend">
+                                               <p class="rating">
+                                               <div class="product-rating">
+                                                   <span class="star">&#9733;</span>
+                                                   <span class="star">&#9733;</span>
+                                                   <span class="star">&#9733;</span>
+                                                   <span class="star">&#9733;</span>
+                                                   <span class="star-half">&#9733;</span>
+                                               </div>
+
+                                               </p>
+                                           </div>
+                                           <div class="action">
+                                               <button type="button">view product</button>
+                                           </div>
+                                       </div>
+                                   </div>
+                                   
+
+
+
                                    <div class="form-radio-flex">
                                        <div class="form-radio-item">
-                                           <input type="radio" name="choose_bank" id="bank_1" value="bank_1" checked="checked" />
-                                           <label for="bank_1"><img src="{{ asset('vendor/productfinder/images/bank-1.jpg')}}" alt=""></label>
+                                           <input type="radio" name="choose_bank" id="bank_1" value="bank_1"
+                                               checked="checked" />
+                                           <label for="bank_1"><img
+                                                   src="{{ asset('vendor/productfinder/images/bank-1.jpg') }}"
+                                                   alt=""></label>
                                        </div>
-   
+
                                        <div class="form-radio-item">
                                            <input type="radio" name="choose_bank" id="bank_2" value="bank_2" />
-                                           <label for="bank_2"><img src="{{ asset('vendor/productfinder/images/bank-2.jpg')}}" alt=""></label>
+                                           <label for="bank_2"><img
+                                                   src="{{ asset('vendor/productfinder/images/bank-2.jpg') }}"
+                                                   alt=""></label>
                                        </div>
-   
+
                                        <div class="form-radio-item">
                                            <input type="radio" name="choose_bank" id="bank_3" value="bank_3" />
-                                           <label for="bank_3"><img src="{{ asset('vendor/productfinder/images/bank-3.jpg')}}" alt=""></label>
+                                           <label for="bank_3"><img
+                                                   src="{{ asset('vendor/productfinder/images/bank-3.jpg') }}"
+                                                   alt=""></label>
                                        </div>
-   
+
                                        <div class="form-radio-item">
                                            <input type="radio" name="choose_bank" id="bank_4" value="bank_4" />
-                                           <label for="bank_4"><img src="{{ asset('vendor/productfinder/images/bank-4.jpg')}}" alt=""></label>
+                                           <label for="bank_4"><img
+                                                   src="{{ asset('vendor/productfinder/images/bank-4.jpg') }}"
+                                                   alt=""></label>
                                        </div>
-   
+
                                        <div class="form-radio-item">
                                            <input type="radio" name="choose_bank" id="bank_5" value="bank_5" />
-                                           <label for="bank_5"><img src="{{ asset('vendor/productfinder/images/bank-5.jpg')}}" alt=""></label>
+                                           <label for="bank_5"><img
+                                                   src="{{ asset('vendor/productfinder/images/bank-5.jpg') }}"
+                                                   alt=""></label>
                                        </div>
-   
+
                                        <div class="form-radio-item">
-                                           <input type="radio" name="choose_bank" id="bank_6" value="bank_6" />
-                                           <label for="bank_6"><img src="{{ asset('vendor/productfinder/images/bank-6.jpg')}}" alt=""></label>
+                                           <input type="radio" name="choose_bank" id="bank_6"
+                                               value="bank_6" />
+                                           <label for="bank_6"><img
+                                                   src="{{ asset('vendor/productfinder/images/bank-6.jpg') }}"
+                                                   alt=""></label>
                                        </div>
-   
+
                                        <div class="form-radio-item">
-                                           <input type="radio" name="choose_bank" id="bank_7" value="bank_7" />
-                                           <label for="bank_7"><img src="{{ asset('vendor/productfinder/images/bank-7.jpg')}}" alt=""></label>
+                                           <input type="radio" name="choose_bank" id="bank_7"
+                                               value="bank_7" />
+                                           <label for="bank_7"><img
+                                                   src="{{ asset('vendor/productfinder/images/bank-7.jpg') }}"
+                                                   alt=""></label>
                                        </div>
-   
+
                                        <div class="form-radio-item">
-                                           <input type="radio" name="choose_bank" id="bank_8" value="bank_8" />
-                                           <label for="bank_8"><img src="{{ asset('vendor/productfinder/images/bank-8.jpg')}}" alt=""></label>
+                                           <input type="radio" name="choose_bank" id="bank_8"
+                                               value="bank_8" />
+                                           <label for="bank_8"><img
+                                                   src="{{ asset('vendor/productfinder/images/bank-8.jpg') }}"
+                                                   alt=""></label>
                                        </div>
                                    </div>
                                </div>
-                               <hr>
-                               <div class="form-group">
-                                   <label for="find_bank" class="form-label">Search your product!</label>
-                                   <div class="form-find">
-                                       <input type="text" name="find_bank" id="find_bank" placeholder="Ex. anti hair loss shampoo" />
-                                       <input type="submit" value="Search" class="submit">
-                                       <span class="form-icon"><i class="zmdi zmdi-search"></i></span>
-                                   </div>
-                               </div>
-   
+
+
                            </div>
                        </fieldset>
                        <h3>Your Information</h3>
