@@ -220,7 +220,8 @@ input {
     width: 1090px; }
 
 .content {
-  height: 800px; }
+  /* height: 800px;  */
+}
 
 .steps ul {
   flex-direction: column;
@@ -511,7 +512,8 @@ input.error {
     height: 120px; } }
 @media screen and (max-width: 992px) {
   .content {
-    height: 900px; }
+    /* height: 900px; */
+   }
 
   .form-radio-flex input + label {
     width: 100px;
@@ -546,7 +548,8 @@ input.error {
     -ms-flex-direction: column; }
 
   .content {
-    height: 1050px; }
+    /* height: 1050px; */
+   }
 
   #find_bank {
     margin-bottom: 20px; }

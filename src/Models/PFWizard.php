@@ -22,7 +22,7 @@ class PFWizard extends Model
      */
     public function steps()
     {
-        return $this->hasMany(PFStep::class);
+        return $this->hasMany(PFStep::class,'pf_wizard_id');
 
     }
 
@@ -31,6 +31,6 @@ class PFWizard extends Model
      */
     public function forms()
     {
-        return $this->hasMany(PFForm::class);
+        return $this->hasMany(PFForm::class,'pf_wizard_id');
     }
 }

@@ -31,6 +31,6 @@ class PFStep extends Model
      */
     public function questions()
     {
-        return $this->hasMany(PFQuestion::class);
+        return $this->hasMany(PFQuestion::class,'pf_step_id');
     }
 }
