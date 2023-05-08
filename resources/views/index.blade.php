@@ -17,7 +17,10 @@
 <body>
      @isset($pf_wizard)
         <div class="main">
-        
+        @php
+          $conditions=[];
+          $answers=[];
+        @endphp
             <div class="container">
                 <form method="POST" id="signup-form" class="signup-form" action="#">
                     <div>
@@ -29,26 +32,32 @@
                             <div class="fieldset-content">
 
                             @foreach ($pf_step->questions as $pf_question)
+                              @php
+                                $conditions[]=[
+                                  $pf_question->id => $pf_question->conditions
+                                ]
+                                
+                              @endphp
                             <div class="form-row">
-                                <h4>{{$pf_question->title}}</h4>
+                                <h4>{{$pf_question->title}}<span class="{{ $pf_question->is_required ? 'required' : '' }}">{{ $pf_question->is_required ? ' * ' : '' }}</span></h4>
                                 @if ($pf_question->typeOption?->type?->name === 'checkbox')
                                 @foreach($pf_question->options as $value => $label)
-                                <label>
-                                    <input type="radio" name="age_gender" value="under_30_male">
-                                    <span class="radio-text">Under 30 and male</span>
-                                </label>
+                                  <label>
+                                      <input type="radio" name="age_gender" value="under_30_male" {{ $pf_question->is_required ? 'required' : '' }}>
+                                      <span class="radio-text">Under 30 and male</span>
+                                  </label>
                                 @endforeach
                                 @endif
 
                                 @if ($pf_question->typeOption?->type?->name === 'radio')
                                 @foreach ($pf_question->options as $option)
-                                @php
-                                    $option_value=json_decode($option->value);
-                                @endphp
-                                    <label>
-                                        <input type="radio" name="{{ $pf_question->id }}" value="{{ $option->id }}">
-                                        <span class="radio-text">{{ $option_value->title }}</span>
-                                    </label>
+                                  @php
+                                      $option_value=json_decode($option->value);
+                                  @endphp
+                                  <label>
+                                      <input type="radio" name="{{ $pf_question->id }}" value="{{ $option->id }} {{ $pf_question->is_required ? 'required' : '' }}">
+                                      <span class="radio-text">{{ $option_value->title }}</span>
+                                  </label>
                                 @endforeach
                                 @endif
                                 @if ($pf_question->typeOption?->type?->name === 'range')
@@ -177,7 +186,7 @@
                     </div>
                 </form>
             </div>
-    
+
         </div>
      @endisset
     <!-- JS -->

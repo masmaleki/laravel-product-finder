@@ -29,23 +29,29 @@
             current: ''
         },
         onStepChanging: function(event, currentIndex, newIndex) {
-            if (currentIndex === 0) {
-                form.parent().parent().parent().append('<div class="footer footer-' + currentIndex + '"></div>');
+            var currentStepForm = $(this).find("fieldset").eq(currentIndex);
+
+            // Check if all required fields in the current step are filled in
+            var isValid = true;
+            currentStepForm.find('.required').each(function() {
+                // console.log($(this));
+                if ($(this).closest('.form-row').find('input:checked').length === 0) {
+                    isValid = false;
+                    return false; // break out of each loop
+                }
+            });
+
+            if (isValid) {
+                // If all required fields are filled in, proceed to the next step
+                return true;
+            } else {
+                // If any required fields are not filled in, prevent moving to the next step
+                alert('Please fill in all required fields.');
+                return false;
             }
-            if (currentIndex === 1) {
-                form.parent().parent().parent().find('.footer').removeClass('footer-0').addClass('footer-' + currentIndex + '');
-            }
-            if (currentIndex === 2) {
-                form.parent().parent().parent().find('.footer').removeClass('footer-1').addClass('footer-' + currentIndex + '');
-            }
-            if (currentIndex === 3) {
-                form.parent().parent().parent().find('.footer').removeClass('footer-2').addClass('footer-' + currentIndex + '');
-            }
-            // if(currentIndex === 4) {
-            //     form.parent().parent().parent().append('<div class="footer" style="height:752px;"></div>');
-            // }
-            form.validate().settings.ignore = ":disabled,:hidden";
-            return form.valid();
+           
+            // form.validate().settings.ignore = ":disabled,:hidden";
+            // return form.valid();
         },
         onFinishing: function(event, currentIndex) {
             form.validate().settings.ignore = ":disabled";
@@ -61,7 +67,7 @@
     });
 
     jQuery.extend(jQuery.validator.messages, {
-        required: "",
+        required: "required",
         remote: "",
         email: "",
         url: "",
