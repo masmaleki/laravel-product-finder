@@ -33,6 +33,7 @@
 
             // Check if all required fields in the current step are filled in
             var isValid = true;
+            return true;
             currentStepForm.find('.required').each(function() {
                 // console.log($(this));
                 if ($(this).closest('.form-row').find('input:checked').length === 0) {
