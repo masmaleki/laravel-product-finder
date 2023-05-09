@@ -122,7 +122,7 @@
                                       </div>
             
 
-                                      <span class="title-section">Upload Your images:</span>
+                                      <span class="title-section">Choose the closest condition:</span>
                                       <p class="desc">Please choose the closest option from the list of hair conditions to proceed to the next step.
                                       </p>
                                   
@@ -132,56 +132,56 @@
                                             <input type="radio" name="choose_bank" id="bank_1" value="bank_1"
                                                 checked="checked" />
                                             <label for="bank_1"><img
-                                                    src="{{ asset('vendor/productfinder/images/bank-1.jpg') }}"
+                                                    src="{{ asset('vendor/productfinder/images/11.jpg') }}"
                                                     alt=""></label>
                                         </div>
 
                                         <div class="form-radio-item">
                                             <input type="radio" name="choose_bank" id="bank_2" value="bank_2" />
                                             <label for="bank_2"><img
-                                                    src="{{ asset('vendor/productfinder/images/bank-2.jpg') }}"
+                                                    src="{{ asset('vendor/productfinder/images/12.jpg') }}"
                                                     alt=""></label>
                                         </div>
 
                                         <div class="form-radio-item">
                                             <input type="radio" name="choose_bank" id="bank_3" value="bank_3" />
                                             <label for="bank_3"><img
-                                                    src="{{ asset('vendor/productfinder/images/bank-3.jpg') }}"
+                                                    src="{{ asset('vendor/productfinder/images/13.jpg') }}"
                                                     alt=""></label>
                                         </div>
 
                                         <div class="form-radio-item">
                                             <input type="radio" name="choose_bank" id="bank_4" value="bank_4" />
                                             <label for="bank_4"><img
-                                                    src="{{ asset('vendor/productfinder/images/bank-4.jpg') }}"
+                                                    src="{{ asset('vendor/productfinder/images/14.jpg') }}"
                                                     alt=""></label>
                                         </div>
 
                                         <div class="form-radio-item">
                                             <input type="radio" name="choose_bank" id="bank_5" value="bank_5" />
                                             <label for="bank_5"><img
-                                                    src="{{ asset('vendor/productfinder/images/bank-5.jpg') }}"
+                                                    src="{{ asset('vendor/productfinder/images/15.jpg') }}"
                                                     alt=""></label>
                                         </div>
 
                                         <div class="form-radio-item">
                                             <input type="radio" name="choose_bank" id="bank_6" value="bank_6" />
                                             <label for="bank_6"><img
-                                                    src="{{ asset('vendor/productfinder/images/bank-6.jpg') }}"
+                                                    src="{{ asset('vendor/productfinder/images/16.jpg') }}"
                                                     alt=""></label>
                                         </div>
 
                                         <div class="form-radio-item">
                                             <input type="radio" name="choose_bank" id="bank_7" value="bank_7" />
                                             <label for="bank_7"><img
-                                                    src="{{ asset('vendor/productfinder/images/bank-7.jpg') }}"
+                                                    src="{{ asset('vendor/productfinder/images/17.jpg') }}"
                                                     alt=""></label>
                                         </div>
 
                                         <div class="form-radio-item">
                                             <input type="radio" name="choose_bank" id="bank_8" value="bank_8" />
                                             <label for="bank_8"><img
-                                                    src="{{ asset('vendor/productfinder/images/bank-8.jpg') }}"
+                                                    src="{{ asset('vendor/productfinder/images/11.jpg') }}"
                                                     alt=""></label>
                                         </div>
                                     </div>
