@@ -87,6 +87,101 @@
             <div class="container">
                 <form method="POST" id="signup-form" class="signup-form" action="#">
                     <div>
+                       
+                        @foreach ($pf_steps as $pf_step)
+                            <h3>{{ $pf_step->title }}</h3>
+                            <fieldset>
+                                <h2>{{ $pf_step->title }}</h2>
+                                <p class="desc">{{ $pf_step->desc }}</p>
+                                <div class="fieldset-content">
+
+                                    @foreach ($pf_step->questions as $pf_question)
+                                        @php
+                                            $conditions[] = [
+                                                $pf_question->id => $pf_question->conditions,
+                                            ];
+                                            
+                                        @endphp
+                                        <div class="form-row">
+                                            <h4>{{ $pf_question->title }}<span
+                                                    class="{{ $pf_question->is_required ? 'required' : '' }}">{{ $pf_question->is_required ? ' * ' : '' }}</span>
+                                            </h4>
+                                            @if ($pf_question->typeOption?->type?->name === 'checkbox')
+                                                @foreach ($pf_question->options as $value => $label)
+                                                    @php
+                                                    $option_value = json_decode($option->value);
+                                                    @endphp
+                                                    <label>
+                                                        <input type="checkbox" name="{{ $pf_question->id }}[]"
+                                                            value="{{ $option->id }} {{ $pf_question->is_required ? 'required' : '' }}">
+                                                        <span class="radio-text">{{ $option_value->title }}</span>
+                                                    </label>
+                                                    @endforeach
+                                            @endif
+
+                                            @if ($pf_question->typeOption?->type?->name === 'radio')
+                                            @foreach ($pf_question->options as $option)
+                                                @php
+                                                    $option_value = json_decode($option->value);
+                                                    $typeOption =json_decode($pf_question->typeOption->option);    
+                                                    $input_id = 'option' . $pf_question->id . '_' . $option->id;
+                                                @endphp
+                                                @if($typeOption->radio->theme=='btn')
+                                                    <div class="action">
+                                                        <input type="radio" id="{{ $input_id }}" name="{{ $pf_question->id }}"
+                                                            value="{{ $option->id }}" >
+                                                        <label for="{{ $input_id }}" class="option{{ $option->id }}">{{ $option_value->title }}</label>
+                                                    </div>
+                                                @else
+                                                    <label>
+                                                        <input type="radio" id="{{ $input_id }}" name="{{ $pf_question->id }}"
+                                                            value="{{ $option->id }}" {{ $pf_question->is_required ? 'required' : '' }}>
+                                                        <span class="radio-text">{{ $option_value->title }}</span>
+                                                    </label>    
+                                                @endif
+                                            @endforeach
+                                        @endif
+                                        
+                                            @if ($pf_question->typeOption?->type?->name === 'range')
+                                                {{-- FOR RANGE --}}
+                                            @endif
+                                            @if ($pf_question->typeOption?->type?->name === 'input')
+                                                @foreach ($pf_question->options as $option)
+                                                @php
+                                                    $option_value = json_decode($option->value);
+                                                    $typeOption =json_decode($pf_question->typeOption->option);
+                                                @endphp
+                                                @if($typeOption->input->theme=='textarea')
+                                                
+                                                <label>
+                                                    <textarea  id="option{{ $option->id }}" name="{{ $pf_question->id }}"
+                                                        value="" cols="{{$typeOption->input->cols}}" rows="{{$typeOption->input->total_line}}" ></textarea>
+                                                    </label>
+                                                
+
+                                                
+                                                @elseif($typeOption->input->theme=='price')
+                                                    <label >
+                                                    <input type="number" name="{{ $pf_question->id }}" min="{{$typeOption->input->min}}" max="{{$typeOption->input->max}}"
+                                                        value="" {{ $pf_question->is_required ? 'required' : '' }}>
+                                                    </label>
+                                                @else
+                                                <label >
+                                                <input type="text" id="option{{ $option->id }}" name="{{ $pf_question->id }}"
+                                                    value="" rows="{{$typeOption->input->total_line}}">
+                                                </label>
+                                                @endif
+                                                @endforeach
+                                            @endif
+
+                                            <p class="desc">{{ $pf_question->desc }}</p>
+                                        </div>
+                                    @endforeach
+
+
+                                </div>
+                            </fieldset>
+                        @endforeach
                         <h3> Hair conditions</h3>
                         <fieldset>
                             <h3>Find the best Service for you!</h3>
@@ -191,101 +286,6 @@
 
                             </div>
                         </fieldset>
-                        @foreach ($pf_steps as $pf_step)
-                            <h3>{{ $pf_step->title }}</h3>
-                            <fieldset>
-                                <h2>{{ $pf_step->title }}</h2>
-                                <p class="desc">{{ $pf_step->desc }}</p>
-                                <div class="fieldset-content">
-
-                                    @foreach ($pf_step->questions as $pf_question)
-                                        @php
-                                            $conditions[] = [
-                                                $pf_question->id => $pf_question->conditions,
-                                            ];
-                                            
-                                        @endphp
-                                        <div class="form-row">
-                                            <h4>{{ $pf_question->title }}<span
-                                                    class="{{ $pf_question->is_required ? 'required' : '' }}">{{ $pf_question->is_required ? ' * ' : '' }}</span>
-                                            </h4>
-                                            @if ($pf_question->typeOption?->type?->name === 'checkbox')
-                                                @foreach ($pf_question->options as $value => $label)
-                                                    @php
-                                                    $option_value = json_decode($option->value);
-                                                    @endphp
-                                                    <label>
-                                                        <input type="checkbox" name="{{ $pf_question->id }}[]"
-                                                            value="{{ $option->id }} {{ $pf_question->is_required ? 'required' : '' }}">
-                                                        <span class="radio-text">{{ $option_value->title }}</span>
-                                                    </label>
-                                                    @endforeach
-                                            @endif
-
-                                            @if ($pf_question->typeOption?->type?->name === 'radio')
-                                                @foreach ($pf_question->options as $option)
-                                                    @php
-                                                        $option_value = json_decode($option->value);
-                                                        $typeOption =json_decode($pf_question->typeOption->option);
-                                                        
-                                                    @endphp
-                                                    @if($typeOption->radio->theme=='btn')
-                                                    <div class="action">
-                                                        <input type="radio" id="option{{ $option->id }}" name="{{ $pf_question->id }}"
-                                                            value="{{ $option->id }}" >
-                                                        <label class="option{{ $option->id }}">{{ $option_value->title }}</label>
-                                                    
-                                                    </div>
-                                                    @else
-                                                    <label>
-                                                        <input type="radio" name="{{ $pf_question->id }}"
-                                                            value="{{ $option->id }}" {{ $pf_question->is_required ? 'required' : '' }}>
-                                                        <span class="radio-text">{{ $option_value->title }}</span>
-                                                    </label>    
-                                                    @endif
-                                                @endforeach
-                                            @endif
-                                            @if ($pf_question->typeOption?->type?->name === 'range')
-                                                {{-- FOR RANGE --}}
-                                            @endif
-                                            @if ($pf_question->typeOption?->type?->name === 'input')
-                                                @foreach ($pf_question->options as $option)
-                                                @php
-                                                    $option_value = json_decode($option->value);
-                                                    $typeOption =json_decode($pf_question->typeOption->option);
-                                                @endphp
-                                                @if($typeOption->input->theme=='textarea')
-                                                
-                                                <label>
-                                                    <textarea  id="option{{ $option->id }}" name="{{ $pf_question->id }}"
-                                                        value="" cols="{{$typeOption->input->cols}}" rows="{{$typeOption->input->total_line}}" ></textarea>
-                                                    </label>
-                                                
-
-                                                
-                                                @elseif($typeOption->input->theme=='price')
-                                                    <label >
-                                                    <input type="number" name="{{ $pf_question->id }}" min="{{$typeOption->input->min}}" max="{{$typeOption->input->max}}"
-                                                        value="" {{ $pf_question->is_required ? 'required' : '' }}>
-                                                    </label>
-                                                @else
-                                                <label >
-                                                <input type="text" id="option{{ $option->id }}" name="{{ $pf_question->id }}"
-                                                    value="" rows="{{$typeOption->input->total_line}}">
-                                                </label>
-                                                @endif
-                                                @endforeach
-                                            @endif
-
-                                            <p class="desc">{{ $pf_question->desc }}</p>
-                                        </div>
-                                    @endforeach
-
-
-                                </div>
-                            </fieldset>
-                        @endforeach
-        
                         <h3>Best Service for you!</h3>
                         <fieldset>
                             <h3>Find the best product for you!</h3>
