@@ -20,7 +20,7 @@ class PFStaticDataAISeeder extends Seeder
 
     const TAG_LIMIT = 5;
 
-    const TYPE_NAMES = ['checkbox', 'radio', 'range'];
+    const TYPE_NAMES = ['checkbox', 'radio', 'range','input','upload'];
 
     protected $faker;
 
@@ -56,14 +56,19 @@ class PFStaticDataAISeeder extends Seeder
                 'status' => self::STATUS_ACTIVE,
             ]);
 
-            $option = $this->getTypeOption($name);
+            $options = $this->getTypeOption($name);
+            
+            foreach($options as $option){
 
-            PFTypeOption::create([
-                'name' => $this->faker->word,
-                'option' => json_encode($option),
-                'status' => self::STATUS_ACTIVE,
-                'pf_type_id' => $type->id,
-            ]);
+                
+                PFTypeOption::create([
+                    'name' => $option['name'],
+                    'option' => json_encode($option['value']),
+                    'status' => self::STATUS_ACTIVE,
+                    'pf_type_id' => $type->id,
+                ]);
+            }
+            
         }
     }
 
@@ -712,7 +717,7 @@ class PFStaticDataAISeeder extends Seeder
 
             // Create question 11
             $question11 = PFQuestion::create([
-                'pf_step_id' => 4,
+                'pf_step_id' => 3,
                 'pf_type_option_id' => 2,
                 'title' => 'What are your expectations for the outcome of any hair restoration procedures?',
                 'conditions' => json_encode([
@@ -773,7 +778,7 @@ class PFStaticDataAISeeder extends Seeder
 
             // Create question 12
             $question12 = PFQuestion::create([
-                'pf_step_id' => 4,
+                'pf_step_id' => 3,
                 'pf_type_option_id' => 2,
                 'title' => 'Have you experienced any side effects or complications with any previous hair restoration procedures?',
                 'conditions' => json_encode([
@@ -833,7 +838,7 @@ class PFStaticDataAISeeder extends Seeder
 
             // Create question 13
             $question13 = PFQuestion::create([
-                'pf_step_id' => 4,
+                'pf_step_id' => 3,
                 'pf_type_option_id' => 2,
                 'title' => 'What is your budget for hair restoration procedures?',
                 'conditions' => json_encode([
@@ -846,7 +851,7 @@ class PFStaticDataAISeeder extends Seeder
                 'is_required' => true,
                 'status' => self::STATUS_ACTIVE,
             ]);
-            // Create question 12 options
+            // Create question 13 options
             PFQuestionOption::create([
                 'pf_question_id' => $question13->id,
                 'pf_type_option_id' => 2,
@@ -886,6 +891,268 @@ class PFStaticDataAISeeder extends Seeder
                 'pf_tag_id' => null,
                 'value' => json_encode([
                     'title' => 'More than $15,000',
+                ]),
+                'status' => self::STATUS_ACTIVE,
+                'info' => null, // insert a description if needed
+            ]);
+
+
+            // Create question 14
+            $question14 = PFQuestion::create([
+                'pf_step_id' => 4,
+                'pf_type_option_id' => 3,
+                'title' => 'Did the transplant meet your expectations?',
+                'conditions' => json_encode([
+                    'and_conditions' => [],
+                    'or_conditions' => [],
+                ]),
+                'desc' => '',
+                'image' => '',
+                'point' => 10,
+                'is_required' => true,
+                'status' => self::STATUS_ACTIVE,
+            ]);
+            // Create question 14 options
+            PFQuestionOption::create([
+                'pf_question_id' => $question14->id,
+                'pf_type_option_id' => 3,
+                'pf_tag_id' => null,
+                'value' => json_encode([
+                    'title' => 'Yes',
+                ]),
+                'status' => self::STATUS_ACTIVE,
+                'info' => null, // insert a description if needed
+            ]);
+
+            PFQuestionOption::create([
+                'pf_question_id' => $question14->id,
+                'pf_type_option_id' => 3,
+                'pf_tag_id' => null,
+                'value' => json_encode([
+                    'title' => 'No',
+                ]),
+                'status' => self::STATUS_ACTIVE,
+                'info' => null, // insert a description if needed
+            ]);
+
+         
+
+
+
+            // Create question 15
+            $question15 = PFQuestion::create([
+                'pf_step_id' => 4,
+                'pf_type_option_id' => 3,
+                'title' => 'Did you experience any complications during or after the procedure?',
+                'conditions' => json_encode([
+                    'and_conditions' => [],
+                    'or_conditions' => [],
+                ]),
+                'desc' => '',
+                'image' => '',
+                'point' => 10,
+                'is_required' => true,
+                'status' => self::STATUS_ACTIVE,
+            ]);
+            PFQuestionOption::create([
+                'pf_question_id' => $question15->id,
+                'pf_type_option_id' => 3,
+                'pf_tag_id' => null,
+                'value' => json_encode([
+                    'title' => 'Yes',
+                ]),
+                'status' => self::STATUS_ACTIVE,
+                'info' => null, // insert a description if needed
+            ]);
+
+            PFQuestionOption::create([
+                'pf_question_id' => $question15->id,
+                'pf_type_option_id' => 3,
+                'pf_tag_id' => null,
+                'value' => json_encode([
+                    'title' => 'No',
+                ]),
+                'status' => self::STATUS_ACTIVE,
+                'info' => null, // insert a description if needed
+            ]);
+
+
+
+
+
+            // Create question 16
+            $question16= PFQuestion::create([
+                'pf_step_id' => 4,
+                'pf_type_option_id' => 6,
+                'title' => 'If yes, please describe the complication',
+                'conditions' => json_encode([
+                    'and_conditions' => [15=>1],
+                    'or_conditions' => [],
+                ]),
+                'desc' => '',
+                'image' => '',
+                'point' => 10,
+                'is_required' => true,
+                'status' => self::STATUS_ACTIVE,
+            ]);
+            // Create question 16 options
+            PFQuestionOption::create([
+                'pf_question_id' => $question16->id,
+                'pf_type_option_id' => 6,
+                'pf_tag_id' => null,
+                'value' => json_encode([
+                    'title' => 'describe the complication',
+                ]),
+                'status' => self::STATUS_ACTIVE,
+                'info' => null, // insert a description if needed
+            ]);
+
+
+             // Create question 17
+             $question17 = PFQuestion::create([
+                'pf_step_id' => 4,
+                'pf_type_option_id' => 3,
+                'title' => 'Were any medications prescribed after the procedure?',
+                'conditions' => json_encode([
+                    'and_conditions' => [],
+                    'or_conditions' => [],
+                ]),
+                'desc' => '',
+                'image' => '',
+                'point' => 10,
+                'is_required' => true,
+                'status' => self::STATUS_ACTIVE,
+            ]);
+            PFQuestionOption::create([
+                'pf_question_id' => $question17->id,
+                'pf_type_option_id' => 3,
+                'pf_tag_id' => null,
+                'value' => json_encode([
+                    'title' => 'Yes',
+                ]),
+                'status' => self::STATUS_ACTIVE,
+                'info' => null, // insert a description if needed
+            ]);
+
+            PFQuestionOption::create([
+                'pf_question_id' => $question17->id,
+                'pf_type_option_id' => 3,
+                'pf_tag_id' => null,
+                'value' => json_encode([
+                    'title' => 'No',
+                ]),
+                'status' => self::STATUS_ACTIVE,
+                'info' => null, // insert a description if needed
+            ]);
+
+
+            // Create question 18
+            $question18= PFQuestion::create([
+                'pf_step_id' => 4,
+                'pf_type_option_id' => 6,
+                'title' => 'If yes, please list the medication(s) prescribed',
+                'conditions' => json_encode([
+                    'and_conditions' => [17=>1],
+                    'or_conditions' => [],
+                ]),
+                'desc' => '',
+                'image' => '',
+                'point' => 10,
+                'is_required' => true,
+                'status' => self::STATUS_ACTIVE,
+            ]);
+            // Create question 18 options
+            PFQuestionOption::create([
+                'pf_question_id' => $question18->id,
+                'pf_type_option_id' => 6,
+                'pf_tag_id' => null,
+                'value' => json_encode([
+                    'title' => 'please list the medication(s)',
+                ]),
+                'status' => self::STATUS_ACTIVE,
+                'info' => null, // insert a description if needed
+            ]);
+
+            // Create question 19
+            $question19= PFQuestion::create([
+                'pf_step_id' => 4,
+                'pf_type_option_id' => 7,
+                'title' => 'How many days did it take you to recover from the procedure?',
+                'conditions' => json_encode([
+                    'and_conditions' => [],
+                    'or_conditions' => [],
+                ]),
+                'desc' => '',
+                'image' => '',
+                'point' => 10,
+                'is_required' => true,
+                'status' => self::STATUS_ACTIVE,
+            ]);
+            // Create question 19 options
+            PFQuestionOption::create([
+                'pf_question_id' => $question19->id,
+                'pf_type_option_id' => 7,
+                'pf_tag_id' => null,
+                'value' => json_encode([
+                    'title' => 'How many days',
+                ]),
+                'status' => self::STATUS_ACTIVE,
+                'info' => null, // insert a description if needed
+            ]);
+
+            // Create question 13
+            $question20 = PFQuestion::create([
+                'pf_step_id' => 4,
+                'pf_type_option_id' => 1,
+                'title' => 'What is your ?',
+                'conditions' => json_encode([
+                    'and_conditions' => [],
+                    'or_conditions' => [],
+                ]),
+                'desc' => '',
+                'image' => '',
+                'point' => 10,
+                'is_required' => true,
+                'status' => self::STATUS_ACTIVE,
+            ]);
+            // Create question 20 options
+            PFQuestionOption::create([
+                'pf_question_id' => $question20->id,
+                'pf_type_option_id' => 1,
+                'pf_tag_id' => null,
+                'value' => json_encode([
+                    'title' => 'Less than $5,000',
+                ]),
+                'status' => self::STATUS_ACTIVE,
+                'info' => null, // insert a description if needed
+            ]);
+
+            PFQuestionOption::create([
+                'pf_question_id' => $question20->id,
+                'pf_type_option_id' => 1,
+                'pf_tag_id' => null,
+                'value' => json_encode([
+                    'title' => 'Less than $5,000',
+                ]),
+                'status' => self::STATUS_ACTIVE,
+                'info' => null, // insert a description if needed
+            ]);
+            PFQuestionOption::create([
+                'pf_question_id' => $question20->id,
+                'pf_type_option_id' => 1,
+                'pf_tag_id' => null,
+                'value' => json_encode([
+                    'title' => 'Less than $5,000',
+                ]),
+                'status' => self::STATUS_ACTIVE,
+                'info' => null, // insert a description if needed
+            ]);
+            PFQuestionOption::create([
+                'pf_question_id' => $question20->id,
+                'pf_type_option_id' => 1,
+                'pf_tag_id' => null,
+                'value' => json_encode([
+                    'title' => 'Less than $5,000',
                 ]),
                 'status' => self::STATUS_ACTIVE,
                 'info' => null, // insert a description if needed
@@ -962,28 +1229,73 @@ class PFStaticDataAISeeder extends Seeder
     {
         switch ($type) {
             case 'checkbox':
-                return [
-                    'checkbox' => [
-                        'max_user_select' => 2,
-                        'total_item' => 4,
-                    ],
-                ];
+                $response[]=[
+                        'name'=>'checkbox_sample',
+                        'value'=>['checkbox' => [
+                            'max_user_select' => 2,
+                            'total_item' => 4,
+                            ]]
+                        ];
+                return $response;
             case 'radio':
-                return [
-                    'radio' => [
+                $response[]=[
+                    'name'=>'radio_sample',
+                    'value'=>['radio' => [
                         'total_item' => 4,
-                    ],
-                ];
+                        'theme'=>'sample'
+                        ]]
+                    ];
+                $response[]=[
+                    'name'=>'radio_btn',
+                    'value'=>['radio' => [
+                        'total_item' => 2,
+                        'theme'=>'btn'
+                        ]]
+                    ];
+            return $response;
+                   
             case 'range':
-                return [
-                    'range' => [
+                $response[]=[
+                    'name'=>'range_sample',
+                    'value'=>['range' => [
                         'max' => 15000,
                         'min' => 100,
                         'step' => 500,
                         'unit' => '$',
                         'def_value' => 1500,
-                    ],
-                ];
+                    ]]
+                    ];
+                return $response;
+
+
+            case 'input':
+                $response[]=[
+                    'name'=>'input_sample',
+                    'value'=>['input' => [
+                        'total_line' => 1,
+                        'theme'=>'input'
+                        ]]
+                    ];
+                $response[]=[
+                    'name'=>'input_textarea',
+                    'value'=>['input' => [
+                        'total_line' => 3,
+                        'theme'=>'textarea'
+                        ]]
+                    ];
+                $response[]=[
+                    'name'=>'input_price',
+                    'value'=>['input' => [
+                        'total_line' => 1,
+                        'theme'=>'price',
+                        'max' => 1000,
+                        'min' => 1,
+                        'step' => 10,
+                        'def_value' => 1,
+                        ]]
+                    ];
+            return $response;
+                
             default:
                 return [];
         }
