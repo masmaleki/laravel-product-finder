@@ -1269,7 +1269,8 @@ class PFStaticDataAISeeder extends Seeder
                 $response[] = [
                     'name' => 'input_textarea',
                     'value' => ['input' => [
-                        'total_line' => 3,
+                        'total_line' => 5,
+                        'cols'=>59,
                         'theme' => 'textarea',
                     ]],
                 ];

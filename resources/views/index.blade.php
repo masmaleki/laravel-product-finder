@@ -13,6 +13,7 @@
         href="{{ asset('vendor/productfinder/fonts/material-icon/css/material-design-iconic-font.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/productfinder/lib/nouislider/nouislider.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <!-- Main css -->
     <link rel="stylesheet" href="{{ asset('vendor/productfinder/css/style.css') }}">
@@ -257,7 +258,7 @@
                                                 
                                                 <label>
                                                     <textarea  id="option{{ $option->id }}" name="{{ $pf_question->id }}"
-                                                        value="" rows="{{$typeOption->input->total_line}}" ></textarea>
+                                                        value="" cols="{{$typeOption->input->cols}}" rows="{{$typeOption->input->total_line}}" ></textarea>
                                                     </label>
                                                 
 
