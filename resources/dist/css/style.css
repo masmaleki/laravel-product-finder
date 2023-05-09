@@ -976,7 +976,7 @@ input[type="radio"]:checked:before {
     .action {
       display: inline-block;
       position: relative;
-      margin: 10px;
+      margin: 0px 10px;
   }
   
   .action input[type="radio"] {
@@ -987,7 +987,7 @@ input[type="radio"]:checked:before {
   
   .action label {
       display: block;
-      padding: 5px 30px;
+      padding: 5px 20px;
       border-radius: 5px;
       font-weight: bold;
       background-color: #fff;
