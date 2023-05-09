@@ -246,7 +246,27 @@
                                                 @endforeach
                                             @endif
                                             @if ($pf_question->typeOption?->type?->name === 'range')
-                                                {{-- FOR RANGE --}}
+                                            @foreach ($pf_question->options as $option)
+                                                    @php
+                                                        $option_value = json_decode($option->value);
+                                                        $typeOption =json_decode($pf_question->typeOption->option);
+                                                        
+                                                    @endphp
+                                                     <div class="form-group">
+                                                        <div class="donate-us">
+                                                            <div class="price_slider ui-slider ui-slider-horizontal">
+                                                                <div id="slider-margin"></div>
+                                                                <p class="your-money">
+                                                                    My budget is:
+                                                                    <span class="money" id="value-lower"></span>
+                                                                    <span class="money" id="value-upper"></span>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <p class="desc">Please use the slider to indicate your budget for hair restoration procedures.</p>
+                                                    </div>
+                                                @endforeach
+                                               
                                             @endif
                                             @if ($pf_question->typeOption?->type?->name === 'input')
                                                 @foreach ($pf_question->options as $option)

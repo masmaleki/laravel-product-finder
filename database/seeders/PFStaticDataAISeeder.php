@@ -102,7 +102,7 @@ class PFStaticDataAISeeder extends Seeder
             }
             // Create question 1
             $question1 = PFQuestion::create([
-                'pf_step_id' => 1,
+                'pf_step_id' => 4,
                 'pf_type_option_id' => 2,
                 'title' => 'What is your age and gender?',
                 'conditions' => json_encode([
@@ -164,7 +164,7 @@ class PFStaticDataAISeeder extends Seeder
 
             // Create question 2
             $question2 = PFQuestion::create([
-                'pf_step_id' => 1,
+                'pf_step_id' => 4,
                 'pf_type_option_id' => 2,
                 'title' => 'When did you first notice your hair loss?',
                 'conditions' => json_encode([
@@ -226,7 +226,7 @@ class PFStaticDataAISeeder extends Seeder
 
             // Create question 3
             $question3 = PFQuestion::create([
-                'pf_step_id' => 1,
+                'pf_step_id' => 4,
                 'pf_type_option_id' => 2,
                 'title' => 'How quickly has your hair loss progressed?',
                 'conditions' => json_encode([
@@ -289,7 +289,7 @@ class PFStaticDataAISeeder extends Seeder
 
             // Create question 4
             $question4 = PFQuestion::create([
-                'pf_step_id' => 1,
+                'pf_step_id' => 4,
                 'pf_type_option_id' => 2,
                 'title' => 'Have you experienced any sudden hair loss or shedding?',
                 'conditions' => json_encode([
@@ -837,7 +837,7 @@ class PFStaticDataAISeeder extends Seeder
 
             // Create question 13
             $question13 = PFQuestion::create([
-                'pf_step_id' => 3,
+                'pf_step_id' => 1,
                 'pf_type_option_id' => 2,
                 'title' => 'What is your budget for hair restoration procedures?',
                 'conditions' => json_encode([
@@ -897,7 +897,7 @@ class PFStaticDataAISeeder extends Seeder
 
             // Create question 14
             $question14 = PFQuestion::create([
-                'pf_step_id' => 4,
+                'pf_step_id' => 1,
                 'pf_type_option_id' => 3,
                 'title' => 'Did the transplant meet your expectations?',
                 'conditions' => json_encode([
@@ -935,7 +935,7 @@ class PFStaticDataAISeeder extends Seeder
 
             // Create question 15
             $question15 = PFQuestion::create([
-                'pf_step_id' => 4,
+                'pf_step_id' => 1,
                 'pf_type_option_id' => 3,
                 'title' => 'Did you experience any complications during or after the procedure?',
                 'conditions' => json_encode([
@@ -972,7 +972,7 @@ class PFStaticDataAISeeder extends Seeder
 
             // Create question 16
             $question16 = PFQuestion::create([
-                'pf_step_id' => 4,
+                'pf_step_id' => 1,
                 'pf_type_option_id' => 6,
                 'title' => 'If yes, please describe the complication',
                 'conditions' => json_encode([
@@ -999,7 +999,7 @@ class PFStaticDataAISeeder extends Seeder
 
             // Create question 17
             $question17 = PFQuestion::create([
-                'pf_step_id' => 4,
+                'pf_step_id' => 1,
                 'pf_type_option_id' => 3,
                 'title' => 'Were any medications prescribed after the procedure?',
                 'conditions' => json_encode([
@@ -1036,7 +1036,7 @@ class PFStaticDataAISeeder extends Seeder
 
             // Create question 18
             $question18 = PFQuestion::create([
-                'pf_step_id' => 4,
+                'pf_step_id' => 1,
                 'pf_type_option_id' => 6,
                 'title' => 'If yes, please list the medication(s) prescribed',
                 'conditions' => json_encode([
@@ -1063,7 +1063,7 @@ class PFStaticDataAISeeder extends Seeder
 
             // Create question 19
             $question19 = PFQuestion::create([
-                'pf_step_id' => 4,
+                'pf_step_id' => 1,
                 'pf_type_option_id' => 7,
                 'title' => 'How many days did it take you to recover from the procedure?',
                 'conditions' => json_encode([
@@ -1090,7 +1090,7 @@ class PFStaticDataAISeeder extends Seeder
 
             // Create question 13
             $question20 = PFQuestion::create([
-                'pf_step_id' => 4,
+                'pf_step_id' => 1,
                 'pf_type_option_id' => 1,
                 'title' => 'What is your ?',
                 'conditions' => json_encode([
@@ -1141,6 +1141,34 @@ class PFStaticDataAISeeder extends Seeder
                 'pf_tag_id' => null,
                 'value' => json_encode([
                     'title' => 'Less than $5,000',
+                ]),
+                'status' => self::STATUS_ACTIVE,
+                'info' => null, // insert a description if needed
+            ]);
+
+
+             // Create question 21
+             $question21 = PFQuestion::create([
+                'pf_step_id' => 1,
+                'pf_type_option_id' => 4,
+                'title' => 'What is your budget for hair restoration procedures?',
+                'conditions' => json_encode([
+                    'and_conditions' => [],
+                    'or_conditions' => [],
+                ]),
+                'desc' => '',
+                'image' => '',
+                'point' => 10,
+                'is_required' => true,
+                'status' => self::STATUS_ACTIVE,
+            ]);
+            // Create question 19 options
+            PFQuestionOption::create([
+                'pf_question_id' => $question21->id,
+                'pf_type_option_id' => 4,
+                'pf_tag_id' => null,
+                'value' => json_encode([
+                    'title' => 'How many days',
                 ]),
                 'status' => self::STATUS_ACTIVE,
                 'info' => null, // insert a description if needed
