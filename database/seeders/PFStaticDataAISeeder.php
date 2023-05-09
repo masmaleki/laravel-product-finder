@@ -1146,9 +1146,8 @@ class PFStaticDataAISeeder extends Seeder
                 'info' => null, // insert a description if needed
             ]);
 
-
-             // Create question 21
-             $question21 = PFQuestion::create([
+            // Create question 21
+            $question21 = PFQuestion::create([
                 'pf_step_id' => 1,
                 'pf_type_option_id' => 4,
                 'title' => 'What is your budget for hair restoration procedures?',
