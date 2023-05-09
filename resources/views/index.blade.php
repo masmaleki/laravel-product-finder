@@ -15,66 +15,67 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<!-- Main css -->
+    <!-- Main css -->
     <link rel="stylesheet" href="{{ asset('vendor/productfinder/css/style.css') }}">
     <style>
         .upload-container {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: space-between;
-          padding-bottom: 20px;
-          border-bottom: #ccc 1px solid;
-          margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding-bottom: 20px;
+            border-bottom: #ccc 1px solid;
+            margin-bottom: 20px;
 
         }
-        
+
         .image-button {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          background-color: #fff;
-          border: 1px solid #ccc;
-          padding: 10px;
-          width: calc(20% - 10px);
-          margin-bottom: 10px;
-          border-radius: 8px;
-          box-shadow: 0px 0px 5px
-        }
-        
-        .image-button img {
-          max-width: 100%;
-          margin-bottom: 5px;
-        }
-        
-        /* Responsive styles */
-        @media (max-width: 768px) {
-          .upload-container {
+            display: flex;
             flex-direction: column;
             align-items: center;
-          }
-          
-          .image-button {
-            width: 100%;
-            margin-right: 0;
-            margin-bottom: 20px;
-          }
-        
-          .image-button:last-child {
-            margin-bottom: 0;
-          }
-          
-          .image-button input[type="file"] {
-            margin-top: 5px;
-          }
+            justify-content: center;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: calc(20% - 10px);
+            margin-bottom: 10px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 5px
         }
-        .title-section{
+
+        .image-button img {
+            max-width: 100%;
+            margin-bottom: 5px;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .upload-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .image-button {
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+
+            .image-button:last-child {
+                margin-bottom: 0;
+            }
+
+            .image-button input[type="file"] {
+                margin-top: 5px;
+            }
+        }
+
+        .title-section {
             font-weight: 900;
             font-size: 17px;
             margin: 10px 1px;
         }
-        </style>
-        
+    </style>
+
 </head>
 
 <body>
@@ -87,10 +88,126 @@
             <div class="container">
                 <form method="POST" id="signup-form" class="signup-form" action="#">
                     <div>
+
+                        @foreach ($pf_steps as $pf_step)
+                            <h3>{{ $pf_step->title }}</h3>
+                            <fieldset>
+                                <h2>{{ $pf_step->title }}</h2>
+                                <p class="desc">{{ $pf_step->desc }}</p>
+                                <div class="fieldset-content">
+
+                                    @foreach ($pf_step->questions as $pf_question)
+                                        @php
+                                            $conditions[] = [
+                                                $pf_question->id => $pf_question->conditions,
+                                            ];
+                                            
+                                        @endphp
+                                        <div class="form-row">
+                                            <h4>{{ $pf_question->title }}<span
+                                                    class="{{ $pf_question->is_required ? 'required' : '' }}">{{ $pf_question->is_required ? ' * ' : '' }}</span>
+                                            </h4>
+                                            @if ($pf_question->typeOption?->type?->name === 'checkbox')
+                                                @foreach ($pf_question->options as $value => $label)
+                                                    @php
+                                                        $option_value = json_decode($option->value);
+                                                    @endphp
+                                                    <label>
+                                                        <input type="checkbox" name="{{ $pf_question->id }}[]"
+                                                            value="{{ $option->id }} {{ $pf_question->is_required ? 'required' : '' }}">
+                                                        <span class="radio-text">{{ $option_value->title }}</span>
+                                                    </label>
+                                                @endforeach
+                                            @endif
+
+                                            @if ($pf_question->typeOption?->type?->name === 'radio')
+                                                @foreach ($pf_question->options as $option)
+                                                    @php
+                                                        $option_value = json_decode($option->value);
+                                                        $typeOption = json_decode($pf_question->typeOption->option);
+                                                        $input_id = 'option' . $pf_question->id . '_' . $option->id;
+                                                    @endphp
+                                                    @if ($typeOption->radio->theme == 'btn')
+                                                        <div class="action">
+                                                            <input type="radio" id="{{ $input_id }}"
+                                                                name="{{ $pf_question->id }}" value="{{ $option->id }}">
+                                                            <label for="{{ $input_id }}"
+                                                                class="option{{ $option->id }}">{{ $option_value->title }}</label>
+                                                        </div>
+                                                    @else
+                                                        <label>
+                                                            <input type="radio" id="{{ $input_id }}"
+                                                                name="{{ $pf_question->id }}" value="{{ $option->id }}"
+                                                                {{ $pf_question->is_required ? 'required' : '' }}>
+                                                            <span class="radio-text">{{ $option_value->title }}</span>
+                                                        </label>
+                                                    @endif
+                                                @endforeach
+                                            @endif
+
+                                            @if ($pf_question->typeOption?->type?->name === 'range')
+                                                @foreach ($pf_question->options as $option)
+                                                    @php
+                                                        $option_value = json_decode($option->value);
+                                                        $typeOption = json_decode($pf_question->typeOption->option);
+                                                        
+                                                    @endphp
+                                                    <div class="form-group">
+                                                        <div class="donate-us">
+                                                            <div class="price_slider ui-slider ui-slider-horizontal">
+                                                                <div id="slider-margin"></div>
+                                                                <p class="your-money">
+                                                                    My budget is:
+                                                                    <span class="money" id="value-lower"></span>
+                                                                    <span class="money" id="value-upper"></span>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <p class="desc">Please use the slider to indicate your budget for
+                                                            hair restoration procedures.</p>
+                                                    </div>
+                                                @endforeach
+                                            @endif
+                                            @if ($pf_question->typeOption?->type?->name === 'input')
+                                                @foreach ($pf_question->options as $option)
+                                                    @php
+                                                        $option_value = json_decode($option->value);
+                                                        $typeOption = json_decode($pf_question->typeOption->option);
+                                                    @endphp
+                                                    @if ($typeOption->input->theme == 'textarea')
+                                                        <label>
+                                                            <textarea id="option{{ $option->id }}" name="{{ $pf_question->id }}" value=""
+                                                                cols="{{ $typeOption->input->cols }}" rows="{{ $typeOption->input->total_line }}"></textarea>
+                                                        </label>
+                                                    @elseif($typeOption->input->theme == 'price')
+                                                        <label>
+                                                            <input type="number" name="{{ $pf_question->id }}"
+                                                                min="{{ $typeOption->input->min }}"
+                                                                max="{{ $typeOption->input->max }}" value=""
+                                                                {{ $pf_question->is_required ? 'required' : '' }}>
+                                                        </label>
+                                                    @else
+                                                        <label>
+                                                            <input type="text" id="option{{ $option->id }}"
+                                                                name="{{ $pf_question->id }}" value=""
+                                                                rows="{{ $typeOption->input->total_line }}">
+                                                        </label>
+                                                    @endif
+                                                @endforeach
+                                            @endif
+
+                                            <p class="desc">{{ $pf_question->desc }}</p>
+                                        </div>
+                                    @endforeach
+
+
+                                </div>
+                            </fieldset>
+                        @endforeach
                         <h3> Hair conditions</h3>
                         <fieldset>
                             <h3>Find the best Service for you!</h3>
-                           
+
                             <div class="fieldset-content">
                                 <div class="choose-bank">
                                     <span class="title-section">Upload Your images:</span>
@@ -98,37 +215,42 @@
                                     </p>
                                     <div class="upload-container">
                                         <label for="front-image" class="image-button">
-                                          <img src="{{ asset('vendor/productfinder/images/4.jpg') }}" alt="Front View">
-                                          Upload Front View
-                                          <input type="file" id="front-image" name="front-image[]" accept="image/*" multiple>
+                                            <img src="{{ asset('vendor/productfinder/images/4.jpg') }}" alt="Front View">
+                                            Upload Front View
+                                            <input type="file" id="front-image" name="front-image[]" accept="image/*"
+                                                multiple>
                                         </label>
-                                      
-                                        <label for="top-image" class="image-button">
-                                          <img src="{{ asset('vendor/productfinder/images/1.jpg') }}" alt="Top View">
-                                          Upload Top View
-                                          <input type="file" id="top-image" name="top-image[]" accept="image/*" multiple>
-                                        </label>
-                                      
-                                        <label for="left-image" class="image-button">
-                                          <img src="{{ asset('vendor/productfinder/images/3.jpg') }}" alt="Right View">
-                                          Upload Right View
-                                          <input type="file" id="right-image" name="left-image[]" accept="image/*" multiple>
-                                        </label>
-                                      
-                                        <label for="left-image" class="image-button">
-                                          <img src="{{ asset('vendor/productfinder/images/2.jpg') }}" alt="Left View">
-                                          Upload Left View
-                                          <input type="file" id="left-image" name="left-image[]" accept="image/*" multiple>
-                                        </label>
-                                      </div>
-            
 
-                                      <span class="title-section">Choose the closest condition:</span>
-                                      <p class="desc">Please choose the closest option from the list of hair conditions to proceed to the next step.
-                                      </p>
-                                  
-                                  
-                                      <div class="form-radio-flex">
+                                        <label for="top-image" class="image-button">
+                                            <img src="{{ asset('vendor/productfinder/images/1.jpg') }}" alt="Top View">
+                                            Upload Top View
+                                            <input type="file" id="top-image" name="top-image[]" accept="image/*"
+                                                multiple>
+                                        </label>
+
+                                        <label for="left-image" class="image-button">
+                                            <img src="{{ asset('vendor/productfinder/images/3.jpg') }}" alt="Right View">
+                                            Upload Right View
+                                            <input type="file" id="right-image" name="left-image[]" accept="image/*"
+                                                multiple>
+                                        </label>
+
+                                        <label for="left-image" class="image-button">
+                                            <img src="{{ asset('vendor/productfinder/images/2.jpg') }}" alt="Left View">
+                                            Upload Left View
+                                            <input type="file" id="left-image" name="left-image[]" accept="image/*"
+                                                multiple>
+                                        </label>
+                                    </div>
+
+
+                                    <span class="title-section">Choose the closest condition:</span>
+                                    <p class="desc">Please choose the closest option from the list of hair conditions to
+                                        proceed to the next step.
+                                    </p>
+
+
+                                    <div class="form-radio-flex">
                                         <div class="form-radio-item">
                                             <input type="radio" name="choose_bank" id="bank_1" value="bank_1"
                                                 checked="checked" />
@@ -191,121 +313,6 @@
 
                             </div>
                         </fieldset>
-                        @foreach ($pf_steps as $pf_step)
-                            <h3>{{ $pf_step->title }}</h3>
-                            <fieldset>
-                                <h2>{{ $pf_step->title }}</h2>
-                                <p class="desc">{{ $pf_step->desc }}</p>
-                                <div class="fieldset-content">
-
-                                    @foreach ($pf_step->questions as $pf_question)
-                                        @php
-                                            $conditions[] = [
-                                                $pf_question->id => $pf_question->conditions,
-                                            ];
-                                            
-                                        @endphp
-                                        <div class="form-row">
-                                            <h4>{{ $pf_question->title }}<span
-                                                    class="{{ $pf_question->is_required ? 'required' : '' }}">{{ $pf_question->is_required ? ' * ' : '' }}</span>
-                                            </h4>
-                                            @if ($pf_question->typeOption?->type?->name === 'checkbox')
-                                                @foreach ($pf_question->options as $value => $label)
-                                                    @php
-                                                    $option_value = json_decode($option->value);
-                                                    @endphp
-                                                    <label>
-                                                        <input type="checkbox" name="{{ $pf_question->id }}[]"
-                                                            value="{{ $option->id }} {{ $pf_question->is_required ? 'required' : '' }}">
-                                                        <span class="radio-text">{{ $option_value->title }}</span>
-                                                    </label>
-                                                    @endforeach
-                                            @endif
-
-                                            @if ($pf_question->typeOption?->type?->name === 'radio')
-                                                @foreach ($pf_question->options as $option)
-                                                    @php
-                                                        $option_value = json_decode($option->value);
-                                                        $typeOption =json_decode($pf_question->typeOption->option);
-                                                        
-                                                    @endphp
-                                                    @if($typeOption->radio->theme=='btn')
-                                                    <div class="action">
-                                                        <input type="radio" id="option{{ $option->id }}" name="{{ $pf_question->id }}"
-                                                            value="{{ $option->id }}" >
-                                                        <label class="option{{ $option->id }}">{{ $option_value->title }}</label>
-                                                    
-                                                    </div>
-                                                    @else
-                                                    <label>
-                                                        <input type="radio" name="{{ $pf_question->id }}"
-                                                            value="{{ $option->id }}" {{ $pf_question->is_required ? 'required' : '' }}>
-                                                        <span class="radio-text">{{ $option_value->title }}</span>
-                                                    </label>    
-                                                    @endif
-                                                @endforeach
-                                            @endif
-                                            @if ($pf_question->typeOption?->type?->name === 'range')
-                                            @foreach ($pf_question->options as $option)
-                                                    @php
-                                                        $option_value = json_decode($option->value);
-                                                        $typeOption =json_decode($pf_question->typeOption->option);
-                                                        
-                                                    @endphp
-                                                     <div class="form-group">
-                                                        <div class="donate-us">
-                                                            <div class="price_slider ui-slider ui-slider-horizontal">
-                                                                <div id="slider-margin"></div>
-                                                                <p class="your-money">
-                                                                    My budget is:
-                                                                    <span class="money" id="value-lower"></span>
-                                                                    <span class="money" id="value-upper"></span>
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                        <p class="desc">Please use the slider to indicate your budget for hair restoration procedures.</p>
-                                                    </div>
-                                                @endforeach
-                                               
-                                            @endif
-                                            @if ($pf_question->typeOption?->type?->name === 'input')
-                                                @foreach ($pf_question->options as $option)
-                                                @php
-                                                    $option_value = json_decode($option->value);
-                                                    $typeOption =json_decode($pf_question->typeOption->option);
-                                                @endphp
-                                                @if($typeOption->input->theme=='textarea')
-                                                
-                                                <label>
-                                                    <textarea  id="option{{ $option->id }}" name="{{ $pf_question->id }}"
-                                                        value="" cols="{{$typeOption->input->cols}}" rows="{{$typeOption->input->total_line}}" ></textarea>
-                                                    </label>
-                                                
-
-                                                
-                                                @elseif($typeOption->input->theme=='price')
-                                                    <label >
-                                                    <input type="number" name="{{ $pf_question->id }}" min="{{$typeOption->input->min}}" max="{{$typeOption->input->max}}"
-                                                        value="" {{ $pf_question->is_required ? 'required' : '' }}>
-                                                    </label>
-                                                @else
-                                                <label >
-                                                <input type="text" id="option{{ $option->id }}" name="{{ $pf_question->id }}"
-                                                    value="" rows="{{$typeOption->input->total_line}}">
-                                                </label>
-                                                @endif
-                                                @endforeach
-                                            @endif
-
-                                            <p class="desc">{{ $pf_question->desc }}</p>
-                                        </div>
-                                    @endforeach
-
-
-                                </div>
-                            </fieldset>
-                        @endforeach
-        
                         <h3>Best Service for you!</h3>
                         <fieldset>
                             <h3>Find the best product for you!</h3>
@@ -362,8 +369,8 @@
                                             <div class="action">
                                                 <input type="radio" id="option1" name="options">
                                                 <label for="option1">Option 1</label>
-                                              </div>
-                                            
+                                            </div>
+
                                         </div>
                                     </div>
                                     <div class="card">
@@ -414,11 +421,11 @@
                                             <div class="action">
                                                 <input type="radio" id="option2" name="options">
                                                 <label for="option2">Option 2</label>
-                                              </div>
-                                            
+                                            </div>
+
                                         </div>
                                     </div>
-                     
+
                                 </div>
 
 
