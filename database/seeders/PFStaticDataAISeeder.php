@@ -982,7 +982,7 @@ class PFStaticDataAISeeder extends Seeder
                 'desc' => '',
                 'image' => '',
                 'point' => 10,
-                'is_required' => true,
+                'is_required' => false,
                 'status' => self::STATUS_ACTIVE,
             ]);
             // Create question 16 options
@@ -1046,7 +1046,7 @@ class PFStaticDataAISeeder extends Seeder
                 'desc' => '',
                 'image' => '',
                 'point' => 10,
-                'is_required' => true,
+                'is_required' => false,
                 'status' => self::STATUS_ACTIVE,
             ]);
             // Create question 18 options

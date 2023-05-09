@@ -7,8 +7,6 @@
     <meta name="author" content="colorlib.com">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ $pf_wizard?->title }}</title>
-
-    <!-- Font Icon -->
     <link rel="stylesheet"
         href="{{ asset('vendor/productfinder/fonts/material-icon/css/material-design-iconic-font.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/productfinder/lib/nouislider/nouislider.min.css') }}">
@@ -17,64 +15,6 @@
 
     <!-- Main css -->
     <link rel="stylesheet" href="{{ asset('vendor/productfinder/css/style.css') }}">
-    <style>
-        .upload-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            padding-bottom: 20px;
-            border-bottom: #ccc 1px solid;
-            margin-bottom: 20px;
-
-        }
-
-        .image-button {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            padding: 10px;
-            width: calc(20% - 10px);
-            margin-bottom: 10px;
-            border-radius: 8px;
-            box-shadow: 0px 0px 5px
-        }
-
-        .image-button img {
-            max-width: 100%;
-            margin-bottom: 5px;
-        }
-
-        /* Responsive styles */
-        @media (max-width: 768px) {
-            .upload-container {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .image-button {
-                width: 100%;
-                margin-right: 0;
-                margin-bottom: 20px;
-            }
-
-            .image-button:last-child {
-                margin-bottom: 0;
-            }
-
-            .image-button input[type="file"] {
-                margin-top: 5px;
-            }
-        }
-
-        .title-section {
-            font-weight: 900;
-            font-size: 17px;
-            margin: 10px 1px;
-        }
-    </style>
 
 </head>
 
@@ -88,7 +28,7 @@
             <div class="container">
                 <form method="POST" id="signup-form" class="signup-form" action="#">
                     <div>
-
+                   
                         @foreach ($pf_steps as $pf_step)
                             <h3>{{ $pf_step->title }}</h3>
                             <fieldset>
@@ -108,16 +48,19 @@
                                                     class="{{ $pf_question->is_required ? 'required' : '' }}">{{ $pf_question->is_required ? ' * ' : '' }}</span>
                                             </h4>
                                             @if ($pf_question->typeOption?->type?->name === 'checkbox')
+                                            <div class="checkbox-options">
                                                 @foreach ($pf_question->options as $value => $label)
                                                     @php
                                                         $option_value = json_decode($option->value);
                                                     @endphp
                                                     <label>
                                                         <input type="checkbox" name="{{ $pf_question->id }}[]"
-                                                            value="{{ $option->id }} {{ $pf_question->is_required ? 'required' : '' }}">
-                                                        <span class="radio-text">{{ $option_value->title }}</span>
+                                                            value="{{ $option->id }}" class="custom-checkbox {{ $pf_question->is_required ? 'required' : '' }}">
+                                                        <span class="checkbox-text">{{ $option_value->title }}</span>
                                                     </label>
                                                 @endforeach
+                                            </div>
+                                            
                                             @endif
 
                                             @if ($pf_question->typeOption?->type?->name === 'radio')
@@ -176,22 +119,21 @@
                                                     @endphp
                                                     @if ($typeOption->input->theme == 'textarea')
                                                         <label>
-                                                            <textarea id="option{{ $option->id }}" name="{{ $pf_question->id }}" value=""
-                                                                cols="{{ $typeOption->input->cols }}" rows="{{ $typeOption->input->total_line }}"></textarea>
-                                                        </label>
+                                                        <textarea id="option{{ $option->id }}" name="{{ $pf_question->id }}" value=""
+                                                          cols="{{ $typeOption->input->cols }}" rows="{{ $typeOption->input->total_line }}"
+                                                          class="pf-textarea"></textarea>
+                                                      </label>
                                                     @elseif($typeOption->input->theme == 'price')
-                                                        <label>
-                                                            <input type="number" name="{{ $pf_question->id }}"
-                                                                min="{{ $typeOption->input->min }}"
-                                                                max="{{ $typeOption->input->max }}" value=""
-                                                                {{ $pf_question->is_required ? 'required' : '' }}>
-                                                        </label>
+                                                    <label>
+                                                        <input type="number" name="{{ $pf_question->id }}" min="{{ $typeOption->input->min }}" max="{{ $typeOption->input->max }}" value=""
+                                                          {{ $pf_question->is_required ? 'required' : '' }} placeholder="Enter only numbers" class="pf-number-input">
+                                                      </label>
+                                                      
                                                     @else
-                                                        <label>
-                                                            <input type="text" id="option{{ $option->id }}"
-                                                                name="{{ $pf_question->id }}" value=""
-                                                                rows="{{ $typeOption->input->total_line }}">
-                                                        </label>
+                                                    <label>
+                                                        <input type="text" id="option{{ $option->id }}" name="{{ $pf_question->id }}" value=""
+                                                          rows="{{ $typeOption->input->total_line }}" placeholder="Enter your answer here" class="pf-text-input">
+                                                      </label>
                                                     @endif
                                                 @endforeach
                                             @endif
@@ -319,9 +261,58 @@
                             <p class="desc">Please enter your infomation and proceed to next step so we can build your
                                 account</p>
                             <div class="fieldset-content">
-                                <div class="choose-bank">
+                                <div class="choose-bank hidden" id="servicex">
                                     <h2>Best Service for you!</h2>
                                     <div class="card">
+                            
+                                        <div class="card__title">
+                                            <div class="icon">
+                                                <a href="#"> <i class="fa fa-info-circle"></i> Service: "Anti-Hair Loss"</a>
+                                            </div>
+                                            <h3>New products</h3>
+                                        </div>
+                                        
+                                        <div class="card__body">
+                                            <div class="featured_text">
+                                                <h1>B {{rand(1,100)}} </h1>
+                                            </div>
+                                                                                        
+                                            <div class="half">
+                                                <div class="description">
+                                                    <p>This service provides personalized recommendations and treatments to prevent hair loss and promote healthy hair growth. Our team of experts will work with you to create a customized plan based on your unique needs and goals.</p>
+                                                </div>
+                                                                                        
+                                                <span class="stock">
+                                                    <div>
+                                                        <p class="price">$210.00</p>
+                                                    </div>
+                                                    Available
+                                                </span>
+                                                
+                                                <div class="reviews">
+                                                    <ul class="stars">
+                                                        <li><i class="fa fa-star"></i></li>
+                                                        <li><i class="fa fa-star"></i></li>
+                                                        <li><i class="fa fa-star"></i></li>
+                                                        <li><i class="fa fa-star"></i></li>
+                                                        <li><i class="fa fa-star-o"></i></li>
+                                                    </ul>
+                                                    <span>(Mostly Positive)</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="card__footer">
+                                            <div class="action">
+                                                <input type="radio" id="option1" name="options">
+                                                <label for="option1">Select Service</label>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+
+                                    {{-- for product --}}
+                                    {{-- <div class="card">
                                         <div class="card__title">
                                             <div class="icon">
                                                 <a href="#"><i class="fa fa-info-circle"></i> Service #1</a>
@@ -372,59 +363,7 @@
                                             </div>
 
                                         </div>
-                                    </div>
-                                    <div class="card">
-                                        <div class="card__title">
-                                            <div class="icon">
-                                                <a href="#"><i class="fa fa-info-circle"></i> Serive #2</a>
-                                            </div>
-                                            <h3>New products</h3>
-                                        </div>
-
-                                        <div class="card__body">
-                                            <div class="half">
-                                                <div class="featured_text">
-                                                    <h1>Nurton</h1>
-                                                    <div>
-                                                        <p class="price">$210.00</p>
-                                                    </div>
-                                                </div>
-                                                <div class="image">
-                                                    <img src="https://images-na.ssl-images-amazon.com/images/I/613A7vcgJ4L._SL1500_.jpg"
-                                                        alt="">
-                                                </div>
-                                            </div>
-                                            <div class="half">
-                                                <div class="description">
-                                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero
-                                                        voluptatem nam pariatur voluptate perferendis, asperiores
-                                                        aspernatur! Porro similique consequatur, nobis soluta minima,
-                                                        quasi laboriosam hic cupiditate perferendis esse numquam magni.
-                                                    </p>
-                                                </div>
-                                                <span class="stock"><i class="fa fa-pen"></i> In stock</span>
-                                                <div class="reviews">
-                                                    <ul class="stars">
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star-o"></i></li>
-                                                    </ul>
-                                                    <span>(sample text!)</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="card__footer">
-                                            <div class="action">
-                                                <input type="radio" id="option2" name="options">
-                                                <label for="option2">Option 2</label>
-                                            </div>
-
-                                        </div>
-                                    </div>
+                                    </div> --}}
 
                                 </div>
 
@@ -496,6 +435,29 @@
     <script src="{{ asset('vendor/productfinder/lib/nouislider/nouislider.min.js') }}"></script>
     <script src="{{ asset('vendor/productfinder/lib/wnumb/wNumb.js') }}"></script>
     <script src="{{ asset('vendor/productfinder/js/main.js') }}"></script>
+    <script>
+
+const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', () => {
+        const checkedCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+        
+        if (checkedCheckboxes.length >= 2) {
+            checkboxes.forEach(c => {
+                if (!c.checked) {
+                    c.disabled = true;
+                }
+            });
+        } else {
+            checkboxes.forEach(c => {
+                c.disabled = false;
+            });
+        }
+    });
+});
+
+    </script>
 </body>
 
 </html>
