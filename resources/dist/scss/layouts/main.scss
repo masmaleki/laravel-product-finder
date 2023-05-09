@@ -449,6 +449,8 @@ span.required {
   
   .card__title .icon > a {
     color: #fff;
+    font-size: 20px;
+    line-height: 10px
   }
   
   .card__title .icon:hover {
@@ -687,35 +689,4 @@ span.required {
     color: #4966b1;
     }
   
-    
-    .product-rating {
-      display: inline-block;
-    }
-    
-    .star {
-      font-size: 17px;
-      color: gold;
-      @media (min-width: 768px) { /* Desktop */
-        font-size: 22px;
-      }
-    }
-    
-    .star-half {
-      font-size: 17px;
-      color: #555;
-      position: relative;
-      display: inline-block;
-      @media (min-width: 768px) { /* Desktop */
-        font-size: 22px;
-      }
-    }
-    
-    .star-half::before {
-      content: '\2605';
-      position: absolute;
-      left: 0;
-      overflow: hidden;
-      width: 50%;
-      color: gold;
-    }
     
