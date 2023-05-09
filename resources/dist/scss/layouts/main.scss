@@ -684,9 +684,43 @@ span.required {
     }
     }
     
-    .card__footer .action button:hover {
+     .action button:hover {
     background: #fff;
     color: #4966b1;
+    }
+    .action {
+        display: inline-block;
+        position: relative;
+        margin: 10px;
+    }
+    
+    .action input[type="radio"] {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+    }
+    
+    .action label {
+        display: block;
+        padding: 5px 30px;
+        border-radius: 5px;
+        font-weight: bold;
+        background-color: #fff;
+        color: #333;
+        border: 2px solid #ccc;
+        transition: all 0.3s ease-in-out;
+    }
+    
+    .action input[type="radio"]:checked + label {
+        background-color: #4966b1;
+        color: #fff;
+        border-color: #4966b1;
+    }
+    
+    .action label:hover {
+        background-color: #4966b1;
+        color: #fff;
+        cursor: pointer;
     }
   
     
