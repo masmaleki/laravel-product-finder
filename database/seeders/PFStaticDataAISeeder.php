@@ -20,7 +20,7 @@ class PFStaticDataAISeeder extends Seeder
 
     const TAG_LIMIT = 5;
 
-    const TYPE_NAMES = ['checkbox', 'radio', 'range','input','upload'];
+    const TYPE_NAMES = ['checkbox', 'radio', 'range', 'input', 'upload'];
 
     protected $faker;
 
@@ -57,10 +57,9 @@ class PFStaticDataAISeeder extends Seeder
             ]);
 
             $options = $this->getTypeOption($name);
-            
-            foreach($options as $option){
 
-                
+            foreach ($options as $option) {
+
                 PFTypeOption::create([
                     'name' => $option['name'],
                     'option' => json_encode($option['value']),
@@ -68,7 +67,7 @@ class PFStaticDataAISeeder extends Seeder
                     'pf_type_id' => $type->id,
                 ]);
             }
-            
+
         }
     }
 
@@ -896,7 +895,6 @@ class PFStaticDataAISeeder extends Seeder
                 'info' => null, // insert a description if needed
             ]);
 
-
             // Create question 14
             $question14 = PFQuestion::create([
                 'pf_step_id' => 4,
@@ -935,10 +933,6 @@ class PFStaticDataAISeeder extends Seeder
                 'info' => null, // insert a description if needed
             ]);
 
-         
-
-
-
             // Create question 15
             $question15 = PFQuestion::create([
                 'pf_step_id' => 4,
@@ -976,17 +970,13 @@ class PFStaticDataAISeeder extends Seeder
                 'info' => null, // insert a description if needed
             ]);
 
-
-
-
-
             // Create question 16
-            $question16= PFQuestion::create([
+            $question16 = PFQuestion::create([
                 'pf_step_id' => 4,
                 'pf_type_option_id' => 6,
                 'title' => 'If yes, please describe the complication',
                 'conditions' => json_encode([
-                    'and_conditions' => [15=>1],
+                    'and_conditions' => [15 => 1],
                     'or_conditions' => [],
                 ]),
                 'desc' => '',
@@ -1007,9 +997,8 @@ class PFStaticDataAISeeder extends Seeder
                 'info' => null, // insert a description if needed
             ]);
 
-
-             // Create question 17
-             $question17 = PFQuestion::create([
+            // Create question 17
+            $question17 = PFQuestion::create([
                 'pf_step_id' => 4,
                 'pf_type_option_id' => 3,
                 'title' => 'Were any medications prescribed after the procedure?',
@@ -1045,14 +1034,13 @@ class PFStaticDataAISeeder extends Seeder
                 'info' => null, // insert a description if needed
             ]);
 
-
             // Create question 18
-            $question18= PFQuestion::create([
+            $question18 = PFQuestion::create([
                 'pf_step_id' => 4,
                 'pf_type_option_id' => 6,
                 'title' => 'If yes, please list the medication(s) prescribed',
                 'conditions' => json_encode([
-                    'and_conditions' => [17=>1],
+                    'and_conditions' => [17 => 1],
                     'or_conditions' => [],
                 ]),
                 'desc' => '',
@@ -1074,7 +1062,7 @@ class PFStaticDataAISeeder extends Seeder
             ]);
 
             // Create question 19
-            $question19= PFQuestion::create([
+            $question19 = PFQuestion::create([
                 'pf_step_id' => 4,
                 'pf_type_option_id' => 7,
                 'title' => 'How many days did it take you to recover from the procedure?',
@@ -1229,73 +1217,76 @@ class PFStaticDataAISeeder extends Seeder
     {
         switch ($type) {
             case 'checkbox':
-                $response[]=[
-                        'name'=>'checkbox_sample',
-                        'value'=>['checkbox' => [
-                            'max_user_select' => 2,
-                            'total_item' => 4,
-                            ]]
-                        ];
+                $response[] = [
+                    'name' => 'checkbox_sample',
+                    'value' => ['checkbox' => [
+                        'max_user_select' => 2,
+                        'total_item' => 4,
+                    ]],
+                ];
+
                 return $response;
             case 'radio':
-                $response[]=[
-                    'name'=>'radio_sample',
-                    'value'=>['radio' => [
+                $response[] = [
+                    'name' => 'radio_sample',
+                    'value' => ['radio' => [
                         'total_item' => 4,
-                        'theme'=>'sample'
-                        ]]
-                    ];
-                $response[]=[
-                    'name'=>'radio_btn',
-                    'value'=>['radio' => [
+                        'theme' => 'sample',
+                    ]],
+                ];
+                $response[] = [
+                    'name' => 'radio_btn',
+                    'value' => ['radio' => [
                         'total_item' => 2,
-                        'theme'=>'btn'
-                        ]]
-                    ];
-            return $response;
-                   
+                        'theme' => 'btn',
+                    ]],
+                ];
+
+                return $response;
+
             case 'range':
-                $response[]=[
-                    'name'=>'range_sample',
-                    'value'=>['range' => [
+                $response[] = [
+                    'name' => 'range_sample',
+                    'value' => ['range' => [
                         'max' => 15000,
                         'min' => 100,
                         'step' => 500,
                         'unit' => '$',
                         'def_value' => 1500,
-                    ]]
-                    ];
+                    ]],
+                ];
+
                 return $response;
 
-
             case 'input':
-                $response[]=[
-                    'name'=>'input_sample',
-                    'value'=>['input' => [
+                $response[] = [
+                    'name' => 'input_sample',
+                    'value' => ['input' => [
                         'total_line' => 1,
-                        'theme'=>'input'
-                        ]]
-                    ];
-                $response[]=[
-                    'name'=>'input_textarea',
-                    'value'=>['input' => [
+                        'theme' => 'input',
+                    ]],
+                ];
+                $response[] = [
+                    'name' => 'input_textarea',
+                    'value' => ['input' => [
                         'total_line' => 3,
-                        'theme'=>'textarea'
-                        ]]
-                    ];
-                $response[]=[
-                    'name'=>'input_price',
-                    'value'=>['input' => [
+                        'theme' => 'textarea',
+                    ]],
+                ];
+                $response[] = [
+                    'name' => 'input_price',
+                    'value' => ['input' => [
                         'total_line' => 1,
-                        'theme'=>'price',
+                        'theme' => 'price',
                         'max' => 1000,
                         'min' => 1,
                         'step' => 10,
                         'def_value' => 1,
-                        ]]
-                    ];
-            return $response;
-                
+                    ]],
+                ];
+
+                return $response;
+
             default:
                 return [];
         }
