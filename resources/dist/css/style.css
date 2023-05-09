@@ -495,6 +495,12 @@ input.error {
     font-size: 28px;
     font-weight: bold; }
 
+    span.required {
+      color: red;
+      font-size: 20px;
+      line-height: 10px;
+  }
+
 @media screen and (max-width: 1024px) {
   .container {
     width: calc(100% - 40px);
@@ -677,3 +683,291 @@ input[type="radio"]:checked:before {
     font-size: 17px;
     margin: 10px 1px;
 }
+
+* cart product finder! */
+
+.card {
+    box-shadow: 0 6px 6px rgba(#000, 0.3);
+    transition: 200ms;
+    background: #fff;
+  }
+  
+  .card__title {
+    display: flex;
+    align-items: center;
+    padding: 20px 30px;
+  
+    @media (min-width: 768px) { /* Desktop */
+      padding: 30px 40px;
+    }
+  }
+  
+  .card__title h3 {
+    flex: 0 1 200px;
+    text-align: right;
+    margin: 0;
+    color: #252525;
+    font-family: sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    text-transform: uppercase;
+  
+    @media (min-width: 768px) { /* Desktop */
+      font-size: 20px;
+    }
+  }
+  
+  .card__title .icon {
+    flex: 1 0 10px;
+    background: #4966b1;
+    color: #fff;
+    padding: 10px 10px;
+    transition: 200ms;
+  
+    @media (min-width: 768px) { /* Desktop */
+      padding: 10px 15px;
+    }
+  }
+  
+  .card__title .icon > a {
+    color: #fff;
+    font-size: 20px;
+    line-height: 10px
+  }
+  
+  .card__title .icon:hover {
+    background: #252525;
+  }
+  
+  .card__body {
+    padding: 0 20px;
+    display: flex;
+    flex-flow: column nowrap;
+    margin-bottom: 20px;
+  
+    @media (min-width: 768px) { /* Desktop */
+      flex-flow: row nowrap;
+      padding: 0 40px;
+      margin-bottom: 25px;
+    }
+  }
+  
+  .card__body > .half {
+    box-sizing: border-box;
+    padding: 0 10px;
+    flex: 1 0 50%;
+  
+    @media (min-width: 768px) { /* Desktop */
+      padding: 0 15px;
+    }
+  }
+  
+  .card__body .featured_text {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    margin-bottom: 10px;
+  
+    @media (min-width: 768px) { /* Desktop */
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0;
+    }
+  }
+  
+  .card__body .featured_text h1 {
+    margin: 0;
+    padding: 0;
+    font-weight: 800;
+    font-family: "Montserrat", sans-serif;
+    font-size: 32px;
+    line-height: 40px;
+    color: #181e28;
+  
+    @media (min-width: 768px) { /* Desktop */
+      font-size: 64px;
+      line-height: 50px;
+    }
+  }
+  
+  .card__body .featured_text p {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .card__body .featured_text p.sub {
+    font-family: "Montserrat", sans-serif;
+    font-size: 18px;
+    text-transform: uppercase;
+    color: #686e77;
+    font-weight: 300;
+    margin-bottom: 5px;
+  
+    @media (min-width: 768px) { /* Desktop */
+      font-size: 26px;
+    }
+  }
+  
+  .card__body .featured_text p.price {
+    font-family: "Fjalla One", sans-serif;
+    color: #252525;
+    font-size: 18px;
+  
+    @media (min-width: 768px) { /* Desktop */
+      font-size: 26px;
+    }
+  }
+  
+  .card__body .image {
+    padding-top: 15px;
+    width: 100%;
+    text-align: center;
+  
+    @media (min-width: 768px) { /* Desktop */
+      padding-top: 0;
+      text-align: left;
+      margin-right: 15px;
+    }
+  }
+  
+  .card__body .image img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    @media (min-width: 768px) { /* Desktop */
+      max-height: 250px;
+      max-width: 100%;
+  
+    }
+  }
+  
+  .card__body .description {
+    margin-bottom: 20px;
+  }
+  
+  .card__body .description p {
+    margin: 0;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 300;
+    line-height: 24px;
+    font-size: 14px;
+    color: #555;
+  
+    @media (min-width: 768px) { /* Desktop */
+      line-height: 27px;
+      font-size: 16px;
+    }
+  }
+  
+  .card__body span.stock {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    color: #555;
+    }
+    
+    .card__body .reviews .stars {
+    display: inline-block;
+    list-style: none;
+    padding: 0;
+    }
+    
+    .card__body .reviews .stars > li {
+    display: inline-block;
+    }
+    
+    .card__body .reviews .stars > li .fa {
+    color: #f7c01b;
+    }
+    
+    .card__body .reviews > span {
+    font-family: "Open Sans", sans-serif;
+    font-size: 12px;
+    margin-left: 5px;
+    color: #555;
+    
+    @media (min-width: 768px) { /* Desktop */
+    font-size: 14px;
+    }
+    }
+    
+    .card__footer {
+    padding: 20px 30px;
+    display: flex;
+    flex-flow: row no-wrap;
+    align-items: center;
+    position: relative;
+    
+    @media (min-width: 768px) { /* Desktop */
+    padding: 30px 40px;
+    }
+    }
+    
+    .card__footer::before {
+    content: "";
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 30px;
+    width: calc(100% - 30px);
+    height: 3px;
+    background: #4966b1;
+    background: linear-gradient(to right, #4966b1 0%,#4966b1 20%,#ddd 20%,#ddd 100%);
+    
+    @media (min-width: 768px) { /* Desktop */
+    left: 40px;
+    }
+    }
+    
+    .card__footer .recommend {
+    flex: 1 0 10px;
+    }
+    
+    .card__footer .recommend p {
+    margin: 0;
+    font-family: "Montserrat", sans-serif;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 12px;
+    color: #555;
+    
+    @media (min-width: 768px) { /* Desktop */
+    font-size: 14px;
+    }
+    }
+    
+    .card__footer .recommend h3 {
+    margin: 0;
+    font-size: 16px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #4966b1;
+    
+    @media (min-width: 768px) { /* Desktop */
+    font-size: 20px;
+    }
+    }
+    
+    .card__footer .action button {
+    cursor: pointer;
+    border: 1px solid #4966b1;
+    padding: 10px 20px;
+    border-radius: 200px;
+    color: #fff;
+    background: #4966b1;
+    font-family: "Open Sans", sans-serif;
+    font-size: 14px;
+    transition: 200ms;
+    
+    @media (min-width: 768px) { /* Desktop */
+    padding: 14px 30px;
+    font-size: 16px;
+    }
+    }
+    
+    .card__footer .action button:hover {
+    background: #fff;
+    color: #4966b1;
+    }
+  
