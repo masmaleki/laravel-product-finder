@@ -251,22 +251,27 @@
                                                 @foreach ($pf_question->options as $option)
                                                 @php
                                                     $option_value = json_decode($option->value);
-                                                    
+                                                    $typeOption =json_decode($pf_question->typeOption->option);
                                                 @endphp
-                                                @if($option->theme=='btn')
+                                                @if($typeOption->input->theme=='textarea')
                                                 
-                                                <div class="action">
-                                                    <input type="radio" name="{{ $pf_question->id }}"
-                                                        value="{{ $option->id }} {{ $pf_question->is_required ? 'required' : '' }}">
-                                                    <label class="radio-text">{{ $option_value->title }}</label>
-                                                
-                                                </div>
-                                                @else
                                                 <label>
-                                                    <input type="radio" name="{{ $pf_question->id }}"
-                                                        value="{{ $option->id }} {{ $pf_question->is_required ? 'required' : '' }}">
-                                                    <span class="radio-text">{{ $option_value->title }}</span>
-                                                </label>    
+                                                    <textarea  id="option{{ $option->id }}" name="{{ $pf_question->id }}"
+                                                        value="" rows="{{$typeOption->input->total_line}}" ></textarea>
+                                                    </label>
+                                                
+
+                                                
+                                                @elseif($typeOption->input->theme=='price')
+                                                    <label >
+                                                    <input type="number" name="{{ $pf_question->id }}" min="{{$typeOption->input->min}}" max="{{$typeOption->input->max}}"
+                                                        value="" {{ $pf_question->is_required ? 'required' : '' }}>
+                                                    </label>
+                                                @else
+                                                <label >
+                                                <input type="text" id="option{{ $option->id }}" name="{{ $pf_question->id }}"
+                                                    value="" rows="{{$typeOption->input->total_line}}">
+                                                </label>
                                                 @endif
                                                 @endforeach
                                             @endif
