@@ -31,37 +31,7 @@
          
  
         onStepChanging: function(event, currentIndex, newIndex) {
-            if (currentIndex === 4) {
-                Swal.fire({
-                title: 'Ai Product Finder!',
-                html: 'Finding Best Match <b></b> Please wait.',
-                timer: 2000,
-                timerProgressBar: true,
-                didOpen: () => {
-                    Swal.showLoading()
-                    const b = Swal.getHtmlContainer().querySelector('b')
-                    timerInterval = setInterval(() => {
-                    b.textContent = Swal.getTimerLeft()
-                    }, 100)
-                },
-                willClose: () => {
-                    clearInterval(timerInterval)
-                }
-                }).then((result) => {
-                    $("#servicex").removeClass("hidden");
-
-                /* Read more about handling dismissals below */
-                if (result.dismiss === Swal.DismissReason.timer) {
-                }
-                })
-
-                let timerInterval
-
-            }
-            else {
-                $("#servicex").addClass("hidden");
-
-            }
+            
             var currentStepForm = $(this).find("fieldset").eq(currentIndex);
 
             // Check if all required fields in the current step are filled in
@@ -95,7 +65,37 @@
             alert('Submited');
         },
         onStepChanged: function(event, currentIndex, priorIndex) {
+            if (currentIndex === 5) {
+                Swal.fire({
+                title: 'Ai Product Finder!',
+                html: 'Finding Best Match <b></b> Please wait.',
+                timer: 2000,
+                timerProgressBar: true,
+                didOpen: () => {
+                    Swal.showLoading()
+                    const b = Swal.getHtmlContainer().querySelector('b')
+                    timerInterval = setInterval(() => {
+                    b.textContent = Swal.getTimerLeft()
+                    }, 100)
+                },
+                willClose: () => {
+                    clearInterval(timerInterval)
+                }
+                }).then((result) => {
+                    $("#servicex").removeClass("hidden");
 
+                /* Read more about handling dismissals below */
+                if (result.dismiss === Swal.DismissReason.timer) {
+                }
+                })
+
+                let timerInterval
+
+            }
+            else {
+                $("#servicex").addClass("hidden");
+
+            }
             return true;
         }
     });

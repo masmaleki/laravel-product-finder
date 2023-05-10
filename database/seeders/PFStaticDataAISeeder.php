@@ -1092,7 +1092,7 @@ class PFStaticDataAISeeder extends Seeder
             $question20 = PFQuestion::create([
                 'pf_step_id' => 1,
                 'pf_type_option_id' => 1,
-                'title' => 'What is your ?',
+                'title' => 'What shampoos do you use the most?',
                 'conditions' => json_encode([
                     'and_conditions' => [],
                     'or_conditions' => [],
@@ -1109,7 +1109,7 @@ class PFStaticDataAISeeder extends Seeder
                 'pf_type_option_id' => 1,
                 'pf_tag_id' => null,
                 'value' => json_encode([
-                    'title' => 'Less than $5,000',
+                    'title' => 'Dove',
                 ]),
                 'status' => self::STATUS_ACTIVE,
                 'info' => null, // insert a description if needed
@@ -1120,7 +1120,7 @@ class PFStaticDataAISeeder extends Seeder
                 'pf_type_option_id' => 1,
                 'pf_tag_id' => null,
                 'value' => json_encode([
-                    'title' => 'Less than $5,000',
+                    'title' => 'Maxxam',
                 ]),
                 'status' => self::STATUS_ACTIVE,
                 'info' => null, // insert a description if needed
@@ -1130,7 +1130,7 @@ class PFStaticDataAISeeder extends Seeder
                 'pf_type_option_id' => 1,
                 'pf_tag_id' => null,
                 'value' => json_encode([
-                    'title' => 'Less than $5,000',
+                    'title' => 'Oribe',
                 ]),
                 'status' => self::STATUS_ACTIVE,
                 'info' => null, // insert a description if needed
@@ -1140,7 +1140,7 @@ class PFStaticDataAISeeder extends Seeder
                 'pf_type_option_id' => 1,
                 'pf_tag_id' => null,
                 'value' => json_encode([
-                    'title' => 'Less than $5,000',
+                    'title' => 'Shea',
                 ]),
                 'status' => self::STATUS_ACTIVE,
                 'info' => null, // insert a description if needed

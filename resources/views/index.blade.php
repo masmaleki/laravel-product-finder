@@ -29,7 +29,7 @@
             <div class="container">
                 <form method="POST" id="signup-form" class="signup-form" action="#">
                     <div>
-                   
+
                         @foreach ($pf_steps as $pf_step)
                             <h3>{{ $pf_step->title }}</h3>
                             <fieldset>
@@ -56,7 +56,7 @@
                                             </h4>
                                             @if ($pf_question->typeOption?->type?->name === 'checkbox')
                                             <div class="checkbox-options">
-                                                @foreach ($pf_question->options as $value => $label)
+                                                @foreach ($pf_question->options as $option)
                                                     @php
                                                         $option_value = json_decode($option->value);
                                                     @endphp
@@ -158,6 +158,8 @@
                                 </div>
                             </fieldset>
                         @endforeach
+
+                      
                         <h3> Hair conditions</h3>
                         <fieldset>
                             <h3>Find the best Service for you!</h3>
@@ -165,7 +167,8 @@
                             <div class="fieldset-content">
                                 <div class="choose-bank">
                                     <span class="title-section">Upload Your images:</span>
-                                    <p class="desc">Please describe your hair condition to proceed to the next step.
+                                    <p class="desc-ch">
+                                            Please describe your hair condition to proceed to the next step.
                                     </p>
                                     <div class="upload-container">
                                         <label for="front-image" class="image-button">
@@ -199,9 +202,11 @@
 
 
                                     <span class="title-section">Choose the closest condition:</span>
-                                    <p class="desc">Please choose the closest option from the list of hair conditions to
-                                        proceed to the next step.
-                                    </p>
+                                      <p class="desc-ch">
+                                            Please choose the closest option from the list of hair conditions to
+                                            proceed to the next step.
+                                      </p>
+                                    
 
 
                                     <div class="form-radio-flex">
@@ -270,12 +275,18 @@
                         <h3>Best Service for you!</h3>
                         <fieldset>
                             <h3>Find the best product for you!</h3>
-                            <p class="desc">Please enter your infomation and proceed to next step so we can build your
-                                account</p>
+                            <p class="desc q-desc">
+                                <span class="desc-highlight"><i class="fa fa-info-circle" aria-hidden="true"></i>
+                                    Please enter your infomation and proceed to next step so we can build your
+                                    account
+                                </span>
+                              </p>
                             <div class="fieldset-content">
-                                <div class="choose-bank hidden" id="servicex">
+                                <div class="choose-bank " id="servicex">
                                     <h2>Best Service for you!</h2>
-                                    <div class="card">
+                       
+                                    
+                                      <div class="card">
                             
                                         <div class="card__title">
                                             <div class="icon">
@@ -431,7 +442,6 @@
 
                             </div>
                         </fieldset>
-
                     </div>
                 </form>
             </div>
