@@ -1,118 +1,473 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="author" content="colorlib.com">
+    <meta name="author" content="colorlib.com">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{$pf_wizard?->title}}</title>
-
-    <!-- Font Icon -->
-    <link rel="stylesheet" href="{{ asset('vendor/productfinder/fonts/material-icon/css/material-design-iconic-font.min.css')}}">
-    <link rel="stylesheet" href="{{ asset('vendor/productfinder/lib/nouislider/nouislider.min.css')}}">
+    <title>{{ $pf_wizard?->title }}</title>
+    <link rel="stylesheet"
+        href="{{ asset('vendor/productfinder/fonts/material-icon/css/material-design-iconic-font.min.css') }}">
+        <link href="https://fonts.googleapis.com/css?family=Hind&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('vendor/productfinder/lib/nouislider/nouislider.min.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Main css -->
-    <link rel="stylesheet" href="{{ asset('vendor/productfinder/css/style.css')}}">
+    <link rel="stylesheet" href="{{ asset('vendor/productfinder/css/style.css') }}">
+
 </head>
+
 <body>
-     @isset($pf_wizard)
+    @isset($pf_wizard)
         <div class="main">
-        
+            @php
+                $conditions = [];
+                $answers = [];
+            @endphp
             <div class="container">
-                <form method="POST" id="pfwizrd" class="signup-form" action="#">
+                <form method="POST" id="signup-form" class="signup-form" action="#">
                     <div>
-                      @foreach ($pf_steps as $pf_step )
-                        <h3>{{$pf_step->title}}</h3>
+                   
+                        @foreach ($pf_steps as $pf_step)
+                            <h3>{{ $pf_step->title }}</h3>
+                            <fieldset>
+                                <h2>{{ $pf_step->title }}</h2>
+                                @if(!empty($pf_step->desc) )
+                                <p class="desc q-desc">
+                                    <span class="desc-highlight"><i class="fa fa-info-circle" aria-hidden="true"></i>
+                                        {{ $pf_step->desc }}</span>
+                                  </p>
+                                @endif
+                                
+                                <div class="fieldset-content">
+
+                                    @foreach ($pf_step->questions as $pf_question)
+                                        @php
+                                            $conditions[] = [
+                                                $pf_question->id => $pf_question->conditions,
+                                            ];
+                                            
+                                        @endphp
+                                        <div class="form-row">
+                                            <h4>{{ $pf_question->title }}<span
+                                                    class="{{ $pf_question->is_required ? 'required' : '' }}">{{ $pf_question->is_required ? ' * ' : '' }}</span>
+                                            </h4>
+                                            @if ($pf_question->typeOption?->type?->name === 'checkbox')
+                                            <div class="checkbox-options">
+                                                @foreach ($pf_question->options as $value => $label)
+                                                    @php
+                                                        $option_value = json_decode($option->value);
+                                                    @endphp
+                                                    <label>
+                                                        <input type="checkbox" name="{{ $pf_question->id }}[]"
+                                                            value="{{ $option->id }}" class="custom-checkbox {{ $pf_question->is_required ? 'required' : '' }}">
+                                                        <span class="checkbox-text">{{ $option_value->title }}</span>
+                                                    </label>
+                                                @endforeach
+                                            </div>
+                                            
+                                            @endif
+
+                                            @if ($pf_question->typeOption?->type?->name === 'radio')
+                                                @foreach ($pf_question->options as $option)
+                                                    @php
+                                                        $option_value = json_decode($option->value);
+                                                        $typeOption = json_decode($pf_question->typeOption->option);
+                                                        $input_id = 'option' . $pf_question->id . '_' . $option->id;
+                                                    @endphp
+                                                    @if ($typeOption->radio->theme == 'btn')
+                                                        <div class="action">
+                                                            <input type="radio" id="{{ $input_id }}"
+                                                                name="{{ $pf_question->id }}" value="{{ $option->id }}">
+                                                            <label for="{{ $input_id }}"
+                                                                class="option{{ $option->id }}">{{ $option_value->title }}</label>
+                                                        </div>
+                                                    @else
+                                                        <label>
+                                                            <input type="radio" id="{{ $input_id }}"
+                                                                name="{{ $pf_question->id }}" value="{{ $option->id }}"
+                                                                {{ $pf_question->is_required ? 'required' : '' }}>
+                                                            <span class="radio-text">{{ $option_value->title }}</span>
+                                                        </label>
+                                                    @endif
+                                                @endforeach
+                                            @endif
+
+                                            @if ($pf_question->typeOption?->type?->name === 'range')
+                                                @foreach ($pf_question->options as $option)
+                                                    @php
+                                                        $option_value = json_decode($option->value);
+                                                        $typeOption = json_decode($pf_question->typeOption->option);
+                                                        
+                                                    @endphp
+                                                    <div class="form-group">
+                                                        <div class="donate-us">
+                                                            <div class="price_slider ui-slider ui-slider-horizontal">
+                                                                <div id="slider-margin"></div>
+                                                                <p class="your-money">
+                                                                    My budget is:
+                                                                    <span class="money" id="value-lower"></span>
+                                                                    <span class="money" id="value-upper"></span>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <p class="desc">Please use the slider to indicate your budget for
+                                                            hair restoration procedures.</p>
+                                                    </div>
+                                                @endforeach
+                                            @endif
+                                            @if ($pf_question->typeOption?->type?->name === 'input')
+                                                @foreach ($pf_question->options as $option)
+                                                    @php
+                                                        $option_value = json_decode($option->value);
+                                                        $typeOption = json_decode($pf_question->typeOption->option);
+                                                    @endphp
+                                                    @if ($typeOption->input->theme == 'textarea')
+                                                        <label>
+                                                        <textarea id="option{{ $option->id }}" name="{{ $pf_question->id }}" value=""
+                                                          cols="{{ $typeOption->input->cols }}" rows="{{ $typeOption->input->total_line }}"
+                                                          class="pf-textarea"></textarea>
+                                                      </label>
+                                                    @elseif($typeOption->input->theme == 'price')
+                                                    <label>
+                                                        <input type="number" name="{{ $pf_question->id }}" min="{{ $typeOption->input->min }}" max="{{ $typeOption->input->max }}" value=""
+                                                          {{ $pf_question->is_required ? 'required' : '' }} placeholder="Enter only numbers" class="pf-number-input">
+                                                      </label>
+                                                      
+                                                    @else
+                                                    <label>
+                                                        <input type="text" id="option{{ $option->id }}" name="{{ $pf_question->id }}" value=""
+                                                          rows="{{ $typeOption->input->total_line }}" placeholder="Enter your answer here" class="pf-text-input">
+                                                      </label>
+                                                    @endif
+                                                @endforeach
+                                            @endif
+                                            @if(!empty($pf_question->desc) )
+                                            <p class="desc q-desc">
+                                                <span class="desc-highlight"><i class="fa fa-info-circle" aria-hidden="true"></i>
+                                                    {{ $pf_question->desc }}</span>
+                                            </p>
+                                            @endif
+
+                                        </div>
+                                    @endforeach
+
+
+                                </div>
+                            </fieldset>
+                        @endforeach
+                        <h3> Hair conditions</h3>
                         <fieldset>
-                            <h2>{{$pf_step->title}}</h2>
-                            <p class="desc">{{$pf_step->desc}}</p>
+                            <h3>Find the best Service for you!</h3>
+
                             <div class="fieldset-content">
+                                <div class="choose-bank">
+                                    <span class="title-section">Upload Your images:</span>
+                                    <p class="desc">Please describe your hair condition to proceed to the next step.
+                                    </p>
+                                    <div class="upload-container">
+                                        <label for="front-image" class="image-button">
+                                            <img src="{{ asset('vendor/productfinder/images/4.jpg') }}" alt="Front View">
+                                            Upload Front View
+                                            <input type="file" id="front-image" name="front-image[]" accept="image/*"
+                                                multiple>
+                                        </label>
 
-                            @foreach ($pf_step->questions as $pf_question)
-                            <div class="form-row">
-                                <h4>{{$pf_question->title}}<span class="{{ $pf_question->is_required ? 'required' : '' }}"> * </span></h4>
-                                @if ($pf_question->typeOption?->type?->name === 'checkbox')
-                                @foreach($pf_question->options as $value => $label)
-                               {{-- checkbox code --}}
-                                @endforeach
-                                @endif
+                                        <label for="top-image" class="image-button">
+                                            <img src="{{ asset('vendor/productfinder/images/1.jpg') }}" alt="Top View">
+                                            Upload Top View
+                                            <input type="file" id="top-image" name="top-image[]" accept="image/*"
+                                                multiple>
+                                        </label>
 
-                                @if ($pf_question->typeOption?->type?->name === 'radio')
-                                @foreach ($pf_question->options as $option)
-                                    <label>
-                                        <input type="radio" name="{{ $pf_question->id }}" value="{{ $option->id }}">
-                                        <span class="radio-text">{{ json_decode($option->value)->title }}</span>
-                                    </label>
-                                @endforeach
-                                @endif
-                                @if ($pf_question->typeOption?->type?->name === 'range')
-                                    {{-- FOR RANGE --}}
-                                @endif
+                                        <label for="left-image" class="image-button">
+                                            <img src="{{ asset('vendor/productfinder/images/3.jpg') }}" alt="Right View">
+                                            Upload Right View
+                                            <input type="file" id="right-image" name="left-image[]" accept="image/*"
+                                                multiple>
+                                        </label>
 
-                                <p class="desc">{{$pf_question->desc}}</p>
-                            </div>
+                                        <label for="left-image" class="image-button">
+                                            <img src="{{ asset('vendor/productfinder/images/2.jpg') }}" alt="Left View">
+                                            Upload Left View
+                                            <input type="file" id="left-image" name="left-image[]" accept="image/*"
+                                                multiple>
+                                        </label>
+                                    </div>
 
-                            @endforeach
-                              
-                           
+
+                                    <span class="title-section">Choose the closest condition:</span>
+                                    <p class="desc">Please choose the closest option from the list of hair conditions to
+                                        proceed to the next step.
+                                    </p>
+
+
+                                    <div class="form-radio-flex">
+                                        <div class="form-radio-item">
+                                            <input type="radio" name="choose_bank" id="bank_1" value="bank_1"
+                                                checked="checked" />
+                                            <label for="bank_1"><img
+                                                    src="{{ asset('vendor/productfinder/images/11.jpg') }}"
+                                                    alt=""></label>
+                                        </div>
+
+                                        <div class="form-radio-item">
+                                            <input type="radio" name="choose_bank" id="bank_2" value="bank_2" />
+                                            <label for="bank_2"><img
+                                                    src="{{ asset('vendor/productfinder/images/12.jpg') }}"
+                                                    alt=""></label>
+                                        </div>
+
+                                        <div class="form-radio-item">
+                                            <input type="radio" name="choose_bank" id="bank_3" value="bank_3" />
+                                            <label for="bank_3"><img
+                                                    src="{{ asset('vendor/productfinder/images/13.jpg') }}"
+                                                    alt=""></label>
+                                        </div>
+
+                                        <div class="form-radio-item">
+                                            <input type="radio" name="choose_bank" id="bank_4" value="bank_4" />
+                                            <label for="bank_4"><img
+                                                    src="{{ asset('vendor/productfinder/images/14.jpg') }}"
+                                                    alt=""></label>
+                                        </div>
+
+                                        <div class="form-radio-item">
+                                            <input type="radio" name="choose_bank" id="bank_5" value="bank_5" />
+                                            <label for="bank_5"><img
+                                                    src="{{ asset('vendor/productfinder/images/15.jpg') }}"
+                                                    alt=""></label>
+                                        </div>
+
+                                        <div class="form-radio-item">
+                                            <input type="radio" name="choose_bank" id="bank_6" value="bank_6" />
+                                            <label for="bank_6"><img
+                                                    src="{{ asset('vendor/productfinder/images/16.jpg') }}"
+                                                    alt=""></label>
+                                        </div>
+
+                                        <div class="form-radio-item">
+                                            <input type="radio" name="choose_bank" id="bank_7" value="bank_7" />
+                                            <label for="bank_7"><img
+                                                    src="{{ asset('vendor/productfinder/images/17.jpg') }}"
+                                                    alt=""></label>
+                                        </div>
+
+                                        <div class="form-radio-item">
+                                            <input type="radio" name="choose_bank" id="bank_8" value="bank_8" />
+                                            <label for="bank_8"><img
+                                                    src="{{ asset('vendor/productfinder/images/11.jpg') }}"
+                                                    alt=""></label>
+                                        </div>
+                                    </div>
+                                </div>
+
+
                             </div>
                         </fieldset>
-                      
-                       @endforeach
+                        <h3>Best Service for you!</h3>
+                        <fieldset>
+                            <h3>Find the best product for you!</h3>
+                            <p class="desc">Please enter your infomation and proceed to next step so we can build your
+                                account</p>
+                            <div class="fieldset-content">
+                                <div class="choose-bank hidden" id="servicex">
+                                    <h2>Best Service for you!</h2>
+                                    <div class="card">
+                            
+                                        <div class="card__title">
+                                            <div class="icon">
+                                                <a href="#"> <i class="fa fa-info-circle"></i> Service: "Anti-Hair Loss"</a>
+                                            </div>
+                                            <h3>New products</h3>
+                                        </div>
+                                        
+                                        <div class="card__body">
+                                            <div class="featured_text">
+                                                <h1>B {{rand(1,100)}} </h1>
+                                            </div>
+                                                                                        
+                                            <div class="half">
+                                                <div class="description">
+                                                    <p>This service provides personalized recommendations and treatments to prevent hair loss and promote healthy hair growth. Our team of experts will work with you to create a customized plan based on your unique needs and goals.</p>
+                                                </div>
+                                                                                        
+                                                <span class="stock">
+                                                    <div>
+                                                        <p class="price">$210.00</p>
+                                                    </div>
+                                                    Available
+                                                </span>
+                                                
+                                                <div class="reviews">
+                                                    <ul class="stars">
+                                                        <li><i class="fa fa-star"></i></li>
+                                                        <li><i class="fa fa-star"></i></li>
+                                                        <li><i class="fa fa-star"></i></li>
+                                                        <li><i class="fa fa-star"></i></li>
+                                                        <li><i class="fa fa-star-o"></i></li>
+                                                    </ul>
+                                                    <span>(Mostly Positive)</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="card__footer">
+                                            <div class="action">
+                                                <input type="radio" id="option1" name="options">
+                                                <label for="option1">Select Service</label>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+
+                                    {{-- for product --}}
+                                    {{-- <div class="card">
+                                        <div class="card__title">
+                                            <div class="icon">
+                                                <a href="#"><i class="fa fa-info-circle"></i> Service #1</a>
+                                            </div>
+                                            <h3>New products</h3>
+                                        </div>
+
+                                        <div class="card__body">
+                                            <div class="half">
+                                                <div class="featured_text">
+                                                    <h1>Nurton</h1>
+                                                    <div>
+                                                        <p class="price">$210.00</p>
+                                                    </div>
+                                                </div>
+                                                <div class="image">
+                                                    <img src="https://images-na.ssl-images-amazon.com/images/I/613A7vcgJ4L._SL1500_.jpg"
+                                                        alt="">
+                                                </div>
+                                            </div>
+                                            <div class="half">
+                                                <div class="description">
+                                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero
+                                                        voluptatem nam pariatur voluptate perferendis, asperiores
+                                                        aspernatur! Porro similique consequatur, nobis soluta minima,
+                                                        quasi laboriosam hic cupiditate perferendis esse numquam magni.
+                                                    </p>
+                                                </div>
+                                                <span class="stock"><i class="fa fa-pen"></i> In stock</span>
+                                                <div class="reviews">
+                                                    <ul class="stars">
+                                                        <li><i class="fa fa-star"></i></li>
+                                                        <li><i class="fa fa-star"></i></li>
+                                                        <li><i class="fa fa-star"></i></li>
+                                                        <li><i class="fa fa-star"></i></li>
+                                                        <li><i class="fa fa-star-o"></i></li>
+                                                    </ul>
+                                                    <span>(sample text!)</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="card__footer">
+                                            <div class="action">
+                                                <input type="radio" id="option1" name="options">
+                                                <label for="option1">Option 1</label>
+                                            </div>
+
+                                        </div>
+                                    </div> --}}
+
+                                </div>
+
+
+                            </div>
+                        </fieldset>
+                        <h3>Your Information</h3>
+                        <fieldset>
+                            <h3>Your Information</h3>
+                            <p class="desc">"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur,
+                                adipisci velit..."
+                            </p>
+                            <div class="fieldset-content">
+                                <div class="form-row">
+                                    <label class="form-label">Name</label>
+                                    <div class="form-flex">
+                                        <div class="form-group">
+                                            <input type="text" name="first_name" id="first_name" />
+                                            <span class="text-input">First</span>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" name="last_name" id="last_name" />
+                                            <span class="text-input">Last</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" name="email" id="email" />
+                                    <span class="text-input">Example :<span> Jeff@gmail.com</span></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone" class="form-label">Phone</label>
+                                    <input type="text" name="phone" id="phone" />
+                                </div>
+                                <div class="form-date">
+                                    <label for="birth_date" class="form-label">Birth Date</label>
+                                    <div class="form-date-group">
+                                        <div class="form-date-item">
+                                            <select id="birth_month" name="birth_month"></select>
+                                            <span class="text-input">MM</span>
+                                        </div>
+                                        <div class="form-date-item">
+                                            <select id="birth_date" name="birth_date"></select>
+                                            <span class="text-input">DD</span>
+                                        </div>
+                                        <div class="form-date-item">
+                                            <select id="birth_year" name="birth_year"></select>
+                                            <span class="text-input">YYYY</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </fieldset>
 
                     </div>
                 </form>
             </div>
-    
+
         </div>
-     @endisset
+    @endisset
     <!-- JS -->
-    <script src="{{ asset('vendor/productfinder/lib/jquery/jquery.min.js')}}"></script>
-    <script src="{{ asset('vendor/productfinder/lib/jquery-validation/dist/jquery.validate.min.js')}}"></script>
-    <script src="{{ asset('vendor/productfinder/lib/jquery-validation/dist/additional-methods.min.js')}}"></script>
-    <script src="{{ asset('vendor/productfinder/lib/jquery-steps/jquery.steps.min.js')}}"></script>
-    <script src="{{ asset('vendor/productfinder/lib/minimalist-picker/dobpicker.js')}}"></script>
-    <script src="{{ asset('vendor/productfinder/lib/nouislider/nouislider.min.js')}}"></script>
-    <script src="{{ asset('vendor/productfinder/lib/wnumb/wNumb.js')}}"></script>
-    <script src="{{ asset('vendor/productfinder/js/main.js')}}"></script>
-
+    <script src="{{ asset('vendor/productfinder/lib/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('vendor/productfinder/lib/jquery-validation/dist/jquery.validate.min.js') }}"></script>
+    <script src="{{ asset('vendor/productfinder/lib/jquery-validation/dist/additional-methods.min.js') }}"></script>
+    <script src="{{ asset('vendor/productfinder/lib/jquery-steps/jquery.steps.min.js') }}"></script>
+    <script src="{{ asset('vendor/productfinder/lib/minimalist-picker/dobpicker.js') }}"></script>
+    <script src="{{ asset('vendor/productfinder/lib/nouislider/nouislider.min.js') }}"></script>
+    <script src="{{ asset('vendor/productfinder/lib/wnumb/wNumb.js') }}"></script>
+    <script src="{{ asset('vendor/productfinder/js/main.js') }}"></script>
     <script>
-// Array of required questions for each step
-const requiredQuestions = {
-  step1: ['1', '2'],
-  step2: ['6', ]
-};
 
-// Function to check if all required questions have been answered
-function areRequiredQuestionsAnswered(step) {
-  const requiredQuestionsForStep = requiredQuestions[step];
-  let allAnswered = true;
-  requiredQuestionsForStep.forEach((questionId) => {
-    const radioButton = document.querySelector(`input[name=${questionId}]:checked`);
-    if (!radioButton) {
-      allAnswered = false;
-      // Display error message for unanswered question
-      const errorMessage = `Please answer question ${questionId}`;
-      const errorElement = document.getElementById(`${questionId}-error`);
-      errorElement.innerText = errorMessage;
-    }
-  });
-  return allAnswered;
-}
+const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
-// Function to handle "next" button click
-function onNextButtonClick() {
-  const currentStep = getCurrentStep();
-  const allRequiredQuestionsAnswered = areRequiredQuestionsAnswered(currentStep);
-  if (allRequiredQuestionsAnswered) {
-    // Proceed to next step
-    goToNextStep();
-  } else {
-    // Don't proceed to next step
-    return;
-  }
-}
-
+checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', () => {
+        const checkedCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+        
+        if (checkedCheckboxes.length >= 2) {
+            checkboxes.forEach(c => {
+                if (!c.checked) {
+                    c.disabled = true;
+                }
+            });
+        } else {
+            checkboxes.forEach(c => {
+                c.disabled = false;
+            });
+        }
+    });
+});
 
     </script>
 </body>

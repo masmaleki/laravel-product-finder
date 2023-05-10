@@ -35,24 +35,24 @@ class LaravelProductFinderServiceProvider extends PackageServiceProvider
             ])
             ->hasAssets()
             ->hasRoute('web')
-            // ->hasViewComposer()
-            // ->hasViewComponents()
-            ->runsMigrations()
-            ->hasCommand(LaravelProductFinderCommand::class)
-            ->hasInstallCommand(function (InstallCommand $command) {
-                $command
-                    ->startWith(function (InstallCommand $command) {
-                        $command->info('Hello, and welcome to my great new package!');
-                    })
-                    ->publishConfigFile()
-                    ->publishAssets()
-                    ->publishMigrations()
-                    // ->copyAndRegisterServiceProviderInApp()
-                    // ->askToStarRepoOnGitHub()
-                    ->endWith(function (InstallCommand $command) {
-                        $command->info('Have a great day!');
-                    });
-            });
+            // ->runsMigrations()
+            // ->hasCommand(LaravelProductFinderCommand::class)
+            // ->hasInstallCommand(function (InstallCommand $command) {
+            //     $command
+            //         // ->startWith(function (InstallCommand $command) {
+            //         //     $command->info('Hello, and welcome to my great new package!');
+            //         // })
+            //         ->publishConfigFile()
+            //         ->publishAssets()
+            //         ->publishMigrations()
+            //         // ->copyAndRegisterServiceProviderInApp()
+            //         // ->askToStarRepoOnGitHub()
+            //         // ->endWith(function (InstallCommand $command) {
+            //         //     $command->info('Have a great day!');
+            //         // })
+            //         ;
+            // })
+            ;
     }
 
     public function packageBooted()
