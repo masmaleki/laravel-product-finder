@@ -282,7 +282,7 @@
                                 </span>
                               </p>
                             <div class="fieldset-content">
-                                <div class="choose-bank " id="servicex">
+                                <div class="choose-bank hidden" id="servicex">
                                     <h2>Best Service for you!</h2>
                        
                                     
@@ -422,24 +422,7 @@
                                     <label for="phone" class="form-label">Phone</label>
                                     <input type="text" name="phone" id="phone" />
                                 </div>
-                                <div class="form-date">
-                                    <label for="birth_date" class="form-label">Birth Date</label>
-                                    <div class="form-date-group">
-                                        <div class="form-date-item">
-                                            <select id="birth_month" name="birth_month"></select>
-                                            <span class="text-input">MM</span>
-                                        </div>
-                                        <div class="form-date-item">
-                                            <select id="birth_date" name="birth_date"></select>
-                                            <span class="text-input">DD</span>
-                                        </div>
-                                        <div class="form-date-item">
-                                            <select id="birth_year" name="birth_year"></select>
-                                            <span class="text-input">YYYY</span>
-                                        </div>
-                                    </div>
-                                </div>
-
+                               
                             </div>
                         </fieldset>
                     </div>
