@@ -35,9 +35,6 @@ class LaravelProductFinderServiceProvider extends PackageServiceProvider
             ])
             ->hasAssets()
             ->hasRoute('web')
-            // ->hasViewComposer()
-            // ->hasViewComponents()
-            ->runsMigrations()
             ->hasCommand(LaravelProductFinderCommand::class)
             ->hasInstallCommand(function (InstallCommand $command) {
                 $command
