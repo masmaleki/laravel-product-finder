@@ -1207,12 +1207,13 @@ input[type="radio"]:checked:before {
 }
 
 .custom-checkbox:checked:before {
-  content: '\2714';
+  content: "\2714";
   display: block;
   text-align: center;
   line-height: 20px;
   font-size: 16px;
   color: #ffffff;
+  background-color: #475e60;
 }
 
 .checkbox-text {
