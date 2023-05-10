@@ -159,6 +159,119 @@
                             </fieldset>
                         @endforeach
 
+                      
+                        <h3> Hair conditions</h3>
+                        <fieldset>
+                            <h3>Find the best Service for you!</h3>
+
+                            <div class="fieldset-content">
+                                <div class="choose-bank">
+                                    <span class="title-section">Upload Your images:</span>
+                                    <p class="desc-ch">
+                                            Please describe your hair condition to proceed to the next step.
+                                    </p>
+                                    <div class="upload-container">
+                                        <label for="front-image" class="image-button">
+                                            <img src="{{ asset('vendor/productfinder/images/4.jpg') }}" alt="Front View">
+                                            Upload Front View
+                                            <input type="file" id="front-image" name="front-image[]" accept="image/*"
+                                                multiple>
+                                        </label>
+
+                                        <label for="top-image" class="image-button">
+                                            <img src="{{ asset('vendor/productfinder/images/1.jpg') }}" alt="Top View">
+                                            Upload Top View
+                                            <input type="file" id="top-image" name="top-image[]" accept="image/*"
+                                                multiple>
+                                        </label>
+
+                                        <label for="left-image" class="image-button">
+                                            <img src="{{ asset('vendor/productfinder/images/3.jpg') }}" alt="Right View">
+                                            Upload Right View
+                                            <input type="file" id="right-image" name="left-image[]" accept="image/*"
+                                                multiple>
+                                        </label>
+
+                                        <label for="left-image" class="image-button">
+                                            <img src="{{ asset('vendor/productfinder/images/2.jpg') }}" alt="Left View">
+                                            Upload Left View
+                                            <input type="file" id="left-image" name="left-image[]" accept="image/*"
+                                                multiple>
+                                        </label>
+                                    </div>
+
+
+                                    <span class="title-section">Choose the closest condition:</span>
+                                      <p class="desc-ch">
+                                            Please choose the closest option from the list of hair conditions to
+                                            proceed to the next step.
+                                      </p>
+                                    
+
+
+                                    <div class="form-radio-flex">
+                                        <div class="form-radio-item">
+                                            <input type="radio" name="choose_bank" id="bank_1" value="bank_1"
+                                                checked="checked" />
+                                            <label for="bank_1"><img
+                                                    src="{{ asset('vendor/productfinder/images/11.jpg') }}"
+                                                    alt=""></label>
+                                        </div>
+
+                                        <div class="form-radio-item">
+                                            <input type="radio" name="choose_bank" id="bank_2" value="bank_2" />
+                                            <label for="bank_2"><img
+                                                    src="{{ asset('vendor/productfinder/images/12.jpg') }}"
+                                                    alt=""></label>
+                                        </div>
+
+                                        <div class="form-radio-item">
+                                            <input type="radio" name="choose_bank" id="bank_3" value="bank_3" />
+                                            <label for="bank_3"><img
+                                                    src="{{ asset('vendor/productfinder/images/13.jpg') }}"
+                                                    alt=""></label>
+                                        </div>
+
+                                        <div class="form-radio-item">
+                                            <input type="radio" name="choose_bank" id="bank_4" value="bank_4" />
+                                            <label for="bank_4"><img
+                                                    src="{{ asset('vendor/productfinder/images/14.jpg') }}"
+                                                    alt=""></label>
+                                        </div>
+
+                                        <div class="form-radio-item">
+                                            <input type="radio" name="choose_bank" id="bank_5" value="bank_5" />
+                                            <label for="bank_5"><img
+                                                    src="{{ asset('vendor/productfinder/images/15.jpg') }}"
+                                                    alt=""></label>
+                                        </div>
+
+                                        <div class="form-radio-item">
+                                            <input type="radio" name="choose_bank" id="bank_6" value="bank_6" />
+                                            <label for="bank_6"><img
+                                                    src="{{ asset('vendor/productfinder/images/16.jpg') }}"
+                                                    alt=""></label>
+                                        </div>
+
+                                        <div class="form-radio-item">
+                                            <input type="radio" name="choose_bank" id="bank_7" value="bank_7" />
+                                            <label for="bank_7"><img
+                                                    src="{{ asset('vendor/productfinder/images/17.jpg') }}"
+                                                    alt=""></label>
+                                        </div>
+
+                                        <div class="form-radio-item">
+                                            <input type="radio" name="choose_bank" id="bank_8" value="bank_8" />
+                                            <label for="bank_8"><img
+                                                    src="{{ asset('vendor/productfinder/images/11.jpg') }}"
+                                                    alt=""></label>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </fieldset>
                         <h3>Best Service for you!</h3>
                         <fieldset>
                             <h3>Find the best product for you!</h3>
@@ -280,119 +393,6 @@
 
                             </div>
                         </fieldset>
-                        <h3> Hair conditions</h3>
-                        <fieldset>
-                            <h3>Find the best Service for you!</h3>
-
-                            <div class="fieldset-content">
-                                <div class="choose-bank">
-                                    <span class="title-section">Upload Your images:</span>
-                                    <p class="desc-ch">
-                                            Please describe your hair condition to proceed to the next step.
-                                    </p>
-                                    <div class="upload-container">
-                                        <label for="front-image" class="image-button">
-                                            <img src="{{ asset('vendor/productfinder/images/4.jpg') }}" alt="Front View">
-                                            Upload Front View
-                                            <input type="file" id="front-image" name="front-image[]" accept="image/*"
-                                                multiple>
-                                        </label>
-
-                                        <label for="top-image" class="image-button">
-                                            <img src="{{ asset('vendor/productfinder/images/1.jpg') }}" alt="Top View">
-                                            Upload Top View
-                                            <input type="file" id="top-image" name="top-image[]" accept="image/*"
-                                                multiple>
-                                        </label>
-
-                                        <label for="left-image" class="image-button">
-                                            <img src="{{ asset('vendor/productfinder/images/3.jpg') }}" alt="Right View">
-                                            Upload Right View
-                                            <input type="file" id="right-image" name="left-image[]" accept="image/*"
-                                                multiple>
-                                        </label>
-
-                                        <label for="left-image" class="image-button">
-                                            <img src="{{ asset('vendor/productfinder/images/2.jpg') }}" alt="Left View">
-                                            Upload Left View
-                                            <input type="file" id="left-image" name="left-image[]" accept="image/*"
-                                                multiple>
-                                        </label>
-                                    </div>
-
-
-                                    <span class="title-section">Choose the closest condition:</span>
-                                      <p class="desc-ch">
-                                            Please choose the closest option from the list of hair conditions to
-                                            proceed to the next step.
-                                      </p>
-                                    
-
-
-                                    <div class="form-radio-flex">
-                                        <div class="form-radio-item">
-                                            <input type="radio" name="choose_bank" id="bank_1" value="bank_1"
-                                                checked="checked" />
-                                            <label for="bank_1"><img
-                                                    src="{{ asset('vendor/productfinder/images/11.jpg') }}"
-                                                    alt=""></label>
-                                        </div>
-
-                                        <div class="form-radio-item">
-                                            <input type="radio" name="choose_bank" id="bank_2" value="bank_2" />
-                                            <label for="bank_2"><img
-                                                    src="{{ asset('vendor/productfinder/images/12.jpg') }}"
-                                                    alt=""></label>
-                                        </div>
-
-                                        <div class="form-radio-item">
-                                            <input type="radio" name="choose_bank" id="bank_3" value="bank_3" />
-                                            <label for="bank_3"><img
-                                                    src="{{ asset('vendor/productfinder/images/13.jpg') }}"
-                                                    alt=""></label>
-                                        </div>
-
-                                        <div class="form-radio-item">
-                                            <input type="radio" name="choose_bank" id="bank_4" value="bank_4" />
-                                            <label for="bank_4"><img
-                                                    src="{{ asset('vendor/productfinder/images/14.jpg') }}"
-                                                    alt=""></label>
-                                        </div>
-
-                                        <div class="form-radio-item">
-                                            <input type="radio" name="choose_bank" id="bank_5" value="bank_5" />
-                                            <label for="bank_5"><img
-                                                    src="{{ asset('vendor/productfinder/images/15.jpg') }}"
-                                                    alt=""></label>
-                                        </div>
-
-                                        <div class="form-radio-item">
-                                            <input type="radio" name="choose_bank" id="bank_6" value="bank_6" />
-                                            <label for="bank_6"><img
-                                                    src="{{ asset('vendor/productfinder/images/16.jpg') }}"
-                                                    alt=""></label>
-                                        </div>
-
-                                        <div class="form-radio-item">
-                                            <input type="radio" name="choose_bank" id="bank_7" value="bank_7" />
-                                            <label for="bank_7"><img
-                                                    src="{{ asset('vendor/productfinder/images/17.jpg') }}"
-                                                    alt=""></label>
-                                        </div>
-
-                                        <div class="form-radio-item">
-                                            <input type="radio" name="choose_bank" id="bank_8" value="bank_8" />
-                                            <label for="bank_8"><img
-                                                    src="{{ asset('vendor/productfinder/images/11.jpg') }}"
-                                                    alt=""></label>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                            </div>
-                        </fieldset>
-
                         <h3>Your Information</h3>
                         <fieldset>
                             <h3>Your Information</h3>
