@@ -9,7 +9,8 @@
     <title>{{ $pf_wizard?->title }}</title>
     <link rel="stylesheet"
         href="{{ asset('vendor/productfinder/fonts/material-icon/css/material-design-iconic-font.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('vendor/productfinder/lib/nouislider/nouislider.min.css') }}">
+        <link href="https://fonts.googleapis.com/css?family=Hind&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('vendor/productfinder/lib/nouislider/nouislider.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -33,7 +34,13 @@
                             <h3>{{ $pf_step->title }}</h3>
                             <fieldset>
                                 <h2>{{ $pf_step->title }}</h2>
-                                <p class="desc">{{ $pf_step->desc }}</p>
+                                @if(!empty($pf_step->desc) )
+                                <p class="desc q-desc">
+                                    <span class="desc-highlight"><i class="fa fa-info-circle" aria-hidden="true"></i>
+                                        {{ $pf_step->desc }}</span>
+                                  </p>
+                                @endif
+                                
                                 <div class="fieldset-content">
 
                                     @foreach ($pf_step->questions as $pf_question)
@@ -137,8 +144,13 @@
                                                     @endif
                                                 @endforeach
                                             @endif
+                                            @if(!empty($pf_question->desc) )
+                                            <p class="desc q-desc">
+                                                <span class="desc-highlight"><i class="fa fa-info-circle" aria-hidden="true"></i>
+                                                    {{ $pf_question->desc }}</span>
+                                            </p>
+                                            @endif
 
-                                            <p class="desc">{{ $pf_question->desc }}</p>
                                         </div>
                                     @endforeach
 
