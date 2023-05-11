@@ -23,7 +23,8 @@
     @isset($pf_wizard)
         <div class="main">
             @php
-                $conditions = [];
+                $AndConditions = [];
+                $OrConditions = [];
                 $answers = [];
             @endphp
             <div class="container">
@@ -45,34 +46,36 @@
 
                                     @foreach ($pf_step->questions as $pf_question)
                                         @php
-                                            
+                                            //start conditions
                                             $check_conditions=json_decode($pf_question->conditions);
+                                            //check_conditions_flag&check_conditions_hidden for check question defualt hidden
                                             $check_conditions_flag=(empty($check_conditions->and_conditions) and empty($check_conditions->or_conditions)) ? true:false;
                                             $check_conditions_hidden=($check_conditions_flag==false) ? 'hidden':'';
+                                            //if question have some condition prepare varable to check js
                                             if(!$check_conditions_flag){
+                                                //prepare and_conditions
                                                 foreach ($check_conditions->and_conditions as $kay =>$value) {
-                                                    
-                                                    if(array_key_exists($kay,$conditions)){
-                                                        $conditions[$kay] = 
-                                                             [$conditions[$kay],[$value,$pf_question->id]]
+                                                    if(array_key_exists($kay,$AndConditions)){
+                                                        $AndConditions[$kay] = 
+                                                             [$AndConditions[$kay],[$value,$pf_question->id]]
                                                         ;
                                                     }
                                                     else{
-                                                        $conditions[$kay] = [
-                                                         $value,$pf_question->id
-                                                        ];
+                                                        $AndConditions[$kay] = [$value,$pf_question->id];
                                                     }
-                                                    
-                                                    
                                                 }
-                                                // dd($conditions);
-                                                // foreach ($check_conditions->or_conditions as $kay =>$value) {
-                                                //     var_dump($kay,$value);
-                                                // }
-                                                // $conditions[] = [
-                                                //     // $pf_question->id => $pf_question->conditions,
-
-                                                // ];
+                                                //prepare or_conditions
+                                                foreach ($check_conditions->or_conditions as $kay =>$value) {
+                                                    
+                                                    if(array_key_exists($kay,$OrConditions)){
+                                                        $OrConditions[$kay] = 
+                                                             [$OrConditions[$kay],[$value,$pf_question->id]]
+                                                        ;
+                                                    }
+                                                    else{
+                                                        $OrConditions[$kay] = [$value,$pf_question->id];
+                                                    }
+                                                }
                                             }
                                         @endphp
                                         <div id="PFQ_{{$pf_question->id}}" class="form-row {{$check_conditions_hidden}}">
@@ -111,7 +114,7 @@
                                                         </div>
                                                     @else
                                                         <label>
-                                                            <input type="radio" id="{{ $input_id }}" onclick="checkConditions(this);
+                                                            <input type="radio" id="{{ $input_id }}" onclick="checkConditions(this);"
                                                                 name="{{ $pf_question->id }}" value="{{ $option->id }}"
                                                                 {{ $pf_question->is_required ? 'required' : '' }}>
                                                             <span class="radio-text">{{ $option_value->title }}</span>
@@ -184,8 +187,8 @@
                             </fieldset>
                         @endforeach
                 @php
-                $conditions = json_encode($conditions);
-                
+                $AndConditions = json_encode($AndConditions);
+                $OrConditions= json_encode($OrConditions);
             @endphp
                       
                         <h3> Hair conditions</h3>
@@ -490,16 +493,30 @@
         });
     });
     function checkConditions(option){
-        let check_conditions={!! json_encode($conditions) !!};
-        check_conditions=JSON.parse(check_conditions);
-        for (let i = 0; i < check_conditions.length; i++) {
-            if (check_conditions[i][option.name]!=undefined) {
-                if(check_conditions[i][option.name][0]==option.value){
-                    $("#PFQ_"+check_conditions[i][option.name][1]).removeClass("hidden");
-                }
-                else{
-                    $("#PFQ_"+check_conditions[i][option.name][1]).addClass("hidden");
-                }
+        //TODO check other answer
+
+        let check_conditions_and={!! json_encode($AndConditions) !!};
+        check_conditions_and=JSON.parse(check_conditions_and);
+        let check_conditions_or={!! json_encode($OrConditions) !!};
+        check_conditions_or=JSON.parse(check_conditions_or);
+        
+        //check condition And
+        //TODO fix and becase should check other answer
+        if (check_conditions_and[option.name]!=undefined) {
+            if(check_conditions_and[option.name][0].includes(parseInt(option.value))){
+                $("#PFQ_"+check_conditions_and[option.name][1]).removeClass("hidden");
+            }
+            else{
+                $("#PFQ_"+check_conditions_and[option.name][1]).addClass("hidden");
+            }
+        }
+        //check condition Or
+        if (check_conditions_or[option.name]!=undefined) {
+            if(check_conditions_or[option.name][0].includes(parseInt(option.value))){
+                $("#PFQ_"+check_conditions_or[option.name][1]).removeClass("hidden");
+            }
+            else{
+                $("#PFQ_"+check_conditions_or[option.name][1]).addClass("hidden");
             }
         }
     }

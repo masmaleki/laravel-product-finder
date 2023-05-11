@@ -15,6 +15,6 @@ class PFWizardController extends Controller
             $pf_steps = $pf_wizard->steps()->where('status', 'active')->orderBY('order')->get();
         }
 
-        return view('productfinder::index3', compact('pf_wizard', 'pf_steps'));
+        return view('productfinder::index', compact('pf_wizard', 'pf_steps'));
     }
 }
