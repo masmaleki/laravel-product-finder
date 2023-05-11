@@ -146,8 +146,8 @@
                                                         <div class="action">
                                                             <input type="radio" onclick="checkConditions(this);" id="{{ $input_id }}"
                                                                 name="{{ $pf_question->id }}" value="{{ $option->id }}">
-                                                            <label for="{{ $input_id }}"
-                                                                class="option{{ $option->id }}">{{ $option_value->title }}</label>
+                                                            <label for="{{ $input_id }}" id="option{{ $option->id }}"
+                                                                class="btn">{{ $option_value->title }}</label>
                                                         </div>
                                                     @else
                                                         <label>
@@ -340,7 +340,7 @@
 
                             </div>
                         </fieldset>
-                        <h3>Best Service for you!</h3>
+                        <h3>Best Service</h3>
                         <fieldset>
                             <h3>Find the best product for you!</h3>
                             <p class="desc q-desc">
