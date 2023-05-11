@@ -976,8 +976,8 @@ class PFStaticDataAISeeder extends Seeder
                 'pf_type_option_id' => 6,
                 'title' => 'If yes, please describe the complication',
                 'conditions' => json_encode([
-                    'and_conditions' => [15 => 1],
-                    'or_conditions' => [],
+                    'and_conditions' => [15 => [55]],
+                    'or_conditions' => [15 => [55]],
                 ]),
                 'desc' => '',
                 'image' => '',
@@ -1040,8 +1040,8 @@ class PFStaticDataAISeeder extends Seeder
                 'pf_type_option_id' => 6,
                 'title' => 'If yes, please list the medication(s) prescribed',
                 'conditions' => json_encode([
-                    'and_conditions' => [17 => 1],
-                    'or_conditions' => [],
+                    'and_conditions' => [17 => [58]],
+                    'or_conditions' => [17 => [58]],
                 ]),
                 'desc' => '',
                 'image' => '',

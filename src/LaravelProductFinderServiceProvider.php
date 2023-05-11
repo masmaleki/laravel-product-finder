@@ -68,6 +68,8 @@ class LaravelProductFinderServiceProvider extends PackageServiceProvider
         $this->publishes([
             __DIR__.'/../database/seeders/PFWizardSeeder.php' => database_path('seeders/PFWizardSeeder.php'),
             __DIR__.'/../database/seeders/PFStaticDataAISeeder.php' => database_path('seeders/PFStaticDataAISeeder.php'),
+            __DIR__.'/../database/seeders/PFStaticTwoDataAISeeder.php' => database_path('seeders/PFStaticTwoDataAISeeder.php'),
+
         ], 'productfinder-seeders');
     }
 }
