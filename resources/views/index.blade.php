@@ -45,12 +45,37 @@
 
                                     @foreach ($pf_step->questions as $pf_question)
                                         @php
-                                            $conditions[] = [
-                                                $pf_question->id => $pf_question->conditions,
-                                            ];
                                             
+                                            $check_conditions=json_decode($pf_question->conditions);
+                                            $check_conditions_flag=(empty($check_conditions->and_conditions) and empty($check_conditions->or_conditions)) ? true:false;
+                                            $check_conditions_hidden=($check_conditions_flag==false) ? 'hidden':'';
+                                            if(!$check_conditions_flag){
+                                                foreach ($check_conditions->and_conditions as $kay =>$value) {
+                                                    
+                                                    if(array_key_exists($kay,$conditions)){
+                                                        $conditions[$kay] = 
+                                                             [$conditions[$kay],[$value,$pf_question->id]]
+                                                        ;
+                                                    }
+                                                    else{
+                                                        $conditions[$kay] = [
+                                                         $value,$pf_question->id
+                                                        ];
+                                                    }
+                                                    
+                                                    
+                                                }
+                                                // dd($conditions);
+                                                // foreach ($check_conditions->or_conditions as $kay =>$value) {
+                                                //     var_dump($kay,$value);
+                                                // }
+                                                // $conditions[] = [
+                                                //     // $pf_question->id => $pf_question->conditions,
+
+                                                // ];
+                                            }
                                         @endphp
-                                        <div class="form-row">
+                                        <div id="PFQ_{{$pf_question->id}}" class="form-row {{$check_conditions_hidden}}">
                                             <h4>{{ $pf_question->title }}<span
                                                     class="{{ $pf_question->is_required ? 'required' : '' }}">{{ $pf_question->is_required ? ' * ' : '' }}</span>
                                             </h4>
@@ -61,7 +86,7 @@
                                                         $option_value = json_decode($option->value);
                                                     @endphp
                                                     <label>
-                                                        <input type="checkbox" name="{{ $pf_question->id }}[]"
+                                                        <input type="checkbox"  name="{{ $pf_question->id }}[]" onclick="checkConditions(this);
                                                             value="{{ $option->id }}" class="custom-checkbox {{ $pf_question->is_required ? 'required' : '' }}">
                                                         <span class="checkbox-text">{{ $option_value->title }}</span>
                                                     </label>
@@ -79,14 +104,14 @@
                                                     @endphp
                                                     @if ($typeOption->radio->theme == 'btn')
                                                         <div class="action">
-                                                            <input type="radio" id="{{ $input_id }}"
+                                                            <input type="radio" onclick="checkConditions(this);" id="{{ $input_id }}"
                                                                 name="{{ $pf_question->id }}" value="{{ $option->id }}">
                                                             <label for="{{ $input_id }}"
                                                                 class="option{{ $option->id }}">{{ $option_value->title }}</label>
                                                         </div>
                                                     @else
                                                         <label>
-                                                            <input type="radio" id="{{ $input_id }}"
+                                                            <input type="radio" id="{{ $input_id }}" onclick="checkConditions(this);
                                                                 name="{{ $pf_question->id }}" value="{{ $option->id }}"
                                                                 {{ $pf_question->is_required ? 'required' : '' }}>
                                                             <span class="radio-text">{{ $option_value->title }}</span>
@@ -158,7 +183,10 @@
                                 </div>
                             </fieldset>
                         @endforeach
-
+                @php
+                $conditions = json_encode($conditions);
+                
+            @endphp
                       
                         <h3> Hair conditions</h3>
                         <fieldset>
@@ -442,26 +470,39 @@
     <script src="{{ asset('vendor/productfinder/js/main.js') }}"></script>
     <script>
 
-const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
-checkboxes.forEach(checkbox => {
-    checkbox.addEventListener('change', () => {
-        const checkedCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-        
-        if (checkedCheckboxes.length >= 2) {
-            checkboxes.forEach(c => {
-                if (!c.checked) {
-                    c.disabled = true;
-                }
-            });
-        } else {
-            checkboxes.forEach(c => {
-                c.disabled = false;
-            });
-        }
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', () => {
+            const checkedCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+            
+            if (checkedCheckboxes.length >= 2) {
+                checkboxes.forEach(c => {
+                    if (!c.checked) {
+                        c.disabled = true;
+                    }
+                });
+            } else {
+                checkboxes.forEach(c => {
+                    c.disabled = false;
+                });
+            }
+        });
     });
-});
-
+    function checkConditions(option){
+        let check_conditions={!! json_encode($conditions) !!};
+        check_conditions=JSON.parse(check_conditions);
+        for (let i = 0; i < check_conditions.length; i++) {
+            if (check_conditions[i][option.name]!=undefined) {
+                if(check_conditions[i][option.name][0]==option.value){
+                    $("#PFQ_"+check_conditions[i][option.name][1]).removeClass("hidden");
+                }
+                else{
+                    $("#PFQ_"+check_conditions[i][option.name][1]).addClass("hidden");
+                }
+            }
+        }
+    }
     </script>
 </body>
 
