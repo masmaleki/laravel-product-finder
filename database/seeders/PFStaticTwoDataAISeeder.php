@@ -86,7 +86,7 @@ class PFStaticTwoDataAISeeder extends Seeder
     {
         for ($i = 1; $i <= 1; $i++) {
             $wizard = PFWizard::create([
-                'title' => "Wizard $i",
+                'title' => "AI Hair ",
                 'desc' => "This is the description for Wizard $i",
                 'status' => self::STATUS_ACTIVE,
             ]);
