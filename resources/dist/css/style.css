@@ -1350,3 +1350,11 @@ h2{
   font-weight: bold;
     font-family: hinbal,arial;
 }
+a[role="menuitem"]{
+  min-width: 160px;
+  height: 60px;
+  text-align: center;
+  margin: 0 6px;
+  padding-top: 11px;
+  font-size: 23px;
+}
