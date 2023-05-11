@@ -1333,11 +1333,11 @@ span.radio-text {
   font-size: 23px;
 }
 label.btn {
-  min-width: 160px;
-  height: 46px;
+  min-width: 118px;
+  height: 45px;
   text-align: center;
   margin: 0 6px;
-  padding-top: 20px;
+  padding-top: 15px;
   font-size: 23px;
 }
 span.checkbox-text {
@@ -1351,10 +1351,10 @@ h2{
     font-family: hinbal,arial;
 }
 a[role="menuitem"]{
-  min-width: 160px;
-  height: 60px;
+  width: 220px;
+  height: 80px;
   text-align: center;
   margin: 0 6px;
-  padding-top: 11px;
+  padding: 10px;
   font-size: 23px;
 }
