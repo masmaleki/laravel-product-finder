@@ -1,0 +1,528 @@
+<?php
+
+namespace Database\Seeders;
+
+use Faker\Generator as Faker;
+use Illuminate\Database\Seeder;
+use Masmaleki\LaravelProductFinder\Models\PFProduct;
+use Masmaleki\LaravelProductFinder\Models\PFProductTag;
+use Masmaleki\LaravelProductFinder\Models\PFQuestion;
+use Masmaleki\LaravelProductFinder\Models\PFQuestionOption;
+use Masmaleki\LaravelProductFinder\Models\PFStep;
+use Masmaleki\LaravelProductFinder\Models\PFTag;
+use Masmaleki\LaravelProductFinder\Models\PFType;
+use Masmaleki\LaravelProductFinder\Models\PFTypeOption;
+use Masmaleki\LaravelProductFinder\Models\PFWizard;
+
+class PFStaticTwoDataAISeeder extends Seeder
+{
+    const STATUS_ACTIVE = 'active';
+
+    const TAG_LIMIT = 5;
+
+    const TYPE_NAMES = ['checkbox', 'radio', 'range', 'input', 'upload'];
+
+    protected $faker;
+
+    public function __construct(Faker $faker)
+    {
+        $this->faker = $faker;
+    }
+
+    /**
+     * Seed the database with PFType and PFTypeOption records.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        $this->seedTypes();
+        $this->seedWizards();
+        $this->createProducts();
+        $this->createTags();
+        $this->associateTagsWithProducts();
+    }
+
+    /**
+     * Seed the database with PFType and PFTypeOption records.
+     *
+     * @return void
+     */
+    protected function seedTypes()
+    {
+        foreach (self::TYPE_NAMES as $name) {
+            $type = PFType::create([
+                'name' => $name,
+                'status' => self::STATUS_ACTIVE,
+            ]);
+
+            $options = $this->getTypeOption($name);
+
+            foreach ($options as $option) {
+
+                PFTypeOption::create([
+                    'name' => $option['name'],
+                    'option' => json_encode($option['value']),
+                    'status' => self::STATUS_ACTIVE,
+                    'pf_type_id' => $type->id,
+                ]);
+            }
+
+        }
+    }
+
+    /**
+     * Seed the database with PFWizard, PFStep, and PFQuestion records.
+     *
+     * @return void
+     */
+
+    /**
+     * Seed the database with PFWizard, PFStep, and PFQuestion records.
+     *
+     * @return void
+     */
+    protected function seedWizards()
+    {
+        for ($i = 1; $i <= 1; $i++) {
+            $wizard = PFWizard::create([
+                'title' => "Wizard $i",
+                'desc' => "This is the description for Wizard $i",
+                'status' => self::STATUS_ACTIVE,
+            ]);
+
+            for ($j = 1; $j <= 4; $j++) {
+                $step = PFStep::create([
+                    'pf_wizard_id' => $wizard->id,
+                    'title' => "Step $j",
+                    'order' => $j,
+                    'desc' => "This is the description for Step $j of Wizard $i",
+                    'status' => self::STATUS_ACTIVE,
+                ]);
+            }
+         
+        
+            // Create question 12
+            $question12 = PFQuestion::create([
+                'pf_step_id' => 2,
+                'pf_type_option_id' => 2,
+                'title' => 'Have you experienced any side effects or complications with any previous hair restoration procedures?',
+                'conditions' => json_encode([
+                    'and_conditions' => [],
+                    'or_conditions' => [],
+                ]),
+                'desc' => '',
+                'image' => '',
+                'point' => 10,
+                'is_required' => true,
+                'status' => self::STATUS_ACTIVE,
+            ]);
+            // Create question 12 options
+            PFQuestionOption::create([
+                'pf_question_id' => $question12->id,
+                'pf_type_option_id' => 2,
+                'pf_tag_id' => null,
+                'value' => json_encode([
+                    'title' => 'Yes',
+                ]),
+                'status' => self::STATUS_ACTIVE,
+                'info' => null, // insert a description if needed
+            ]);
+
+            PFQuestionOption::create([
+                'pf_question_id' => $question12->id,
+                'pf_type_option_id' => 2,
+                'pf_tag_id' => null,
+                'value' => json_encode([
+                    'title' => 'No',
+                ]),
+                'status' => self::STATUS_ACTIVE,
+                'info' => null, // insert a description if needed
+            ]);
+
+            PFQuestionOption::create([
+                'pf_question_id' => $question12->id,
+                'pf_type_option_id' => 2,
+                'pf_tag_id' => null,
+                'value' => json_encode([
+                    'title' => 'Not applicable, I have not had any previous hair restoration procedures',
+                ]),
+                'status' => self::STATUS_ACTIVE,
+                'info' => null, // insert a description if needed
+            ]);
+
+            PFQuestionOption::create([
+                'pf_question_id' => $question12->id,
+                'pf_type_option_id' => 2,
+                'pf_tag_id' => null,
+                'value' => json_encode([
+                    'title' => 'Prefer not to answer',
+                ]),
+                'status' => self::STATUS_ACTIVE,
+                'info' => null, // insert a description if needed
+            ]);
+
+           
+            // Create question 14
+            $question14 = PFQuestion::create([
+                'pf_step_id' => 3,
+                'pf_type_option_id' => 3,
+                'title' => 'Did the transplant meet your expectations?',
+                'conditions' => json_encode([
+                    'and_conditions' => [],
+                    'or_conditions' => [],
+                ]),
+                'desc' => '',
+                'image' => '',
+                'point' => 10,
+                'is_required' => true,
+                'status' => self::STATUS_ACTIVE,
+            ]);
+            // Create question 14 options
+            PFQuestionOption::create([
+                'pf_question_id' => $question14->id,
+                'pf_type_option_id' => 3,
+                'pf_tag_id' => null,
+                'value' => json_encode([
+                    'title' => 'Yes',
+                ]),
+                'status' => self::STATUS_ACTIVE,
+                'info' => null, // insert a description if needed
+            ]);
+
+            PFQuestionOption::create([
+                'pf_question_id' => $question14->id,
+                'pf_type_option_id' => 3,
+                'pf_tag_id' => null,
+                'value' => json_encode([
+                    'title' => 'No',
+                ]),
+                'status' => self::STATUS_ACTIVE,
+                'info' => null, // insert a description if needed
+            ]);
+
+            // Create question 15
+            $question15 = PFQuestion::create([
+                'pf_step_id' => 4,
+                'pf_type_option_id' => 3,
+                'title' => 'Did you experience any complications during or after the procedure?',
+                'conditions' => json_encode([
+                    'and_conditions' => [],
+                    'or_conditions' => [],
+                ]),
+                'desc' => '',
+                'image' => '',
+                'point' => 10,
+                'is_required' => true,
+                'status' => self::STATUS_ACTIVE,
+            ]);
+            PFQuestionOption::create([
+                'pf_question_id' => $question15->id,
+                'pf_type_option_id' => 3,
+                'pf_tag_id' => null,
+                'value' => json_encode([
+                    'title' => 'Yes',
+                ]),
+                'status' => self::STATUS_ACTIVE,
+                'info' => null, // insert a description if needed
+            ]);
+
+            PFQuestionOption::create([
+                'pf_question_id' => $question15->id,
+                'pf_type_option_id' => 3,
+                'pf_tag_id' => null,
+                'value' => json_encode([
+                    'title' => 'No',
+                ]),
+                'status' => self::STATUS_ACTIVE,
+                'info' => null, // insert a description if needed
+            ]);
+
+            // Create question 16
+            $question16 = PFQuestion::create([
+                'pf_step_id' => 4,
+                'pf_type_option_id' => 6,
+                'title' => 'If yes, please describe the complication',
+                'conditions' => json_encode([
+                    'and_conditions' => [3 => [7]],
+                    'or_conditions' => [3 => [7]],
+                ]),
+                'desc' => '',
+                'image' => '',
+                'point' => 10,
+                'is_required' => false,
+                'status' => self::STATUS_ACTIVE,
+            ]);
+            // Create question 16 options
+            PFQuestionOption::create([
+                'pf_question_id' => $question16->id,
+                'pf_type_option_id' => 6,
+                'pf_tag_id' => null,
+                'value' => json_encode([
+                    'title' => 'describe the complication',
+                ]),
+                'status' => self::STATUS_ACTIVE,
+                'info' => null, // insert a description if needed
+            ]);
+
+        
+
+            // Create question 19
+            $question19 = PFQuestion::create([
+                'pf_step_id' => 4,
+                'pf_type_option_id' => 7,
+                'title' => 'How many days did it take you to recover from the procedure?',
+                'conditions' => json_encode([
+                    'and_conditions' => [],
+                    'or_conditions' => [],
+                ]),
+                'desc' => '',
+                'image' => '',
+                'point' => 10,
+                'is_required' => true,
+                'status' => self::STATUS_ACTIVE,
+            ]);
+            // Create question 19 options
+            PFQuestionOption::create([
+                'pf_question_id' => $question19->id,
+                'pf_type_option_id' => 7,
+                'pf_tag_id' => null,
+                'value' => json_encode([
+                    'title' => 'How many days',
+                ]),
+                'status' => self::STATUS_ACTIVE,
+                'info' => null, // insert a description if needed
+            ]);
+
+            // Create question 20
+            $question20 = PFQuestion::create([
+                'pf_step_id' => 1,
+                'pf_type_option_id' => 1,
+                'title' => 'What shampoos do you use the most?',
+                'conditions' => json_encode([
+                    'and_conditions' => [],
+                    'or_conditions' => [],
+                ]),
+                'desc' => '',
+                'image' => '',
+                'point' => 10,
+                'is_required' => true,
+                'status' => self::STATUS_ACTIVE,
+            ]);
+            // Create question 20 options
+            PFQuestionOption::create([
+                'pf_question_id' => $question20->id,
+                'pf_type_option_id' => 1,
+                'pf_tag_id' => null,
+                'value' => json_encode([
+                    'title' => 'Dove',
+                ]),
+                'status' => self::STATUS_ACTIVE,
+                'info' => null, // insert a description if needed
+            ]);
+
+            PFQuestionOption::create([
+                'pf_question_id' => $question20->id,
+                'pf_type_option_id' => 1,
+                'pf_tag_id' => null,
+                'value' => json_encode([
+                    'title' => 'Maxxam',
+                ]),
+                'status' => self::STATUS_ACTIVE,
+                'info' => null, // insert a description if needed
+            ]);
+            PFQuestionOption::create([
+                'pf_question_id' => $question20->id,
+                'pf_type_option_id' => 1,
+                'pf_tag_id' => null,
+                'value' => json_encode([
+                    'title' => 'Oribe',
+                ]),
+                'status' => self::STATUS_ACTIVE,
+                'info' => null, // insert a description if needed
+            ]);
+            PFQuestionOption::create([
+                'pf_question_id' => $question20->id,
+                'pf_type_option_id' => 1,
+                'pf_tag_id' => null,
+                'value' => json_encode([
+                    'title' => 'Shea',
+                ]),
+                'status' => self::STATUS_ACTIVE,
+                'info' => null, // insert a description if needed
+            ]);
+
+            // Create question 21
+            $question21 = PFQuestion::create([
+                'pf_step_id' => 3,
+                'pf_type_option_id' => 4,
+                'title' => 'What is your budget for hair restoration procedures?',
+                'conditions' => json_encode([
+                    'and_conditions' => [],
+                    'or_conditions' => [],
+                ]),
+                'desc' => '',
+                'image' => '',
+                'point' => 10,
+                'is_required' => true,
+                'status' => self::STATUS_ACTIVE,
+            ]);
+            // Create question 19 options
+            PFQuestionOption::create([
+                'pf_question_id' => $question21->id,
+                'pf_type_option_id' => 4,
+                'pf_tag_id' => null,
+                'value' => json_encode([
+                    'title' => 'How many days',
+                ]),
+                'status' => self::STATUS_ACTIVE,
+                'info' => null, // insert a description if needed
+            ]);
+
+        }
+    }
+
+    /**
+     * Create sample PFProduct records.
+     *
+     * @return void
+     */
+    protected function createProducts()
+    {
+        // Create 50 products
+        for ($i = 1; $i <= 50; $i++) {
+            PFProduct::create([
+                'name' => "Product $i",
+                'picture' => "product-$i.jpg",
+                'price' => rand(10, 100),
+                'info' => "Info about product $i",
+            ]);
+        }
+    }
+
+    /**
+     * Create sample PFTag records.
+     *
+     * @return void
+     */
+    protected function createTags()
+    {
+        // Create 80 tags
+        for ($i = 1; $i <= 80; $i++) {
+            PFTag::create([
+                'name' => "Tag $i",
+                'value' => "tag-$i",
+                'info' => "Info about tag $i",
+            ]);
+        }
+    }
+
+    /**
+     * Associate PFTag records with PFProduct records.
+     *
+     * @return void
+     */
+    protected function associateTagsWithProducts()
+    {
+        $products = PFProduct::all();
+        $tags = PFTag::all();
+
+        foreach ($products as $product) {
+            // Get a random selection of tags to associate with the product
+            $randomTags = $tags->random(self::TAG_LIMIT);
+
+            foreach ($randomTags as $tag) {
+                PFProductTag::create([
+                    'pf_product_id' => $product->id,
+                    'pf_tag_id' => $tag->id,
+                ]);
+            }
+        }
+    }
+
+    /**
+     * Get a type option array based on the given type name.
+     *
+     * @param  string  $type The type name
+     * @return array The corresponding type option array
+     */
+    protected function getTypeOption(string $type): array
+    {
+        switch ($type) {
+            case 'checkbox':
+                $response[] = [
+                    'name' => 'checkbox_sample',
+                    'value' => ['checkbox' => [
+                        'max_user_select' => 2,
+                        'total_item' => 4,
+                    ]],
+                ];
+
+                return $response;
+            case 'radio':
+                $response[] = [
+                    'name' => 'radio_sample',
+                    'value' => ['radio' => [
+                        'total_item' => 4,
+                        'theme' => 'sample',
+                    ]],
+                ];
+                $response[] = [
+                    'name' => 'radio_btn',
+                    'value' => ['radio' => [
+                        'total_item' => 2,
+                        'theme' => 'btn',
+                    ]],
+                ];
+
+                return $response;
+
+            case 'range':
+                $response[] = [
+                    'name' => 'range_sample',
+                    'value' => ['range' => [
+                        'max' => 15000,
+                        'min' => 100,
+                        'step' => 500,
+                        'unit' => '$',
+                        'def_value' => 1500,
+                    ]],
+                ];
+
+                return $response;
+
+            case 'input':
+                $response[] = [
+                    'name' => 'input_sample',
+                    'value' => ['input' => [
+                        'total_line' => 1,
+                        'theme' => 'input',
+                    ]],
+                ];
+                $response[] = [
+                    'name' => 'input_textarea',
+                    'value' => ['input' => [
+                        'total_line' => 5,
+                        'cols' => 59,
+                        'theme' => 'textarea',
+                    ]],
+                ];
+                $response[] = [
+                    'name' => 'input_price',
+                    'value' => ['input' => [
+                        'total_line' => 1,
+                        'theme' => 'price',
+                        'max' => 1000,
+                        'min' => 1,
+                        'step' => 10,
+                        'def_value' => 1,
+                    ]],
+                ];
+
+                return $response;
+
+            default:
+                return [];
+        }
+    }
+}
