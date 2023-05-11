@@ -198,7 +198,7 @@
                                                     @elseif($typeOption->input->theme == 'price')
                                                     <label>
                                                         <input type="number" name="{{ $pf_question->id }}" min="{{ $typeOption->input->min }}" max="{{ $typeOption->input->max }}" value=""
-                                                          {{ $pf_question->is_required ? 'required' : '' }} placeholder="Enter only numbers" class="pf-number-input">
+                                                          placeholder="Enter only numbers" class="pf-number-input">
                                                       </label>
                                                       
                                                     @else

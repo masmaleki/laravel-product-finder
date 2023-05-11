@@ -1338,3 +1338,10 @@ label.btn {
 span.checkbox-text {
   font-size: 22px;
 }
+.form-row{
+  width: 890px !important;
+}
+h2{
+  font-weight: bold;
+    font-family: unset;
+}
