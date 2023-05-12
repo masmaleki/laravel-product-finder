@@ -36,13 +36,43 @@
 
             // Check if all required fields in the current step are filled in
             var isValid = true;
-            return true;
+            // return true;
             currentStepForm.find('.required').each(function() {
-                // console.log($(this));
-                if ($(this).closest('.form-row').find('input:checked').length === 0) {
+                console.log($(this).closest('.form-row').find('input:checked')!=undefined && $(this).closest('.form-row').find('input:checked').length === 0 );
+                console.log('s',$(this).closest('.form-row').find('input:checked'));
+                console.log('l',$(this).closest('.form-row').find('input:checked').length);
+
+                if ( $(this).closest('.form-row').find('input').val()=='' ||
+                ($(this).closest('.form-row').find('input:checked')!=undefined && $(this).closest('.form-row').find('input:checked').length === 0 )
+                ) {
                     isValid = false;
                     return false; // break out of each loop
                 }
+                // if ($(this).closest('.form-row').find('input[type="checkbox"]') &&
+                //     $(this).closest('.form-row').find('input[type="checkbox"]:checked').length === 0
+                // ) {
+                //     isValid = false;
+                //     return false; // break out of each loop
+                // }
+                // if ($(this).closest('.form-row').find('input[type="radio"]')!=undefined &&
+                //     $(this).closest('.form-row').find('input[type="radio"]:checked').length === 0
+                // ) {
+                //     isValid = false;
+                //     return false; // break out of each loop
+                // }
+                // if ($(this).closest('.form-row').find('input[type="number"]') !=undefined &&
+                // $(this).closest('.form-row').find('input[type="number"]').val()==''
+                // ) {
+                //     isValid = false;
+                //     return false; // break out of each loop
+                // }
+                // if (
+                // $(this).closest('.form-row').find('input[type="text"]')!=undefined &&
+                // $(this).closest('.form-row').find('input[type="text"]').val()==''
+                // ) {
+                //     isValid = false;
+                //     return false; // break out of each loop
+                // }
             });
 
             if (isValid) {
@@ -50,7 +80,14 @@
                 return true;
             } else {
                 // If any required fields are not filled in, prevent moving to the next step
-                alert('Please fill in all required fields.');
+                // alert('Please fill in all required fields.');
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Please Answer all required Questions.',
+                    icon: 'error',
+                    confirmButtonText:'Ok',
+                    customClass: "btn-sweet-alert",
+                })
                 return false;
             }
            
@@ -62,7 +99,16 @@
             return form.valid();
         },
         onFinished: function(event, currentIndex) {
-            alert('Submited');
+            // alert('Submited');
+            Swal.fire({
+                title: 'Success!',
+                text: 'Success I contact with you',
+                icon: 'success',
+                confirmButtonText: 'Ok',
+                confirmButtonColor: '#3085d6',
+            }).then(() => {
+                window.location.reload();
+            })
         },
         onStepChanged: function(event, currentIndex, priorIndex) {
             if (currentIndex === 5) {
