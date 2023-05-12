@@ -253,6 +253,18 @@ function checkIfQuestionAnswered(row) {
             }
         }
     }
-   
+    
     return answered;
   }
+
+
+  const range = document.getElementById("myRange");
+const rangeValue = document.getElementById("rangeValue");
+
+range.addEventListener("input", function() {
+  rangeValue.value = this.value;
+});
+
+rangeValue.addEventListener("input", function() {
+  range.value = this.value;
+});

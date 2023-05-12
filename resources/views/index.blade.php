@@ -120,18 +120,18 @@
                                                     class="{{ $pf_question->is_required ? 'required' : '' }}">{{ $pf_question->is_required ? ' * ' : '' }}</span>
                                             </h4>
                                             @if ($pf_question->typeOption?->type?->name === 'checkbox')
-                                            <div class="checkbox-options">
-                                                @foreach ($pf_question->options as $option)
-                                                    @php
-                                                        $option_value = json_decode($option->value);
-                                                    @endphp
-                                                    <label>
-                                                        <input type="checkbox"  name="{{ $pf_question->id }}[]" onclick="checkConditions(this);"
-                                                            value="{{ $option->id }}" class="custom-checkbox" >
-                                                        <span class="checkbox-text">{{ $option_value->title }}</span>
-                                                    </label>
-                                                @endforeach
-                                            </div>
+                                                <div class="checkbox-options">
+                                                    @foreach ($pf_question->options as $option)
+                                                        @php
+                                                            $option_value = json_decode($option->value);
+                                                        @endphp
+                                                        <label>
+                                                            <input type="checkbox"  name="{{ $pf_question->id }}[]" onclick="checkConditions(this);"
+                                                                value="{{ $option->id }}" class="custom-checkbox" >
+                                                            <span class="checkbox-text">{{ $option_value->title }}</span>
+                                                        </label>
+                                                    @endforeach
+                                                </div>
                                             
                                             @endif
 
@@ -167,19 +167,14 @@
                                                         $typeOption = json_decode($pf_question->typeOption->option);
                                                         
                                                     @endphp
-                                                    <div class="form-group">
-                                                        <div class="donate-us">
-                                                            <div class="price_slider ui-slider ui-slider-horizontal">
-                                                                <div id="slider-margin"></div>
-                                                                <p class="your-money">
-                                                                    My budget is:
-                                                                    <span class="money" id="value-lower"></span>
-                                                                    <span class="money" id="value-upper"></span>
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                        <p class="desc">Please use the slider to indicate your budget for
-                                                            hair restoration procedures.</p>
+                                                    
+                                                    <div class="range-wrap" style="width: 85%;">
+                                                        <input id="myRange" name="{{ $pf_question->id }}" type="range" class="range"
+                                                         min="{{$typeOption->range->min}}" max="{{$typeOption->range->max}}" 
+                                                         value="{{$typeOption->range->def_value}}" step="{{$typeOption->range->step}}">
+                                                        <output class="bubble">
+                                                            <span>{{$typeOption->range->unit}}</span><input type="number" id="rangeValue" value="{{$typeOption->range->def_value}}">
+                                                        </output>
                                                     </div>
                                                 @endforeach
                                             @endif
