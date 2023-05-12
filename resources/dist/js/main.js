@@ -253,8 +253,6 @@ function checkIfQuestionAnswered(row) {
             }
         }
     }
-    console.log('ch',checkboxes.length);
-    console.log('ra',radios.length);
-    console.log('number_input',number_inputs.length);
+   
     return answered;
   }
