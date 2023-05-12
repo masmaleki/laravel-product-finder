@@ -38,14 +38,50 @@
             var isValid = true;
             // return true;
             currentStepForm.find('.required').each(function() {
-                
-                if ( $(this).closest('.form-row').find('input').val()=='' ||
-                ($(this).closest('.form-row').find('input:checked').val()!=undefined && $(this).closest('.form-row').find('input:checked').length === 0 )
-                ) {
+                const rowAnswered = checkIfQuestionAnswered($(this).closest('.form-row'));
+                if (!rowAnswered) {
                     isValid = false;
-                    return false; // break out of each loop
+                    return isValid;
                 }
-                
+                // console.log('s',$(this).closest('.form-row').find('input').val());
+                // if($(this).closest('.form-row').find('input').val()=='')
+                // //check all input widout radio and checkbox because had default value
+                // {
+                //        isValid = false;
+                //        return false; // break out of each loop
+                 
+                // }
+                // else if (
+                //  $(this).closest('.form-row').find('input:checked').length === 0 
+                // ) {
+                //     isValid = false;
+                //     return false; // break out of each loop
+                // }
+                // if ($(this).closest('.form-row').find('input[type="checkbox"]') &&
+                //     $(this).closest('.form-row').find('input[type="checkbox"]:checked').length === 0
+                // ) {
+                //     isValid = false;
+                //     return false; // break out of each loop
+                // }
+                // if ($(this).closest('.form-row').find('input[type="radio"]')!=undefined &&
+                //     $(this).closest('.form-row').find('input[type="radio"]:checked').length === 0
+                // ) {
+                //     isValid = false;
+                //     return false; // break out of each loop
+                // }
+                // if ($(this).closest('.form-row').find('input[type="number"]') !=undefined &&
+                // $(this).closest('.form-row').find('input[type="number"]').val()==''
+                // ) {
+                //     isValid = false;
+                //     return false; // break out of each loop
+                // }
+                // if (
+                // $(this).closest('.form-row').find('input[type="text"]')!=undefined &&
+                // $(this).closest('.form-row').find('input[type="text"]').val()==''
+                // ) {
+                //     isValid = false;
+                //     return false; // break out of each loop
+                // }
             });
 
             if (isValid) {
@@ -176,3 +212,49 @@
         });
     }
 })(jQuery);
+
+function checkIfQuestionAnswered(row) {
+    // Check for radio buttons
+    const radios = row.find('input[type="radio"]');
+    let radios_name='';
+    let answered = false;
+    for (let i = 0; i < radios.length; i++) {
+        if(radios_name=='' || radios[i].name!=radios_name){
+            if (radios[i].checked) {
+                answered = true;
+                radios_name=radios[i].name;
+                break;
+            }
+        }
+    }
+   
+    // Check for checkboxes
+    const checkboxes = row.find('input[type="checkbox"]');
+    let checkboxes_name='';
+    for (let i = 0; i < checkboxes.length; i++) {
+        if(checkboxes_name=='' || checkboxes[i].name!=checkboxes_name){
+            if (checkboxes[i].checked) {
+                answered = true;
+                checkboxes_name=checkboxes[i].name;
+                break;
+            }
+        }
+        
+    }
+    // Check for input number
+    const number_inputs = row.find('input[type="number"]');
+    let number_input_name='';
+    for (let i = 0; i < number_inputs.length; i++) {
+        if(number_input_name=='' || number_inputs[i].name!=number_input_name){
+            if (number_inputs[i].value!='') {
+                answered = true;
+                number_input_name=number_inputs[i].name;
+                break;
+            }
+        }
+    }
+    console.log('ch',checkboxes.length);
+    console.log('ra',radios.length);
+    console.log('number_input',number_inputs.length);
+    return answered;
+  }
