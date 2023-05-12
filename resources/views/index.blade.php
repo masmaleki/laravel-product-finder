@@ -126,8 +126,8 @@
                                                         $option_value = json_decode($option->value);
                                                     @endphp
                                                     <label>
-                                                        <input type="checkbox"  name="{{ $pf_question->id }}[]" onclick="checkConditions(this);
-                                                            value="{{ $option->id }}" class="custom-checkbox {{ $pf_question->is_required ? 'required' : '' }}">
+                                                        <input type="checkbox"  name="{{ $pf_question->id }}[]" onclick="checkConditions(this);"
+                                                            value="{{ $option->id }}" class="custom-checkbox" {{ $pf_question->is_required ? 'required="required"' : '' }}>
                                                         <span class="checkbox-text">{{ $option_value->title }}</span>
                                                     </label>
                                                 @endforeach

@@ -222,7 +222,7 @@ input {
   position: absolute;
   content: '';
   width: 2px;
-  height: 380px;
+  height: 400px;
   background: #ebebeb;
   left: 64px;
   top: 50%;
@@ -1198,11 +1198,11 @@ input[type="radio"]:checked:before {
 .pf-textarea,
 .pf-number-input,
 .pf-text-input {
-  box-sizing: border-box;
-  width: 100%;
-  padding: 15px;
-  border: 2px solid #ccc;
-  font-size: 16px;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  padding: 15px !important;
+  border: 2px solid #ccc !important;
+  font-size: 16px !important;
   line-height: 1.5;
 }
 
@@ -1213,7 +1213,7 @@ input[type="radio"]:checked:before {
 .pf-number-input:focus,
 .pf-textarea:focus,
 .pf-text-input:focus {
-  border-color: #475e60;
+  border-color: #475e60 !important;
   border-width: 3px;
 }
 
@@ -1345,6 +1345,7 @@ span.checkbox-text {
 }
 .form-row{
   width: 890px !important;
+  position: relative;
 }
 h2{
   font-weight: bold;
@@ -1357,4 +1358,22 @@ a[role="menuitem"]{
   margin: 0 6px;
   padding: 10px;
   font-size: 23px;
+}
+label.error{
+  top: 130px;
+  left: 0;
+  right: unset;
+  background: rgb(119 154 158 / 86%);
+  padding: 5px 22px;
+
+}
+label.error:after{
+  left: 5px;
+  top: unset;
+  right: unset;
+  color: #fff;
+  font-size: 15px;
+}
+input::placeholder {
+  color: #ccc;
 }
