@@ -222,7 +222,7 @@ input {
   position: absolute;
   content: '';
   width: 2px;
-  height: 380px;
+  height: 400px;
   background: #ebebeb;
   left: 64px;
   top: 50%;
@@ -1198,11 +1198,11 @@ input[type="radio"]:checked:before {
 .pf-textarea,
 .pf-number-input,
 .pf-text-input {
-  box-sizing: border-box;
-  width: 100%;
-  padding: 15px;
-  border: 2px solid #ccc;
-  font-size: 16px;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  padding: 15px !important;
+  border: 2px solid #ccc !important;
+  font-size: 16px !important;
   line-height: 1.5;
 }
 
@@ -1213,7 +1213,7 @@ input[type="radio"]:checked:before {
 .pf-number-input:focus,
 .pf-textarea:focus,
 .pf-text-input:focus {
-  border-color: #475e60;
+  border-color: #475e60 !important;
   border-width: 3px;
 }
 
@@ -1345,6 +1345,7 @@ span.checkbox-text {
 }
 .form-row{
   width: 890px !important;
+  position: relative;
 }
 h2{
   font-weight: bold;
@@ -1357,4 +1358,109 @@ a[role="menuitem"]{
   margin: 0 6px;
   padding: 10px;
   font-size: 23px;
+}
+label.error{
+  top: 130px;
+  left: 0;
+  right: unset;
+  background: rgb(119 154 158 / 86%);
+  padding: 5px 22px;
+
+}
+label.error:after{
+  left: 5px;
+  top: unset;
+  right: unset;
+  color: #fff;
+  font-size: 15px;
+}
+input::placeholder {
+  color: #ccc;
+}
+.btn-sweet-alert button{
+  width: 105px;
+  padding: 15px;
+  background-color: rgb(71, 94, 96) !important;
+
+}
+.range-wrap {
+  position: relative;
+  
+}
+
+.range {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #ddd;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+  padding: 0;
+}
+
+.range:hover {
+  opacity: 1;
+}
+
+.range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: #475e60;
+  cursor: pointer;
+}
+
+.range::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: #475e60;
+  cursor: pointer;
+}
+
+.bubble {
+  display: inline-block;
+  position: absolute;
+  width: 27px;
+  color: #fff;
+  line-height: 20px;
+  text-align: center;
+  border-radius: 3px;
+  background: #475e60;
+  padding: 4px 18px;
+  top: -10px;
+  right: -72px;
+}
+.bubble:after {
+  position: absolute;
+  top: 8px;
+  left: -7px;
+  width: 0;
+  height: 0;
+  border-top: 7px solid transparent;
+  border-right: 7px solid #475e60;
+  border-bottom: 7px solid transparent;
+  content: "";
+}
+.bubble input{
+  width: 45px;
+    height: 23px;
+    color: #fff;
+    border: unset;
+    padding: unset;
+    background: #475e60;
+
+}
+.bubble span{
+  position: absolute;
+  left: 5px;
+  top: 6px;
+  font-size: 18px;
+  font-weight: bold;
+
 }

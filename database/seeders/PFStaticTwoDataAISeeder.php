@@ -352,7 +352,7 @@ class PFStaticTwoDataAISeeder extends Seeder
                 'info' => null, // insert a description if needed
             ]);
 
-            // Create question 21
+             // Create question 21
             $question21 = PFQuestion::create([
                 'pf_step_id' => 3,
                 'pf_type_option_id' => 4,
@@ -364,7 +364,7 @@ class PFStaticTwoDataAISeeder extends Seeder
                 'desc' => '',
                 'image' => '',
                 'point' => 10,
-                'is_required' => true,
+                'is_required' => false,
                 'status' => self::STATUS_ACTIVE,
             ]);
             // Create question 19 options

@@ -120,18 +120,18 @@
                                                     class="{{ $pf_question->is_required ? 'required' : '' }}">{{ $pf_question->is_required ? ' * ' : '' }}</span>
                                             </h4>
                                             @if ($pf_question->typeOption?->type?->name === 'checkbox')
-                                            <div class="checkbox-options">
-                                                @foreach ($pf_question->options as $option)
-                                                    @php
-                                                        $option_value = json_decode($option->value);
-                                                    @endphp
-                                                    <label>
-                                                        <input type="checkbox"  name="{{ $pf_question->id }}[]" onclick="checkConditions(this);
-                                                            value="{{ $option->id }}" class="custom-checkbox {{ $pf_question->is_required ? 'required' : '' }}">
-                                                        <span class="checkbox-text">{{ $option_value->title }}</span>
-                                                    </label>
-                                                @endforeach
-                                            </div>
+                                                <div class="checkbox-options">
+                                                    @foreach ($pf_question->options as $option)
+                                                        @php
+                                                            $option_value = json_decode($option->value);
+                                                        @endphp
+                                                        <label>
+                                                            <input type="checkbox"  name="{{ $pf_question->id }}[]" onclick="checkConditions(this);"
+                                                                value="{{ $option->id }}" class="custom-checkbox" >
+                                                            <span class="checkbox-text">{{ $option_value->title }}</span>
+                                                        </label>
+                                                    @endforeach
+                                                </div>
                                             
                                             @endif
 
@@ -167,19 +167,14 @@
                                                         $typeOption = json_decode($pf_question->typeOption->option);
                                                         
                                                     @endphp
-                                                    <div class="form-group">
-                                                        <div class="donate-us">
-                                                            <div class="price_slider ui-slider ui-slider-horizontal">
-                                                                <div id="slider-margin"></div>
-                                                                <p class="your-money">
-                                                                    My budget is:
-                                                                    <span class="money" id="value-lower"></span>
-                                                                    <span class="money" id="value-upper"></span>
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                        <p class="desc">Please use the slider to indicate your budget for
-                                                            hair restoration procedures.</p>
+                                                    
+                                                    <div class="range-wrap" style="width: 85%;">
+                                                        <input id="myRange" name="{{ $pf_question->id }}" type="range" class="range"
+                                                         min="{{$typeOption->range->min}}" max="{{$typeOption->range->max}}" 
+                                                         value="{{$typeOption->range->def_value}}" step="{{$typeOption->range->step}}">
+                                                        <output class="bubble">
+                                                            <span>{{$typeOption->range->unit}}</span><input type="number" id="rangeValue" value="{{$typeOption->range->def_value}}">
+                                                        </output>
                                                     </div>
                                                 @endforeach
                                             @endif
@@ -279,7 +274,7 @@
 
                                     <div class="form-radio-flex">
                                         <div class="form-radio-item">
-                                            <input type="radio" name="choose_bank" id="bank_1" value="bank_1"
+                                            <input type="checkbox" name="choose_hair_ai[]" id="bank_1" value="bank_1"
                                                 checked="checked" />
                                             <label for="bank_1"><img
                                                     src="{{ asset('vendor/productfinder/images/11.jpg') }}"
@@ -287,49 +282,49 @@
                                         </div>
 
                                         <div class="form-radio-item">
-                                            <input type="radio" name="choose_bank" id="bank_2" value="bank_2" />
+                                            <input type="checkbox" name="choose_hair_ai[]" id="bank_2" value="bank_2" />
                                             <label for="bank_2"><img
                                                     src="{{ asset('vendor/productfinder/images/12.jpg') }}"
                                                     alt=""></label>
                                         </div>
 
                                         <div class="form-radio-item">
-                                            <input type="radio" name="choose_bank" id="bank_3" value="bank_3" />
+                                            <input type="checkbox" name="choose_hair_ai[]" id="bank_3" value="bank_3" />
                                             <label for="bank_3"><img
                                                     src="{{ asset('vendor/productfinder/images/13.jpg') }}"
                                                     alt=""></label>
                                         </div>
 
                                         <div class="form-radio-item">
-                                            <input type="radio" name="choose_bank" id="bank_4" value="bank_4" />
+                                            <input type="checkbox" name="choose_hair_ai[]" id="bank_4" value="bank_4" />
                                             <label for="bank_4"><img
                                                     src="{{ asset('vendor/productfinder/images/14.jpg') }}"
                                                     alt=""></label>
                                         </div>
 
                                         <div class="form-radio-item">
-                                            <input type="radio" name="choose_bank" id="bank_5" value="bank_5" />
+                                            <input type="checkbox" name="choose_hair_ai[]" id="bank_5" value="bank_5" />
                                             <label for="bank_5"><img
                                                     src="{{ asset('vendor/productfinder/images/15.jpg') }}"
                                                     alt=""></label>
                                         </div>
 
                                         <div class="form-radio-item">
-                                            <input type="radio" name="choose_bank" id="bank_6" value="bank_6" />
+                                            <input type="checkbox" name="choose_hair_ai[]" id="bank_6" value="bank_6" />
                                             <label for="bank_6"><img
                                                     src="{{ asset('vendor/productfinder/images/16.jpg') }}"
                                                     alt=""></label>
                                         </div>
 
                                         <div class="form-radio-item">
-                                            <input type="radio" name="choose_bank" id="bank_7" value="bank_7" />
+                                            <input type="checkbox" name="choose_hair_ai[]" id="bank_7" value="bank_7" />
                                             <label for="bank_7"><img
                                                     src="{{ asset('vendor/productfinder/images/17.jpg') }}"
                                                     alt=""></label>
                                         </div>
 
                                         <div class="form-radio-item">
-                                            <input type="radio" name="choose_bank" id="bank_8" value="bank_8" />
+                                            <input type="checkbox" name="choose_hair_ai[]" id="bank_8" value="bank_8" />
                                             <label for="bank_8"><img
                                                     src="{{ asset('vendor/productfinder/images/11.jpg') }}"
                                                     alt=""></label>
@@ -546,7 +541,7 @@ Austria</p>
 
     checkboxes.forEach(checkbox => {
         checkbox.addEventListener('change', () => {
-            const checkedCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+            const checkedCheckboxes = document.querySelectorAll('.form-row input[type="checkbox"]:checked');
             
             if (checkedCheckboxes.length >= 2) {
                 checkboxes.forEach(c => {
