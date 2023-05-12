@@ -38,41 +38,14 @@
             var isValid = true;
             // return true;
             currentStepForm.find('.required').each(function() {
-                console.log($(this).closest('.form-row').find('input:checked')!=undefined && $(this).closest('.form-row').find('input:checked').length === 0 );
-                console.log('s',$(this).closest('.form-row').find('input:checked'));
-                console.log('l',$(this).closest('.form-row').find('input:checked').length);
-
+                
                 if ( $(this).closest('.form-row').find('input').val()=='' ||
-                ($(this).closest('.form-row').find('input:checked')!=undefined && $(this).closest('.form-row').find('input:checked').length === 0 )
+                ($(this).closest('.form-row').find('input:checked').val()!=undefined && $(this).closest('.form-row').find('input:checked').length === 0 )
                 ) {
                     isValid = false;
                     return false; // break out of each loop
                 }
-                // if ($(this).closest('.form-row').find('input[type="checkbox"]') &&
-                //     $(this).closest('.form-row').find('input[type="checkbox"]:checked').length === 0
-                // ) {
-                //     isValid = false;
-                //     return false; // break out of each loop
-                // }
-                // if ($(this).closest('.form-row').find('input[type="radio"]')!=undefined &&
-                //     $(this).closest('.form-row').find('input[type="radio"]:checked').length === 0
-                // ) {
-                //     isValid = false;
-                //     return false; // break out of each loop
-                // }
-                // if ($(this).closest('.form-row').find('input[type="number"]') !=undefined &&
-                // $(this).closest('.form-row').find('input[type="number"]').val()==''
-                // ) {
-                //     isValid = false;
-                //     return false; // break out of each loop
-                // }
-                // if (
-                // $(this).closest('.form-row').find('input[type="text"]')!=undefined &&
-                // $(this).closest('.form-row').find('input[type="text"]').val()==''
-                // ) {
-                //     isValid = false;
-                //     return false; // break out of each loop
-                // }
+                
             });
 
             if (isValid) {
