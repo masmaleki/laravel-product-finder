@@ -395,7 +395,7 @@ label.error {
   position: absolute;
   top: 0px;
   right: 0; */
-  display: block;
+  display: none !important;
   position: absolute;
   top: 123px;
   left: 0;
@@ -427,7 +427,7 @@ label.error:after {
 }
 
 input.error {
-  border: 1px solid #f63726;
+ /* border: 1px solid #f63726;*/
 }
 
 #find_bank {
