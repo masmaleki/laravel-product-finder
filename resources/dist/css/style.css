@@ -391,10 +391,28 @@ input {
 }
 
 label.error {
-  display: block;
+  /* display: block;
   position: absolute;
   top: 0px;
-  right: 0;
+  right: 0; */
+  display: none !important;
+  position: absolute;
+  top: 123px;
+  left: 0;
+  right: unset;
+  background: rgb(242 242 237) !important;
+  padding: 5px 22px;
+  font-size: 18px;
+  margin: 10px 0;
+  margin: 8px 0px;
+  color: #475e60 !important;
+  border-radius: 8px 0px 8px 0px;
+  
+}
+
+.range-wrap label.error{
+  top: 15px !important;
+  left: 0;
 }
 
 label.error:after {
@@ -403,12 +421,13 @@ label.error:after {
   content: '\f135';
   right: 20px;
   top: 50px;
+  line-height: 28px;
   font-size: 13px;
-  color: #f63726;
+  color: #475e60 !important;
 }
 
 input.error {
-  border: 1px solid #f63726;
+ /* border: 1px solid #f63726;*/
 }
 
 #find_bank {
@@ -1385,6 +1404,7 @@ input::placeholder {
 }
 .range-wrap {
   position: relative;
+  margin-bottom: 10px;
   
 }
 
