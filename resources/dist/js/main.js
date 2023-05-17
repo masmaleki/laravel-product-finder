@@ -120,7 +120,7 @@
             })
         },
         onStepChanged: function(event, currentIndex, priorIndex) {
-            if (currentIndex === 5) {
+            if (currentIndex === 6) {
                 Swal.fire({
                 title: 'Ai Product Finder!',
                 html: 'Finding Best Match <b></b> Please wait.',
